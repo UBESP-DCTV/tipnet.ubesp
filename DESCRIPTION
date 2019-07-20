@@ -1,12 +1,14 @@
 Package: tipnet.ubesp
-Title: What the Package Does (One Line, Title Case)
+Title: TIPNet reports
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Corrado",
            family = "Lanera",
            role = c("aut", "cre"),
            email = "corrado.lanera@gmail.com")
-Description: What the package does (one paragraph).
+Description:
+    The goal of tipnet.ubesp is to implement and collect all the code
+    needed for the development of the TIPNet reports by UBESP.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
