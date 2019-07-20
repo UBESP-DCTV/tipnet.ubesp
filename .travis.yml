@@ -4,14 +4,15 @@ language: R
 cache: packages
 
 
- os:
-   - linux
-   - osx
+os:
+ - linux
+ - osx
 
+# rdevel has problem with rtools in osx
 matrix:
   include:
   - r: devel
-    os: linux # rdevel has problem with rtools in osx
+    os: linux
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
