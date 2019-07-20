@@ -12,3 +12,5 @@ Description:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/UBESP-DCTV/tipnet.ubesp
+BugReports: https://github.com/UBESP-DCTV/tipnet.ubesp/issues
