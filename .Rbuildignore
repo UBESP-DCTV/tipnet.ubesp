@@ -1,3 +1,13 @@
 ^tipnet\.ubesp\.Rproj$
 ^\.Rproj\.user$
 ^analyses$
+^README\.Rmd$
+^\.github$
+^\.github/ISSUE_TEMPLATE$
+^LICENSE\.md$
+^appveyor\.yml$
+^\.travis\.yml$
+^codecov\.yml$
+^\.covrignore$
+^cran-comments\.md$
+^data-raw$
