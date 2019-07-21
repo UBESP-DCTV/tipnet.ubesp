@@ -11,3 +11,4 @@
 ^\.covrignore$
 ^cran-comments\.md$
 ^data-raw$
+^report$
