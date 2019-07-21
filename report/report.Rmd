@@ -9,7 +9,6 @@ output:
     toc: true
     toc_float: true
     number_section: true
-    css: css/style.css
     df_print: paged
 
 runtime: shiny_prerendered
