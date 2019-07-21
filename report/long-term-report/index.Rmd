@@ -19,27 +19,24 @@ link-citations: yes
 description: "Prototype example for the TIPNet long-term report."
 ---
 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
 # Preamble {-}
 
 foo $\frac{1}{2}$
 
-
-# Introduction {#intro}
-
-## Quarterly Results {.tabset}
-
-### By Product
-
-(tab content)
-
-### By Region
-
-(tab content)
-
-# Example
-```{r}
-mtcars
+```{r intro, child = '010-intro.Rmd'}
 ```
+
+
+# Examples
 
 ## Example one
 ```{r, echo=FALSE}
