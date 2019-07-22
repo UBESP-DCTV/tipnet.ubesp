@@ -1,6 +1,6 @@
 --- 
 output:
-  html_document:
+  bookdown::html_document2:
     toc: true
     toc_float: true
     df_print: paged
@@ -77,6 +77,20 @@ del Sacro Cuore, Rome
 - Department of Anesthesia and Intensive Care, Children’s Hospital G Di Cristina, Palermo
 - Department of Anesthesia and Intensive Care Ospedale Garibaldi – Nesima, Catania
 - Department of Pediatrics Ospedale Policlinico –Universitario G Martino, Messina
+
+
+# foo {#foobar}
+
+\@ref(foobar)
+
+```{r, child = "010-descdem.Rmd"}
+```
+
+\@ref(foobar)
+
+
+```{r, child = "020-adminorigin.Rmd"}
+```
 
 
 

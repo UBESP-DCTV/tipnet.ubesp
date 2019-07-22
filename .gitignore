@@ -3,3 +3,5 @@
 .RData
 
 report/*\.html
+
+report/long-term-report/*\.html

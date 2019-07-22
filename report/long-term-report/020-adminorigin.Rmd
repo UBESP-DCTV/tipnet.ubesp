@@ -1,0 +1,4 @@
+# Type of Admission and Origin {#adminorigin}
+
+
+\@ref(foobar)
