@@ -5,3 +5,5 @@
 report/*\.html
 
 report/long-term-report/*\.html
+
+report/long-term-report/index_data/
