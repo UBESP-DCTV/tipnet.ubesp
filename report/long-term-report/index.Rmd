@@ -1,22 +1,22 @@
 --- 
-title: "TIPNet long-term report"
-subtitle: "(prototype)"
-author: "Corrado Lanera^[Unità di Biostatistica, Epidemiologia, e Sanlute Pubblica --- Dip. Scienze Cardio Toraco Vascolari e Salute Pubblica (Univ. di Padova -- IT)]"
-date: "Last update `r Sys.Date()`"
-
 output:
   html_document:
     toc: true
     toc_float: true
-    number_section: true
     df_print: paged
-
 runtime: shiny_prerendered
-
+date: "Last update `r Sys.Date()`"
 biblio-style: apalike
 link-citations: yes
 
-description: "Prototype example for the TIPNet long-term report."
+params:
+  period: "2010 - 2014"
+
+title: "`r paste0('TIPNet long-term report, years ', params$period)`"
+subtitle: "(prototype by Corrado Lanera^[Unità di Biostatistica, Epidemiologia, e Sanlute Pubblica --- Dip. Scienze Cardio Toraco Vascolari e Salute Pubblica (Univ. di Padova -- IT)])"
+author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI) and CINECA"
+
+description: "`r paste0('Prototype example for the TIPNet long-term report (years ', params$period, ')')`"
 ---
 
 
@@ -28,51 +28,58 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Preamble {-}
+# Colophon {-}
 
-foo $\frac{1}{2}$
+**Network coordinator**: Andrea Wolfler, MD ([Department of Anesthesia and Intensive Care Unit](https://www.asst-fbf-sacco.it/reparti-e-servizi/info/anestesia-e-rianimazione-pediatrica) -- [Children’s Hospital Vittore Buzzi](https://www.asst-fbf-sacco.it/reparti-e-servizi/ricerca-reparto-presidio/buzzi)) --- Milan
 
-```{r intro, child = '010-intro.Rmd'}
-```
-
-
-# Examples
-
-## Example one
-```{r, echo=FALSE}
-sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
-plotOutput("distPlot")
-```
-
-```{r, context="server"}
-output$distPlot <- renderPlot({
-  x <- faithful[, 2]  # Old Faithful Geyser data
-  bins <- seq(min(x), max(x), length.out = input$bins + 1)
-  hist(x, breaks = bins, col = 'darkgray', border = 'white')
-})
-```
+**In collaboration with**: [Unit of Biostatistics, Epidemiology and Public Helath](https://ubesp.jimdo.com/) ([Department Cardiac, Toracic, Vascular sciences and Public Health](https://www.dctv.unipd.it/) -- [University of Padova](https://www.unipd.it/)) --- Interuniversity Consortium
 
 
-## Example two
-```{r eruptions, echo=FALSE}
-selectInput(
-  'breaks', label = 'Number of bins:',
-  choices = c(10, 20, 35, 50), selected = 20
-)
-plotOutput("distPlot2")
-```
+**Business intelligence analyst**: Roberta Amato
+
+**IT Project Managers**: Chiara Dellacasa, Giulia Stabile
+
+**With the contribution of**:
+
+- F. Racca, J Gualino - Alessandria
+- F. Ferrero, R Osello, R Gilodi - Novara
+- I Salvo, E. Zoia, A. Mandelli - Milano
+- E Calderini, C. Montani, E. Prandi - Milano
+- P. Biban, P Santuz - Verona
+- A. Pettenazzo, A Amigoni - Padova
+- S. Furlan, F Savron - Trieste
+- F Caramelli, C. Mondardini, E. Iannella - Bologna
+- C Cecchetti, D Perrotta - Roma
+- S Picardo, E Rossetti - Roma
+- M Corbari - Roma
+- G. Conti, M Piastra, O. Genovese - Roma
+- R Testa, A Dolcini, L. D’Amato - Napoli
+- G Coffaro, A. M. Guddo, A. M. Giglio - Palermo
+- E Gitto - Messina
+- G Stancanelli - Catania
+
+**TIPNet study group** - participating center:
+
+- Department of Anesthesia and Intensive Care, Children’s Hospital Sant’Antonio e Biagio e Cesare Arrigo, Alessandria:
+- Department of Pediatrics, Ospedale Maggiore della Carità, Novara:
+- Department of Anesthesia and Intensive Care, Children’s Hospital V Buzzi, Milan:
+- Department of Anesthesia and Intensive Care, Fondazione IRCCS Ca Granda, Ospedale Maggiore Policlinico, Milan:
+- Department of Pediatric Anesthesia and Intensive Care, Spedali Civili, Brescia
+- Department of Neonatal and Paediatric Intensive Care, Azienda Ospedaliera Universitaria Integrata, Verona
+- Department of Woman’s and Child’s Health, Pediatric ICU, University Hospital, Padova
+- Department of Anesthesia and Intensive Care, Institute for Maternal and Child health, IRCCS Burlo Garofolo, Trieste
+- Department of Pediatric Anesthesia and Intensive Care, Ospedale Sant’Orsola Malpighi, Bologna
+- Department of Anesthesia and Intensive Care, Children’s Hospital Meyer, Firenze
+- Department of Anesthesia and Intensive Care, Children’s Hospital Bambino Gesù, Rome DEA, ARCO, Palidoro
+- Anesthesia and Intensive Care Department, Pediatric ICU, Policlinico Universitario A.Gemelli, Università Cattolica
+del Sacro Cuore, Rome
+- Department of Anesthesia and Intensive Care, Children’s Hospital Santobono-Pausillipon, Napoli
+- Department of Anesthesia and Intensive Care, Children’s Hospital G Di Cristina, Palermo
+- Department of Anesthesia and Intensive Care Ospedale Garibaldi – Nesima, Catania
+- Department of Pediatrics Ospedale Policlinico –Universitario G Martino, Messina
 
 
-```{r, context="server"}
-output$distPlot2 <- renderPlot({
-  par(mar = c(4, 4, .1, .5))
-  hist(
-    faithful$eruptions, as.numeric(input$breaks),
-    col = 'gray', border = 'white',
-    xlab = 'Duration (minutes)', main = ''
-  )
-})
-```
+
 # References {-}
 ```{r include=FALSE}
 # automatically create a bib database for R packages
