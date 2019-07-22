@@ -8,6 +8,9 @@ runtime: shiny_prerendered
 date: "Last update `r Sys.Date()`"
 biblio-style: apalike
 link-citations: yes
+bibliography:
+  - bibliography.bib
+  - packages.bib
 
 params:
   period: "2010 - 2014"
@@ -79,17 +82,19 @@ del Sacro Cuore, Rome
 - Department of Pediatrics Ospedale Policlinico –Universitario G Martino, Messina
 
 
-# foo {#foobar}
-
-\@ref(foobar)
-
-```{r, child = "010-descdem.Rmd"}
+```{r, child = "010-descriptives.Rmd"}
 ```
 
-\@ref(foobar)
+```{r, child = "020-origin.Rmd"}
+```
 
+```{r, child = "030-ccc.Rmd"}
+```
 
-```{r, child = "020-adminorigin.Rmd"}
+```{r, child = "040-severity.Rmd"}
+```
+
+```{r, child = "050-los.Rmd"}
 ```
 
 

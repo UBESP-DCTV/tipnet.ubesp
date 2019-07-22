@@ -1,3 +1,0 @@
-# Descriptive and Demographic {#descdem}
-
-\@ref(adminorigin)
