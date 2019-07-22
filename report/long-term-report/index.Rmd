@@ -5,7 +5,7 @@ output:
     toc_float: true
     df_print: paged
 runtime: shiny_prerendered
-date: "Last update `r Sys.Date()`"
+date: "**Last update**: `r Sys.Date()`"
 biblio-style: apalike
 link-citations: yes
 bibliography:
@@ -13,10 +13,10 @@ bibliography:
   - packages.bib
 
 params:
-  period: "2010 - 2014"
+  period: "2010 -- 2014"
 
 title: "`r paste0('TIPNet long-term report, years ', params$period)`"
-subtitle: "(prototype by Corrado Lanera^[Unità di Biostatistica, Epidemiologia, e Sanlute Pubblica --- Dip. Scienze Cardio Toraco Vascolari e Salute Pubblica (Univ. di Padova -- IT)])"
+subtitle: "(prototype by Corrado Lanera^[Unità di Biostatistica, Epidemiologia, e Sanlute Pubblica --- Dipartimento di Scienze Cardio-Toraco-Vascolari e Salute Pubblica (Università di Padova -- IT)])"
 author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI) and CINECA"
 
 description: "`r paste0('Prototype example for the TIPNet long-term report (years ', params$period, ')')`"
@@ -29,7 +29,26 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE
 )
+suppressPackageStartupMessages(library(tidyverse, quietly = TRUE))
 ```
+
+```{r data, include=FALSE, cache=TRUE, cache.extra=file.info("bar.csv")$mtime}
+# this would only simulate a cache for imprted dataset, which is 
+# re-imported only if the modified time changed!!
+write_lines("a, b, c\n1, 2, 3", "bar.csv")
+bar <- read_csv("bar.csv")
+
+foo <- tibble(
+    unit = letters,
+    type = c("M/S", "C/N", "n/p")[sample.int(3, 26, replace = TRUE)]
+  ) %>% 
+  full_join(tibble(
+    unit = rep(letters, 5),
+    year = rep(2010:2014, 26),
+    beds = sample(c(NA, 0:10), 130, replace = TRUE)
+  ))
+```
+
 
 # Colophon {-}
 
