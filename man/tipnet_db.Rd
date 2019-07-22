@@ -4,5 +4,5 @@
 \alias{tipnet_db}
 \title{TIPNet database}
 \description{
-here we describe the tipnet database structure
+Here we describe the tipnet database structure
 }
