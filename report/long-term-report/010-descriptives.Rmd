@@ -65,6 +65,8 @@ output$distPlot2 <- renderPlot({
 
 
 ## Admissions
+
+### Trends
 ```{r eruptions, echo=FALSE}
 selectInput(
   'breaks', label = 'Number of bins:',
@@ -84,6 +86,23 @@ output$distPlot3 <- renderPlot({
   )
 })
 ```
+
+
+### Distributions
+
+foo
+
+### Gender
+
+foo
+
+### Ethnicity
+
+foo
+
+### Age
+
+foo
 
 ## Demographics
 ```{r eruptions2, echo=FALSE}

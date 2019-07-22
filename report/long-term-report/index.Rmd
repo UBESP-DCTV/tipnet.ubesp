@@ -3,6 +3,7 @@ output:
   bookdown::html_document2:
     toc: true
     toc_float: true
+    toc_depth: 2
     df_print: paged
 runtime: shiny_prerendered
 date: "**Last update**: `r Sys.Date()`"
