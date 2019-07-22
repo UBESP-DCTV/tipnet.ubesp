@@ -1,2 +1,103 @@
-# Descriptive and Demographic {#descriptives}
+# Descriptive and Demographic {#descriptives .tabset .tabset-fade .tabset-pills}
 
+
+In Italy there are 23 medical surgical (M/S) Pediatric Intensive Care Units (PICUs):
+
+- 11 in the north
+- 8 in the center
+- 4 in the south
+
+of the country.
+
+The number of units participating in the registry increased from 13 in
+2011 to 18 in 2014.
+
+Due to different reasons, not all the units recorded efficiently during
+the years. This is the first report published by the network. Data
+reported here analyze patients admitted in PICUs during
+`r params$period`.
+
+Only children 0 -- 16 years old who have a severity score on admission
+which allow to estimate a Standardized Mortality Ratio (SMR) were
+considered.
+
+## PICUs
+
+### Type
+```{r ,echo=FALSE}
+checkboxGroupInput('picu_type',
+    label = 'PICU type:',
+    choices = c(
+        "Medical / Surgical" = "M/S",
+        "Cardiac / Neurosurgery" = "C/N",
+        "Neonata / Pediatric" = "n/p"
+    ), selected = c("M/S", "C/N", "n/p")
+)
+plotOutput("picutypePlot")
+```
+
+```{r, context="server"}
+output$picutypePlot <- renderPlot({
+    filter(foo, type %in% input$picu_type) %>% 
+        ggplot(aes(x = year, y = beds, colour = unit)) +
+            geom_line()
+})
+
+```
+
+
+
+### Number of beds
+```{r, echo=FALSE}
+sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
+plotOutput("distPlot2")
+```
+
+
+```{r, context="server"}
+output$distPlot2 <- renderPlot({
+  x <- faithful[, 2]  # Old Faithful Geyser data
+  bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  hist(x, breaks = bins, col = 'darkgray', border = 'white')
+})
+
+```
+
+
+## Admissions
+```{r eruptions, echo=FALSE}
+selectInput(
+  'breaks', label = 'Number of bins:',
+  choices = c(10, 20, 35, 50), selected = 20
+)
+plotOutput("distPlot3")
+```
+
+
+```{r, context="server"}
+output$distPlot3 <- renderPlot({
+  par(mar = c(4, 4, .1, .5))
+  hist(
+    faithful$eruptions, as.numeric(input$breaks),
+    col = 'gray', border = 'white',
+    xlab = 'Duration (minutes)', main = ''
+  )
+})
+```
+
+## Demographics
+```{r eruptions2, echo=FALSE}
+plotOutput("distPlot4")
+```
+
+
+```{r, context="server"}
+output$distPlot4 <- renderPlot({
+  par(mar = c(4, 4, .1, .5))
+  hist(
+    faithful$eruptions, as.numeric(input$breaks),
+    col = 'gray', border = 'white',
+    xlab = 'Duration (minutes)', main = ''
+  )
+})
+```
