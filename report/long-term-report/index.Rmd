@@ -43,6 +43,7 @@ knitr::opts_chunk$set(
 suppressPackageStartupMessages(library(tidyverse, quietly = TRUE))
 suppressPackageStartupMessages(library(plotly, quietly = TRUE))
 suppressPackageStartupMessages(library(glue, quietly = TRUE))
+suppressPackageStartupMessages(library(here, quietly = TRUE))
 # suppressPackageStartupMessages(library(tipnet.ubesp, quietly = TRUE))
 
 # When approved, those function should be included in the `tipnet.ubesp`
@@ -74,10 +75,15 @@ gg_breaks <- function(param) {
 }
 ```
 
-```{r data, include=FALSE, cache=TRUE, cache.extra=file.info("bar.csv")$mtime}
-# this would only simulate a cache for imprted dataset, which is 
-# re-imported only if the modified time changed!!
-write_lines("a, b, c\n1, 2, 3", "bar.csv")
+```{r data, include=FALSE, cache=TRUE, cache.extra=file.info(here("..", "..", "data"))$mtime}
+# cache.extra option in the knitr tags here above needs to speed up
+# normal computation and running time (render side) as the data are not
+# changed. Note that server-side data are loaded from the render-side
+# if included in the chunck named "data" (like this is), hence setting
+# cache.extra provide a further speed up.
+anagrafica <- read_rds(here("..", "..", "data", "tip_anagrafica.rds"))
+
+
 bar <- read_csv("bar.csv")
 n <- 7
 units <- letters[seq_len(n)]
