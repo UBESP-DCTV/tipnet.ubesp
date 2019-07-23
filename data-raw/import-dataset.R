@@ -1,8 +1,10 @@
 ## code to prepare `tipnet_db` dataset goes here
+library(assertive) # it should precede tidyverse
 library(tidyverse)
 library(lubridate)
 library(janitor)
 library(here)  # it should follow the lubridate package because `here()`
+library(glue)
 
 ## Raw data will stay off-line, commonly onle level above the the
 ## R-package folder. This assure the package remains lightweight
@@ -51,24 +53,27 @@ import_problems <- raw_data_list %>%
 # not see any issue, anyway, it don't seams to be a real problem
 import_problems
 
-fun_double <- function(x) {all(assertive::is_whole_number(x))}
 
 # DB part of the script ------------------------------------------------
 # From this part of the script I will perform an essential cleaning
 # of the dataframes
-tipnet_db <- map(
-    raw_data_list,
-        ~ .x %>%
-            # Clean the names of the variables
-            clean_names() %>%
-            # Transform dummy variables coded as "Sì" and "No" into
-            # logical
-            mutate_if(is.character, str_to_lower) %>%
-            mutate_if(is.character, ~ . == "si")
-            # mutate_if(
-            #     fun_double, as.integer
-            # )
-    )
+tipnet_db <- map(raw_data_list, ~{
+    clean_names(.x) %>%
+        # lowering all the text
+        mutate_if(is.character, str_to_lower) %>%
+
+        # coding logical
+        mutate_if(is.character, ~ . == "si") %>%
+
+        # integers
+        mutate_if(is.numeric, ~{
+            ifelse(
+                test = all(.x == trunc(.x), na.rm = TRUE),
+                yes  = as.integer(.x),
+                no   = .x
+            )
+        })
+})
 
 ## furter processing of the data........................................
 # stop("
@@ -81,6 +86,9 @@ tipnet_db <- map(
 ## space. This assure we can track the import and the general
 ## manipulation of the raw dataset while maintaining them off-line.
 
-save(tipnet_db, file = here::here("..", "data", "tipnet_db.rda"))
+## save single object for quick and lightweight usage, and the whole
+## db for cohomprensive computations.
+iwalk(tipnet_db, ~write_rds(.x, here("..", "data", glue("{.y}.rds"))))
+save(tipnet_db, file = here("..", "data", "tipnet_db.rda"))
 
 ## Please, document any specification. report any changes on `R/data.R`
