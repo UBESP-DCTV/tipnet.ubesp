@@ -24,37 +24,38 @@ considered.
 ## PICUs
 
 ### Type
-```{r ,echo=FALSE}
+```{r, eval=!params$export, include=!params$export}
+message(params$picu_type)
 checkboxGroupInput('picu_type',
     label = 'PICU type:',
     choices = c(
         "Medical / Surgical" = "M/S",
         "Cardiac / Neurosurgery" = "C/N",
         "Neonata / Pediatric" = "n/p"
-    ), selected = c("M/S", "C/N", "n/p")
+    ), selected = params$picu_type
 )
 plotOutput("picutypePlot")
 ```
 
-```{r, context="server"}
-output$picutypePlot <- renderPlot({
-    filter(foo, type %in% input$picu_type) %>% 
-        ggplot(aes(x = year, y = beds, colour = unit)) +
-            geom_line()
-})
 
+```{r, context="server", eval=!params$export, include=!params$export}
+output$picutypePlot <- renderPlot({gg_picu_type(input$picu_type)})
+```
+
+```{r, eval=params$export, include=params$export}
+glue('PICU type selected: {paste(params$picu_type, collapse = ", ")}')
+gg_picu_type(params$picu_type)
 ```
 
 
-
 ### Number of beds
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=!params$export, include=!params$export}
 sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
 plotOutput("distPlot2")
 ```
 
 
-```{r, context="server"}
+```{r, context="server", eval=!params$export, include=!params$export}
 output$distPlot2 <- renderPlot({
   x <- faithful[, 2]  # Old Faithful Geyser data
   bins <- seq(min(x), max(x), length.out = input$bins + 1)
@@ -67,7 +68,7 @@ output$distPlot2 <- renderPlot({
 ## Admissions
 
 ### Trends
-```{r eruptions, echo=FALSE}
+```{r, echo=FALSE, eval=!params$export, include=!params$export}
 selectInput(
   'breaks', label = 'Number of bins:',
   choices = c(10, 20, 35, 50), selected = params$breaks
@@ -76,7 +77,7 @@ plotOutput("distPlot3")
 ```
 
 
-```{r, context="server"}
+```{r, context="server", eval=!params$export, include=!params$export}
 output$distPlot3 <- renderPlot({
   par(mar = c(4, 4, .1, .5))
   hist(
@@ -105,12 +106,12 @@ foo
 foo
 
 ## Demographics
-```{r eruptions2, echo=FALSE}
+```{r, echo=FALSE, eval=!params$export, include=!params$export}
 plotOutput("distPlot4")
 ```
 
 
-```{r, context="server"}
+```{r, context="server", eval=!params$export, include=!params$export}
 output$distPlot4 <- renderPlot({
   par(mar = c(4, 4, .1, .5))
   hist(

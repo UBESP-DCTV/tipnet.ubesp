@@ -1,25 +1,29 @@
 --- 
+params:
+    export: FALSE
+    period: "2010 -- 2014"
+    picu_type: ["M/S", "C/N", "n/p"]
+    breaks: 20L
+
 output:
-  bookdown::html_document2:
-    toc: true
-    toc_float: true
-    toc_depth: 2
-    df_print: paged
+    bookdown::html_document2:
+        toc: true
+        toc_float: true
+        toc_depth: 2
+        df_print: paged
+
 runtime: shiny_prerendered
+
+title: "`r paste0('TIPNet long-term report, years ', params$period)`"
+subtitle: "(prototype by Corrado Lanera^[Unità di Biostatistica, Epidemiologia, e Sanlute Pubblica --- Dipartimento di Scienze Cardio-Toraco-Vascolari e Salute Pubblica (Università di Padova -- IT)])"
+author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI) and CINECA"
 date: "**Last update**: `r Sys.Date()`"
+
 biblio-style: apalike
 link-citations: yes
 bibliography:
   - bibliography.bib
   - packages.bib
-
-params:
-  period: "2010 -- 2014"
-  breaks: 20
-
-title: "`r paste0('TIPNet long-term report, years ', params$period)`"
-subtitle: "(prototype by Corrado Lanera^[Unità di Biostatistica, Epidemiologia, e Sanlute Pubblica --- Dipartimento di Scienze Cardio-Toraco-Vascolari e Salute Pubblica (Università di Padova -- IT)])"
-author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI) and CINECA"
 
 description: "`r paste0('Prototype example for the TIPNet long-term report (years ', params$period, ')')`"
 ---
@@ -31,7 +35,16 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE
 )
+
 suppressPackageStartupMessages(library(tidyverse, quietly = TRUE))
+suppressPackageStartupMessages(library(glue, quietly = TRUE))
+# suppressPackageStartupMessages(library(tipnet.ubesp, quietly = TRUE))
+
+gg_picu_type <- function(param) {
+  filter(foo, type %in% param) %>% 
+    ggplot(aes(x = year, y = beds, colour = unit)) +
+    geom_line()
+}
 ```
 
 ```{r data, include=FALSE, cache=TRUE, cache.extra=file.info("bar.csv")$mtime}
@@ -106,32 +119,28 @@ del Sacro Cuore, Rome
 ```{r, child = "010-descriptives.Rmd"}
 ```
 
-```{r, child = "020-origin.Rmd"}
+```{r, child = "020-origin.Rmd", eval=FALSE}
 ```
 
-```{r, child = "030-ccc.Rmd"}
+```{r, child = "030-ccc.Rmd", eval=FALSE}
 ```
 
-```{r, child = "040-severity.Rmd"}
+```{r, child = "040-severity.Rmd", eval=FALSE}
 ```
 
-```{r, child = "050-los.Rmd"}
+```{r, child = "050-los.Rmd", eval=FALSE}
 ```
 
 # Report download {-}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=!params$export, include=!params$export}
 downloadLink("report", "Generate report")
 ```
 
-```{r, context="server"}
-output$report <- downloadHandler(
-  # For PDF output, change this to "report.pdf"
-  filename = "report.html",
+```{r, context="server", eval=!params$export, include=!params$export}
+output$report <- downloadHandler("tipnet-repor.html",
+  
   content = function(file) {
-    # Copy the report file to a temporary directory before processing
-    # it, in case we don't have write permissions to the current
-    #  working dir (which can happen when deployed).
     temp_dir <- tempdir()
     file.copy(".", temp_dir,
         overwrite = TRUE,
@@ -140,16 +149,21 @@ output$report <- downloadHandler(
     )
     temp_report <- file.path(temp_dir, "index.Rmd")
     
+    read_lines(temp_report) %>% 
+      str_replace("^runtime: shiny_prerendered$", "") %>% 
+      write_lines(temp_report)
+    
     # Set up parameters to pass to Rmd document
     params <- list(
-      breaks = input$breaks
+      export = TRUE,
+      breaks = input$breaks,
+      picu_type = input$picu_type
     )
 
     # Knit the document, passing in the `params` list, and eval it in a
     # child of the global environment (this isolates the code in the
-    #  document from the code in this app).
-    rmarkdown::render(temp_report,
-      output_file = file,
+    # document from the code in this app).
+    rmarkdown::render(temp_report, output_file = file,
       params = params,
       envir = new.env(parent = globalenv())
     )
