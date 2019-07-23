@@ -3,7 +3,11 @@ params:
     export: FALSE
     period: "2010 -- 2014"
     picu_type: ["M/S", "C/N", "n/p"]
-    breaks: 20L
+    breaks: 20
+    bins: 30
+    iris_x: !r names(iris)[[1]]
+    iris_y: !r names(iris)[[2]]
+    iris_nclust: 3
 
 output:
     bookdown::html_document2:
@@ -37,13 +41,36 @@ knitr::opts_chunk$set(
 )
 
 suppressPackageStartupMessages(library(tidyverse, quietly = TRUE))
+suppressPackageStartupMessages(library(plotly, quietly = TRUE))
 suppressPackageStartupMessages(library(glue, quietly = TRUE))
 # suppressPackageStartupMessages(library(tipnet.ubesp, quietly = TRUE))
 
+# When approved, those function should be included in the `tipnet.ubesp`
+# package.
 gg_picu_type <- function(param) {
   filter(foo, type %in% param) %>% 
+    mutate(year = as.numeric(year)) %>% 
     ggplot(aes(x = year, y = beds, colour = unit)) +
-    geom_line()
+    geom_point() +
+    geom_smooth(se = TRUE) +
+    xlab("Years") +
+    ylab("Beds")
+}
+
+gg_bins <- function(param) {
+    x <- faithful[, 2]  # Old Faithful Geyser data
+    bins <- seq(min(x), max(x), length.out = param + 1)
+    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+}
+
+
+gg_breaks <- function(param) {
+  par(mar = c(4, 4, .1, .5))
+  hist(
+    faithful$eruptions, as.numeric(param),
+    col = 'gray', border = 'white',
+    xlab = 'Duration (minutes)', main = ''
+  )
 }
 ```
 
@@ -52,15 +79,16 @@ gg_picu_type <- function(param) {
 # re-imported only if the modified time changed!!
 write_lines("a, b, c\n1, 2, 3", "bar.csv")
 bar <- read_csv("bar.csv")
-
+n <- 7
+units <- letters[seq_len(n)]
 foo <- tibble(
-    unit = letters,
-    type = c("M/S", "C/N", "n/p")[sample.int(3, 26, replace = TRUE)]
+    unit = units,
+    type = c("M/S", "C/N", "n/p")[sample.int(3, n, replace = TRUE)]
   ) %>% 
   full_join(tibble(
-    unit = rep(letters, 5),
-    year = rep(2010:2014, 26),
-    beds = sample(c(NA, 0:10), 130, replace = TRUE)
+    unit = rep(units, 5),
+    year = rep(2010:2014, n),
+    beds = sample(c(NA, 0:10), n*5, replace = TRUE)
   ))
 ```
 
@@ -119,25 +147,27 @@ del Sacro Cuore, Rome
 ```{r, child = "010-descriptives.Rmd"}
 ```
 
-```{r, child = "020-origin.Rmd", eval=FALSE}
+```{r, child = "020-origin.Rmd"}
 ```
 
-```{r, child = "030-ccc.Rmd", eval=FALSE}
+```{r, child = "030-ccc.Rmd"}
 ```
 
-```{r, child = "040-severity.Rmd", eval=FALSE}
+```{r, child = "040-severity.Rmd"}
 ```
 
-```{r, child = "050-los.Rmd", eval=FALSE}
+```{r, child = "050-los.Rmd"}
 ```
 
-# Report download {-}
 
-```{r, echo=FALSE, eval=!params$export, include=!params$export}
+
+# References {-}
+
+```{r, echo=FALSE, eval=!params$export}
 downloadLink("report", "Generate report")
 ```
 
-```{r, context="server", eval=!params$export, include=!params$export}
+```{r, context="server", eval=!params$export}
 output$report <- downloadHandler("tipnet-repor.html",
   
   content = function(file) {
@@ -151,13 +181,21 @@ output$report <- downloadHandler("tipnet-repor.html",
     
     read_lines(temp_report) %>% 
       str_replace("^runtime: shiny_prerendered$", "") %>% 
+      str_replace_all(
+        "\\.tabset \\.tabset-fade \\.tabset-pills",
+        ""
+      ) %>% 
       write_lines(temp_report)
     
     # Set up parameters to pass to Rmd document
     params <- list(
       export = TRUE,
+      
       breaks = input$breaks,
-      picu_type = input$picu_type
+      bins   = input$bins,
+      iris_x = input$xcol,
+      iris_y = input$ycol,
+      iris_nclust = input$clusters
     )
 
     # Knit the document, passing in the `params` list, and eval it in a
@@ -172,7 +210,6 @@ output$report <- downloadHandler("tipnet-repor.html",
 ```
 
 
-# References {-}
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(

@@ -24,68 +24,94 @@ considered.
 ## PICUs
 
 ### Type
-```{r, eval=!params$export, include=!params$export}
-message(params$picu_type)
-checkboxGroupInput('picu_type',
-    label = 'PICU type:',
-    choices = c(
-        "Medical / Surgical" = "M/S",
-        "Cardiac / Neurosurgery" = "C/N",
-        "Neonata / Pediatric" = "n/p"
-    ), selected = params$picu_type
+```{r, eval=!params$export}
+pageWithSidebar(
+    
+    headerPanel('Iris k-means clustering'),
+    
+    sidebarPanel(
+    
+        selectInput('xcol', 'X Variable', names(iris),
+            selected = params$iris_x
+        ),
+    
+        selectInput('ycol', 'Y Variable', names(iris),
+            selected = params$iris_y
+        ),
+    
+        numericInput('clusters', 'Cluster count', min = 1, max = 9,
+            value = params$iris_nclust
+        )
+    
+  ),
+  
+  mainPanel(
+    plotOutput('plot1')
+  )
 )
-plotOutput("picutypePlot")
 ```
 
 
-```{r, context="server", eval=!params$export, include=!params$export}
-output$picutypePlot <- renderPlot({gg_picu_type(input$picu_type)})
+```{r, context="server", eval=!params$export}
+# Combine the selected variables into a new data frame
+  selectedData <- reactive({
+    iris[, c(input$xcol, input$ycol)]
+  })
+
+  clusters <- reactive({
+    kmeans(selectedData(), input$clusters)
+  })
+
+  output$plot1 <- renderPlot({
+    palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+      "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })
 ```
 
-```{r, eval=params$export, include=params$export}
-glue('PICU type selected: {paste(params$picu_type, collapse = ", ")}')
-gg_picu_type(params$picu_type)
+```{r, eval=params$export}
+selected_data <- iris[, c(params$iris_x, params$iris_y)]
+clusters <- kmeans(selected_data, params$iris_nclust)
+
+par(mar = c(5.1, 4.1, 0, 1))
+plot(selected_data, col = clusters$cluster, pch = 20, cex = 3)
+points(clusters$centers, pch = 4, cex = 4, lwd = 4)
 ```
 
 
 ### Number of beds
-```{r, echo=FALSE, eval=!params$export, include=!params$export}
-sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
+```{r, echo=FALSE, eval=!params$export}
+sliderInput("bins", "Number of bins:",
+    min = 1, max = 50, value = params$bins
+)
 plotOutput("distPlot2")
 ```
 
 
-```{r, context="server", eval=!params$export, include=!params$export}
+```{r, context="server", eval=!params$export}
 output$distPlot2 <- renderPlot({
-  x <- faithful[, 2]  # Old Faithful Geyser data
-  bins <- seq(min(x), max(x), length.out = input$bins + 1)
-  hist(x, breaks = bins, col = 'darkgray', border = 'white')
+  gg_bins(input$bins)
 })
 
+```
+
+```{r, eval=params$export}
+glue("Number of bins: {params$bins}")
+gg_bins(params$bins)
 ```
 
 
 ## Admissions
 
 ### Trends
-```{r, echo=FALSE, eval=!params$export, include=!params$export}
-selectInput(
-  'breaks', label = 'Number of bins:',
-  choices = c(10, 20, 35, 50), selected = params$breaks
-)
-plotOutput("distPlot3")
-```
-
-
-```{r, context="server", eval=!params$export, include=!params$export}
-output$distPlot3 <- renderPlot({
-  par(mar = c(4, 4, .1, .5))
-  hist(
-    faithful$eruptions, as.numeric(input$breaks),
-    col = 'gray', border = 'white',
-    xlab = 'Duration (minutes)', main = ''
-  )
-})
+```{r}
+gg_picu_type(params$picu_type) %>% 
+  ggplotly()
 ```
 
 
@@ -106,18 +132,22 @@ foo
 foo
 
 ## Demographics
-```{r, echo=FALSE, eval=!params$export, include=!params$export}
-plotOutput("distPlot4")
+```{r, eval=!params$export}
+selectInput(
+  'breaks', label = 'Number of bins:',
+  choices = c(10, 20, 35, 50), selected = params$breaks
+)
+plotOutput("distPlot3")
 ```
 
 
-```{r, context="server", eval=!params$export, include=!params$export}
-output$distPlot4 <- renderPlot({
-  par(mar = c(4, 4, .1, .5))
-  hist(
-    faithful$eruptions, as.numeric(input$breaks),
-    col = 'gray', border = 'white',
-    xlab = 'Duration (minutes)', main = ''
-  )
+```{r, context="server", eval=!params$export}
+output$distPlot3 <- renderPlot({
+  gg_breaks(input$breaks)
 })
+```
+
+```{r, eval=params$export}
+glue("Number of breaks: {params$breaks}")
+gg_breaks(params$breaks)
 ```
