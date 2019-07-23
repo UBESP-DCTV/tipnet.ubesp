@@ -1,3 +1,5 @@
+* Updated version of the script "import-dataset.R"
+
 # tipnet.ubesp 0.0.0.9000
 * Added basic development support:
   - git + GitHub;
