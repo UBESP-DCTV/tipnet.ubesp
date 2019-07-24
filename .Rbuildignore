@@ -1,6 +1,7 @@
 ^tipnet\.ubesp\.Rproj$
 ^\.Rproj\.user$
 ^analyses$
+^report$
 ^README\.Rmd$
 ^\.github$
 ^\.github/ISSUE_TEMPLATE$
