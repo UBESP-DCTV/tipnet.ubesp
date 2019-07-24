@@ -21,14 +21,35 @@ Only children 0 -- 16 years old who have a severity score on admission
 which allow to estimate a Standardized Mortality Ratio (SMR) were
 considered.
 
-## PICUs
 
-### Type
+```{r}
+DT::datatable(intro_accettazione,
+    filter = "top",
+    selection = "multiple",
+    rownames = FALSE
+)
+```
+
+
+
+---
+
+###### Info: Click on a tab to explore its content {- .alert .alert-info}
+
+## PICUs {.tabset .tabset-dropdown}
+
+
+### Partecipating Units
+
+##### Warn: I did not find this data yet :-) {- .alert .alert-warning}
+
+
+### Shiny-engine examples:
+
+#### Iris k-means clustering live"
+
 ```{r, eval=!params$export}
-pageWithSidebar(
-    
-    headerPanel('Iris k-means clustering'),
-    
+sidebarLayout(
     sidebarPanel(
     
         selectInput('xcol', 'X Variable', names(iris),
@@ -43,14 +64,12 @@ pageWithSidebar(
             value = params$iris_nclust
         )
     
-  ),
-  
-  mainPanel(
-    plotOutput('plot1')
-  )
+    ),
+    mainPanel(
+        plotOutput('plot1')
+    )
 )
 ```
-
 
 ```{r, context="server", eval=!params$export}
 # Combine the selected variables into a new data frame
@@ -106,12 +125,11 @@ gg_bins(params$bins)
 ```
 
 
-## Admissions
+## Admissions {.tabset .tabset-dropdown}
 
 ### Trends
 ```{r}
-gg_picu_type(params$picu_type) %>% 
-  ggplotly()
+ggplotly(gg_admission_trends)
 ```
 
 
@@ -131,7 +149,7 @@ foo
 
 foo
 
-## Demographics
+## Demographics {.tabset .tabset-dropdown}
 ```{r, eval=!params$export}
 selectInput(
   'breaks', label = 'Number of bins:',
