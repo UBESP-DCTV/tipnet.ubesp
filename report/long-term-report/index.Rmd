@@ -34,6 +34,8 @@ description: "`r paste0('Prototype example for the TIPNet long-term report (year
 
 
 ```{r setup, include=FALSE}
+options(knitr.duplicate.label = 'allow')
+
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
@@ -42,6 +44,7 @@ knitr::opts_chunk$set(
 
 suppressPackageStartupMessages(library(tidyverse, quietly = TRUE))
 suppressPackageStartupMessages(library(plotly, quietly = TRUE))
+suppressPackageStartupMessages(library(DT, quietly = TRUE))
 suppressPackageStartupMessages(library(glue, quietly = TRUE))
 suppressPackageStartupMessages(library(here, quietly = TRUE))
 # suppressPackageStartupMessages(library(tipnet.ubesp, quietly = TRUE))
@@ -81,8 +84,62 @@ gg_breaks <- function(param) {
 # changed. Note that server-side data are loaded from the render-side
 # if included in the chunck named "data" (like this is), hence setting
 # cache.extra provide a further speed up.
+
+
+# DATA IMPORT =========================================================
 anagrafica <- read_rds(here("..", "..", "data", "tip_anagrafica.rds"))
 
+accettazione <- read_rds(
+  here("..", "..", "data", "tip_accettazione.rds")
+)
+
+# INTRO ===============================================================
+intro_accettazione <- accettazione %>% 
+    mutate(`Date of admission` = lubridate::dmy(ingresso_dt)) %>% 
+    filter(
+        `Date of admission` >= lubridate::dmy("01/01/2010"),
+        `Date of admission` <= lubridate::dmy("31/12/2014")
+    ) %>% 
+    select(center, `Date of admission`, codpat, d_is_prematuro, d_ex_prematuro, eta) %>% 
+    mutate(
+        Center = as.factor(center),
+        Ingresso = `Date of admission`,
+        Preterm = d_is_prematuro | d_ex_prematuro,
+        `Over 16`   = eta > 16 * 365.25
+    ) %>% 
+    distinct() %>% 
+    select(Center, `Date of admission`, Preterm, `Over 16`)
+
+
+# PICUs ===============================================================
+# Partecipating Units -------------------------------------------------
+# ADMISSIONS ==========================================================
+# Trends --------------------------------------------------------------
+admission_trends <- intro_accettazione %>%
+    mutate(Year = lubridate::year(`Date of admission`)) %>% 
+    arrange(Year) %>% 
+    group_by(Year) %>% 
+    mutate(`Overall admissions` = n()) %>% 
+    group_by(Year, Center) %>% 
+    mutate(`Center admissions` = n()) %>%
+    distinct(
+      Center, Year, `Overall admissions`, `Center admissions`
+    ) %>% 
+    ungroup()
+
+gg_admission_trends <- admission_trends %>% 
+        ggplot(aes(x = Year)) +
+        geom_line(aes(y = `Overall admissions`)) +
+        geom_line(aes(y = `Center admissions`, colour = Center)) +
+        ylab("Admissions")
+
+# Distributions -------------------------------------------------------
+# Gender --------------------------------------------------------------
+# Ethnicity -----------------------------------------------------------
+# Age -----------------------------------------------------------------
+# 
+# DEMOGRAPHICS ========================================================
+# 
 
 bar <- read_csv("bar.csv")
 n <- 7
@@ -100,6 +157,11 @@ foo <- tibble(
 
 
 # Colophon {-}
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **Network coordinator**: Andrea Wolfler, MD ([Department of Anesthesia and Intensive Care Unit](https://www.asst-fbf-sacco.it/reparti-e-servizi/info/anestesia-e-rianimazione-pediatrica) -- [Children’s Hospital Vittore Buzzi](https://www.asst-fbf-sacco.it/reparti-e-servizi/ricerca-reparto-presidio/buzzi)) --- Milan
 
@@ -149,6 +211,7 @@ del Sacro Cuore, Rome
 - Department of Anesthesia and Intensive Care Ospedale Garibaldi – Nesima, Catania
 - Department of Pediatrics Ospedale Policlinico –Universitario G Martino, Messina
 
+</div>
 
 ```{r, child = "010-descriptives.Rmd"}
 ```
@@ -167,9 +230,12 @@ del Sacro Cuore, Rome
 
 
 
-# References {-}
+```{r, results='asis', eval=!params$export}
+cat("# Download current report {-}")
+```
 
-```{r, echo=FALSE, eval=!params$export}
+
+```{r, eval=!params$export}
 downloadLink("report", "Generate report")
 ```
 
@@ -215,6 +281,8 @@ output$report <- downloadHandler("tipnet-repor.html",
 )
 ```
 
+
+# References {-}
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
