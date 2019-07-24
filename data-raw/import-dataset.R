@@ -5,6 +5,7 @@ library(lubridate)
 library(janitor)
 library(here)  # it should follow the lubridate package because `here()`
 library(glue)
+# library(tipnet.ubesp)
 
 ## Raw data will stay off-line, commonly onle level above the the
 ## R-package folder. This assure the package remains lightweight
@@ -59,20 +60,9 @@ import_problems
 # of the dataframes
 tipnet_db <- map(raw_data_list, ~{
     clean_names(.x) %>%
-        # lowering all the text
-        mutate_if(is.character, str_to_lower) %>%
-
-        # coding logical
-        mutate_if(is.character, ~ . == "si") %>%
-
-        # integers
-        mutate_if(is.numeric, ~{
-            ifelse(
-                test = all(.x == trunc(.x), na.rm = TRUE),
-                yes  = as.integer(.x),
-                no   = .x
-            )
-        })
+        lowering_character_columns() %>%
+        nosi_columns_to_lgl() %>%
+        convert_to_integer_numerical_integer_columns()
 })
 
 ## furter processing of the data........................................
