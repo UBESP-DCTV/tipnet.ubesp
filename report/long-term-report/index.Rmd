@@ -8,6 +8,9 @@ params:
     iris_x: !r names(iris)[[1]]
     iris_y: !r names(iris)[[2]]
     iris_nclust: 3
+    pre_pim_x: "be"
+    pre_pim_y: "pim2"
+    pre_pim_nclust: 3
 
 output:
     bookdown::html_document2:
@@ -19,7 +22,7 @@ output:
 runtime: shiny_prerendered
 
 title: "`r paste0('TIPNet long-term report, years ', params$period)`"
-subtitle: "(prototype by Corrado Lanera^[Unità di Biostatistica, Epidemiologia, e Sanlute Pubblica --- Dipartimento di Scienze Cardio-Toraco-Vascolari e Salute Pubblica (Università di Padova -- IT)])"
+subtitle: '<style> div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;} </style><div class = "blue"> Prototype by Corrado Lanera and Dario Gregori<br>**Artificial Intelligence and Data Mining Lab** within the<br>**Unit of Biostatistics, Epidemiology, and Public Health** of the<br>_Department of Cardiac, Thoracic, Vascular Sciences and Public Health_ at the University of Padova</div>'
 author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI) and CINECA"
 date: "**Last update**: `r Sys.Date()`"
 
@@ -92,6 +95,11 @@ anagrafica <- read_rds(here("..", "..", "data", "tip_anagrafica.rds"))
 accettazione <- read_rds(
   here("..", "..", "data", "tip_accettazione.rds")
 )
+
+pre_pim <- read_rds(
+  here("..", "..", "data", "pre_pim.rds")
+) %>% # this is only for the sample kmeans model plot
+  select_if(is.double)
 
 # INTRO ===============================================================
 intro_accettazione <- accettazione %>% 
@@ -267,7 +275,10 @@ output$report <- downloadHandler("tipnet-repor.html",
       bins   = input$bins,
       iris_x = input$xcol,
       iris_y = input$ycol,
-      iris_nclust = input$clusters
+      iris_nclust = input$clusters,
+      pre_pim_x = input$pre_pim_xcol,
+      pre_pim_y = input$pre_pim_ycol,
+      pre_pim_nclust = input$pre_pim_clusters
     )
 
     # Knit the document, passing in the `params` list, and eval it in a

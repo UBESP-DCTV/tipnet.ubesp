@@ -1,3 +1,23 @@
-# Length of stay (LOS) and Pediatric Intensive Care Unit (PICU) discharge {#los}
+# Length of stay (LOS) and Pediatric Intensive Care Unit (PICU) discharge {#los .tabset .tabset-fade .tabset-pills}
 
 
+
+
+## LOS {.tabset .tabset-dropdown}
+
+### Overview
+
+### By year
+
+### By age
+
+### By center
+
+### By condition (CCC)
+
+### Rate of admission
+
+
+
+
+## Discharge {.tabset .tabset-dropdown}

@@ -21,14 +21,35 @@ Only children 0 -- 16 years old who have a severity score on admission
 which allow to estimate a Standardized Mortality Ratio (SMR) were
 considered.
 
+### Overview
 
+Below are reported all the admissions in the registry. Exclusion
+criteria were" preterm or > 16 years old, or not completed data entry
 ```{r}
 DT::datatable(intro_accettazione,
     filter = "top",
     selection = "multiple",
     rownames = FALSE
 )
+
+included <- accettazione %>% 
+    mutate(`Date of admission` = lubridate::dmy(ingresso_dt)) %>% 
+    filter(
+        `Date of admission` >= lubridate::dmy("01/01/2010"),
+        `Date of admission` <= lubridate::dmy("31/12/2014")
+    ) %>% 
+    mutate(
+        Center = as.factor(center),
+        Ingresso = `Date of admission`,
+        Preterm = d_is_prematuro | d_ex_prematuro,
+        `Over 16`   = eta > 16 * 365.25
+    ) %>% 
+    filter(!Preterm, !`Over 16`)
 ```
+
+
+- record in the registry are `r nrow(intro_accettazione)`
+- record analyzed are `r nrow(included)`
 
 
 
@@ -41,27 +62,27 @@ DT::datatable(intro_accettazione,
 
 ### Partecipating Units
 
-##### Warn: I did not find this data yet :-) {- .alert .alert-warning}
+##### Warn: Data missing {- .alert .alert-warning}
 
 
 ### Shiny-engine examples:
 
-#### Iris k-means clustering live"
+#### pre_pim k-means clustering live"
 
 ```{r, eval=!params$export}
 sidebarLayout(
     sidebarPanel(
     
-        selectInput('xcol', 'X Variable', names(iris),
-            selected = params$iris_x
+        selectInput('xcol', 'X Variable', names(pre_pim),
+            selected = params$pre_pim_x
         ),
     
-        selectInput('ycol', 'Y Variable', names(iris),
-            selected = params$iris_y
+        selectInput('ycol', 'Y Variable', names(pre_pim),
+            selected = params$pre_pim_y
         ),
     
         numericInput('clusters', 'Cluster count', min = 1, max = 9,
-            value = params$iris_nclust
+            value = params$pre_pim_nclust
         )
     
     ),
@@ -74,7 +95,8 @@ sidebarLayout(
 ```{r, context="server", eval=!params$export}
 # Combine the selected variables into a new data frame
   selectedData <- reactive({
-    iris[, c(input$xcol, input$ycol)]
+    pre_pim[, c(input$xcol, input$ycol)] %>% 
+      remove_missing()
   })
 
   clusters <- reactive({
@@ -94,8 +116,9 @@ sidebarLayout(
 ```
 
 ```{r, eval=params$export}
-selected_data <- iris[, c(params$iris_x, params$iris_y)]
-clusters <- kmeans(selected_data, params$iris_nclust)
+selected_data <- pre_pim[, c(params$pre_pim_x, params$pre_pim_y)] %>% 
+      remove_missing()
+clusters <- kmeans(selected_data, params$pre_pim_nclust)
 
 par(mar = c(5.1, 4.1, 0, 1))
 plot(selected_data, col = clusters$cluster, pch = 20, cex = 3)

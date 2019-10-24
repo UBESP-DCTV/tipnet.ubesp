@@ -36,21 +36,21 @@ computeSpam = function(...) return(15)
 row
 -----------------------------------------------------------------------
 
-### Articles per Day
+### Center involved
 
 ```{r}
 articles = computeArticles()
 valueBox(articles, icon = "fa-pencil")
 ```
 
-### Comments per Day
+### Record stored
 
 ```{r}
 comments = computeComments()
 valueBox(comments, icon = "fa-comments")
 ```
 
-### Spam per Day
+### Incomplete data
 
 ```{r}
 spam = computeSpam()
@@ -79,7 +79,7 @@ foo
 row
 -----------------------------------------------------------------------
 
-### Contact Rate
+### Centers reporting data
 
 ```{r}
 gauge(91, min = 0, max = 100, symbol = '%', gaugeSectors(
@@ -87,7 +87,7 @@ gauge(91, min = 0, max = 100, symbol = '%', gaugeSectors(
 ))
 ```
 
-### Average Rating 
+### Admission per day 
 
 ```{r}
 gauge(37.4, min = 0, max = 50, gaugeSectors(
@@ -95,7 +95,7 @@ gauge(37.4, min = 0, max = 50, gaugeSectors(
 ))
 ```
 
-### Cancellations
+### Average PIM
 
 ```{r}
 gauge(7, min = 0, max = 10, gaugeSectors(
