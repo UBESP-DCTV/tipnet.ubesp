@@ -1,3 +1,11 @@
 .Rproj.user
 .Rhistory
 .RData
+
+report/*\.html
+
+report/long-term-report/*\.html
+
+report/long-term-report/index_data/
+
+report/long-term-report/index_cache/
