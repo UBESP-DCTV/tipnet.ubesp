@@ -1,6 +1,5 @@
 ^tipnet\.ubesp\.Rproj$
 ^\.Rproj\.user$
-^analyses$
 ^report$
 ^README\.Rmd$
 ^\.github$
@@ -12,4 +11,3 @@
 ^\.covrignore$
 ^cran-comments\.md$
 ^data-raw$
-^report$
