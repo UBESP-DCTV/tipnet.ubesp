@@ -81,7 +81,7 @@ gg_breaks <- function(param) {
 }
 ```
 
-```{r data, include=FALSE, cache=TRUE, cache.extra=file.info(here("..", "..", "data"))$mtime}
+```{r data, include=FALSE, cache=TRUE, cache.extra=file.info(here("..", "..", "..", "data"))$mtime}
 # cache.extra option in the knitr tags here above needs to speed up
 # normal computation and running time (render side) as the data are not
 # changed. Note that server-side data are loaded from the render-side
@@ -90,14 +90,14 @@ gg_breaks <- function(param) {
 
 
 # DATA IMPORT =========================================================
-anagrafica <- read_rds(here("..", "..", "data", "tip_anagrafica.rds"))
+anagrafica <- read_rds(here("..", "..", "..", "data", "tip_anagrafica.rds"))
 
 accettazione <- read_rds(
-  here("..", "..", "data", "tip_accettazione.rds")
+  here("..", "..", "..", "data", "tip_accettazione.rds")
 )
 
 pre_pim <- read_rds(
-  here("..", "..", "data", "pre_pim.rds")
+  here("..", "..", "..", "data", "pre_pim.rds")
 ) %>% # this is only for the sample kmeans model plot
   select_if(is.double)
 
