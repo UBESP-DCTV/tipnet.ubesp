@@ -22,7 +22,9 @@ Imports:
     assertive (>= 0.3-5),
     dplyr (>= 0.8.3),
     purrr (>= 0.3.2),
-    stringr (>= 1.4.0)
+    stringr (>= 1.4.0),
+    shiny,
+    lubridate
 Suggests: 
     covr (>= 3.2.1),
     roxygen2 (>= 6.1.1),
