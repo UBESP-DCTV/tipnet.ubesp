@@ -1,0 +1,240 @@
+--- 
+params:
+    export: FALSE
+    first_y: 2010
+    last_y:  2014
+
+output:
+    bookdown::html_document2:
+        toc: true
+        toc_float: true
+        toc_depth: 2
+        df_print: paged
+
+runtime: shiny_prerendered
+
+title: "TIPNet report"
+
+subtitle: '<style> div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;} </style><div class = "blue">long-term `r paste0("(", params$first_y, " - ", params$last_y, ")")`</div>'
+
+author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with the Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI), and the Unit of Biostatistics, Epidemiology and Public Health (UBEP) of the University of Padova."
+
+date: "**Last update**: `r as.Date(file.info('index.Rmd')$mtime)`"
+
+biblio-style: apalike
+link-citations: yes
+bibliography:
+  - bibliography.bib
+  - packages.bib
+
+description: "`r paste0('TIPNet long-term report (', params$first_y, ' - ', params$last_y, ')')`"
+---
+
+
+```{r setup, include=FALSE}
+options(knitr.duplicate.label = 'allow')
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+
+library(readr)
+library(dplyr)
+library(stringr)
+library(fs)
+
+library(tipnet.ubesp)
+library(plotly)
+library(DT)
+
+library(glue) 
+library(here)
+```
+
+
+```{r server-start, include = FALSE}
+data_path <- dir_create(here("data"))
+file_path <- file.path(data_path, "tipnet_full.rds")
+
+tipnet_full <- read_redcap(
+  url = tipnet_redcap_url()
+)
+
+if (tipnet_full$data$success && tipnet_full$meta_data$success) {
+  write_rds(tipnet_full, path = file_path)
+} else {
+  ui_warn("Connection error to REDCap TIPNet database.")
+}
+```
+
+```{r data, include=FALSE, cache=TRUE, cache.extra=tools::md5sum(file_path)}
+# cache.extra option in the knitr tags here above needs to speed up
+# normal computation and running time (render side) as the data are not
+# changed. Note that server-side data are loaded from the render-side
+# if included in the chunck named "data" (like this is), hence setting
+# cache.extra provide a further speed up.
+
+tipnet_full <- read_rds(file_path)
+
+tipnet <- tidy_data_from(tipnet_full)
+
+
+
+# DATA IMPORT =========================================================
+
+# INTRO ===============================================================
+
+# PICUs ===============================================================
+# Partecipating Units -------------------------------------------------
+
+
+# ADMISSIONS ==========================================================
+# Trends --------------------------------------------------------------
+# Distributions -------------------------------------------------------
+# Gender --------------------------------------------------------------
+# Ethnicity -----------------------------------------------------------
+# Age -----------------------------------------------------------------
+
+ 
+# DEMOGRAPHICS ========================================================
+```
+
+
+# Colophon {-}
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+**Network coordinator**: Andrea Wolfler, MD ([Department of Anesthesia and Intensive Care Unit](https://www.asst-fbf-sacco.it/reparti-e-servizi/info/anestesia-e-rianimazione-pediatrica) -- [Children’s Hospital Vittore Buzzi](https://www.asst-fbf-sacco.it/reparti-e-servizi/ricerca-reparto-presidio/buzzi)) --- Milan
+
+**In collaboration with**: Unit of Biostatistics, Epidemiology and Public Helath ([UBEP](https://ubesp.jimdo.com/)), [Department of Cardiac, Toracic, Vascular sciences and Public Health](https://www.dctv.unipd.it/) -- [University of Padova](https://www.unipd.it/) --- Interuniversity Consortium
+
+- Dario Gregori (head of UBEP)
+- Corrado Lanera (Laboratory of Artificial Intelligence for Medical Sciences)
+- Giulia Lorenzoni, Honoria Ocagli (Laboratory of Clinical Epidemiology)
+- Rosanna Comoretto (Laboratory for Health Service Research)
+- Matteo Martinato, Laura Nasato (Service for Clinical Trials and Biometrics)
+
+**Business intelligence analyst**: Roberta Amato
+
+**IT Project Managers**: Dario Gregori, Corrado Lanera
+
+**With the contribution of**:
+
+- F. Racca, J Gualino - Alessandria
+- F. Ferrero, R Osello, R Gilodi - Novara
+- I Salvo, E. Zoia, A. Mandelli - Milano
+- E Calderini, C. Montani, E. Prandi - Milano
+- P. Biban, P Santuz - Verona
+- A. Pettenazzo, A Amigoni - Padova
+- S. Furlan, F Savron - Trieste
+- F Caramelli, C. Mondardini, E. Iannella - Bologna
+- C Cecchetti, D Perrotta - Roma
+- S Picardo, E Rossetti - Roma
+- M Corbari - Roma
+- G. Conti, M Piastra, O. Genovese - Roma
+- R Testa, A Dolcini, L. D’Amato - Napoli
+- G Coffaro, A. M. Guddo, A. M. Giglio - Palermo
+- E Gitto - Messina
+- G Stancanelli - Catania
+
+**TIPNet study group** - participating center:
+
+- Department of Anesthesia and Intensive Care, Children’s Hospital Sant’Antonio e Biagio e Cesare Arrigo, Alessandria:
+- Department of Pediatrics, Ospedale Maggiore della Carità, Novara:
+- Department of Anesthesia and Intensive Care, Children’s Hospital V Buzzi, Milan:
+- Department of Anesthesia and Intensive Care, Fondazione IRCCS Ca Granda, Ospedale Maggiore Policlinico, Milan:
+- Department of Pediatric Anesthesia and Intensive Care, Spedali Civili, Brescia
+- Department of Neonatal and Paediatric Intensive Care, Azienda Ospedaliera Universitaria Integrata, Verona
+- Department of Woman’s and Child’s Health, Pediatric ICU, University Hospital, Padova
+- Department of Anesthesia and Intensive Care, Institute for Maternal and Child health, IRCCS Burlo Garofolo, Trieste
+- Department of Pediatric Anesthesia and Intensive Care, Ospedale Sant’Orsola Malpighi, Bologna
+- Department of Anesthesia and Intensive Care, Children’s Hospital Meyer, Firenze
+- Department of Anesthesia and Intensive Care, Children’s Hospital Bambino Gesù, Rome DEA, ARCO, Palidoro
+- Anesthesia and Intensive Care Department, Pediatric ICU, Policlinico Universitario A.Gemelli, Università Cattolica
+del Sacro Cuore, Rome
+- Department of Anesthesia and Intensive Care, Children’s Hospital Santobono-Pausillipon, Napoli
+- Department of Anesthesia and Intensive Care, Children’s Hospital G Di Cristina, Palermo
+- Department of Anesthesia and Intensive Care Ospedale Garibaldi – Nesima, Catania
+- Department of Pediatrics Ospedale Policlinico –Universitario G Martino, Messina
+
+</div>
+
+```{r, child = "010-descriptives.Rmd"}
+```
+
+```{r, child = "020-origin.Rmd"}
+```
+
+```{r, child = "030-ccc.Rmd"}
+```
+
+```{r, child = "040-severity.Rmd"}
+```
+
+```{r, child = "050-los.Rmd"}
+```
+
+
+
+```{r, results='asis', eval=!params$export}
+cat("# Download current report {-}")
+```
+
+
+```{r, eval=!params$export}
+downloadLink("report", "Generate report")
+```
+
+```{r, context="server", eval=!params$export}
+
+output$report <- downloadHandler("tipnet-repor.html",
+  
+  content = function(file) {
+    temp_dir <- tempdir()
+    file.copy(".", temp_dir,
+        overwrite = TRUE,
+        recursive = TRUE,
+        copy.date = TRUE # this is needed to not invalidate caches
+    )
+    temp_report <- file.path(temp_dir, "index.Rmd")
+    
+    read_lines(temp_report) %>% 
+      str_replace("^runtime: shiny_prerendered$", "") %>% 
+      str_replace_all(
+        "\\.tabset \\.tabset-fade \\.tabset-pills",
+        ""
+      ) %>% 
+      write_lines(temp_report)
+    
+    # Set up parameters to pass to Rmd document
+    params <- list(
+      export = TRUE
+      
+      # foo = input$foo, # bring the current state of the report
+    )
+
+    # Knit the document, passing in the `params` list, and eval it in a
+    # child of the global environment (this isolates the code in the
+    # document from the code in this app).
+    rmarkdown::render(temp_report, output_file = file,
+      params = params,
+      envir = new.env(parent = globalenv())
+    )
+  }
+)
+```
+
+
+# References {-}
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
