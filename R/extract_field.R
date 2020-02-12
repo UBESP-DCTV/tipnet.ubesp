@@ -17,9 +17,15 @@ nest_tables <- function(data) {
     dplyr::mutate(
       tables = purrr::map(.data$tables, ~{
         janitor::remove_empty(.x, c("rows", "cols")) %>%
-          add_sheets_prefix(exept = .data$codpat) %>%
-          sheets_to_var("sheets", exept = .data$codpat) %>%
-          tidyr::nest(tables = -.data$sheets)
+          add_sheets_prefix(exept = "codpat") %>%
+          sheets_to_var(exept = "codpat") %>%
+          tidyr::nest(tables = -.data$sheets) %>%
+          dplyr::mutate(
+            tables = purrr::map(.data$tables,
+              janitor::remove_empty,
+              which = c("rows", "cols")
+            )
+          )
       })
     ) %>%
     tidyr::unnest(.data$tables)
@@ -27,7 +33,7 @@ nest_tables <- function(data) {
 }
 
 
-sheets_to_var <- function(data, name, exept) {
+sheets_to_var <- function(data, name = "sheets", exept = NULL) {
 
   names_pattern <- paste0(
     "(", paste(attr(data, 'sheet_names'), collapse = '|'), ")",
