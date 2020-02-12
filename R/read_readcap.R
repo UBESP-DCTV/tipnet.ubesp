@@ -34,13 +34,13 @@ read_redcap <- function(url, token = tipnet_token()) {
 
   # Import all the field of ROLEX db
   df <- REDCapR::redcap_read(
-    batch_size = 2000,
-    redcap_uri = url, token = token,
-    export_data_access_groups = TRUE,
-    raw_or_label = "raw",
-    raw_or_label_headers = "raw",
+    redcap_uri = url,
+    token = token,
+    batch_size = 1000L,
+    raw_or_label = "label",
     export_checkbox_label = TRUE,
-    guess_type = FALSE,
+    export_survey_fields = TRUE,
+    guess_type = TRUE,
     verbose = FALSE
   )
 

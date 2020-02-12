@@ -40,8 +40,7 @@ knitr::opts_chunk$set(
   warning = FALSE
 )
 
-library(readr)
-library(dplyr)
+library(tidyverse)
 library(stringr)
 library(fs)
 
@@ -55,18 +54,7 @@ library(here)
 
 
 ```{r server-start, include = FALSE}
-data_path <- dir_create(here("data"))
-file_path <- file.path(data_path, "tipnet_full.rds")
-
-tipnet_full <- read_redcap(
-  url = tipnet_redcap_url()
-)
-
-if (tipnet_full$data$success && tipnet_full$meta_data$success) {
-  write_rds(tipnet_full, path = file_path)
-} else {
-  ui_warn("Connection error to REDCap TIPNet database.")
-}
+db_update_from_server()
 ```
 
 ```{r data, include=FALSE, cache=TRUE, cache.extra=tools::md5sum(file_path)}
@@ -76,10 +64,7 @@ if (tipnet_full$data$success && tipnet_full$meta_data$success) {
 # if included in the chunck named "data" (like this is), hence setting
 # cache.extra provide a further speed up.
 
-tipnet_full <- read_rds(file_path)
-
-tipnet <- tidy_data_from(tipnet_full)
-
+tipnet <- read_rds(file_path)
 
 
 # DATA IMPORT =========================================================
