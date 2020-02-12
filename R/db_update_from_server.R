@@ -23,6 +23,7 @@ db_update_from_server <- function(path_data = data_path(),
 
   if (all_ok) {
     tipnet_raw %>%
+      tidy_data_extraction() %>%
       nest_tables() %>%
       readr::write_rds(path = file_path)
 
