@@ -4,10 +4,7 @@
 \alias{db_update_from_server}
 \title{Title}
 \usage{
-db_update_from_server(
-  path_data = dir_create(here("data")),
-  file_name = "tipnet.rds"
-)
+db_update_from_server(path_data = data_path(), file_name = "tipnet.rds")
 }
 \arguments{
 \item{path_data}{(chr) path for data folder (default is \verb{data/}

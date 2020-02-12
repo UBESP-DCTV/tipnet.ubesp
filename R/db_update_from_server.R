@@ -12,7 +12,7 @@
 #' \dontrun{
 #'   db_update_from_server()
 #' }
-db_update_from_server <- function(path_data = dir_create(here("data")),
+db_update_from_server <- function(path_data = data_path(),
                                   file_name = "tipnet.rds"
 ) {
 
@@ -24,7 +24,7 @@ db_update_from_server <- function(path_data = dir_create(here("data")),
   if (all_ok) {
     tipnet_raw %>%
       nest_tables() %>%
-      write_rds(path = file_path)
+      readr::write_rds(path = file_path)
 
     return(invisible(TRUE))
 
@@ -34,3 +34,4 @@ db_update_from_server <- function(path_data = dir_create(here("data")),
   }
 
 }
+

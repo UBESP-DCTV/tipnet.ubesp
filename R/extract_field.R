@@ -19,10 +19,10 @@ nest_tables <- function(data) {
         janitor::remove_empty(.x, c("rows", "cols")) %>%
           add_sheets_prefix(exept = .data$codpat) %>%
           sheets_to_var("sheets", exept = .data$codpat) %>%
-          nest(tables = -.data$sheets)
+          tidyr::nest(tables = -.data$sheets)
       })
     ) %>%
-    unnest(tables)
+    tidyr::unnest(.data$tables)
 
 }
 
@@ -36,7 +36,7 @@ sheets_to_var <- function(data, name, exept) {
 
   tidyr::pivot_longer(
     data = data,
-    cols = -exclude,
+    cols = -exept,
     names_to = c(name, ".value"),
     names_pattern = names_pattern
   )
@@ -44,7 +44,7 @@ sheets_to_var <- function(data, name, exept) {
 
 
 tidy_data_extraction <- function(data) {
-  as_tibble(data[["data"]][["data"]]) %>%
+  tibble::as_tibble(data[["data"]][["data"]]) %>%
     janitor::clean_names() %>%
     dplyr::mutate_if(is.character, tolower) %>%
     dplyr::rename(fields = .data$redcap_event_name)

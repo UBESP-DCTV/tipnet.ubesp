@@ -11,6 +11,9 @@
 #'
 #' @param data (data.frame) a "data" data frame inside the object
 #'   exported from REDCap using the [read_redcap] function.
+#' @param exept (chr) Character vector of variable's names in `data` to
+#'   exclude from being considered into a sheet (i.e. REDCap
+#'   infromations not included into a specific form, e.g., ID)
 #'
 #' @importFrom stringr str_detect
 #'
@@ -19,7 +22,8 @@
 #' @export
 #'
 #' @examples
-#' sample_df <- tibble(
+#'
+#' sample_df <- data.frame(
 #'   a = sample(1),
 #'   b = sample(1),
 #'   c_complete = sample(1),

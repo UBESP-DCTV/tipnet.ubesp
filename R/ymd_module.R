@@ -20,7 +20,7 @@ ymdInputUI <- function(id, label) {
 #'
 #' @param id  a
 #'
-#' @importFrom shiny reactive req renderText
+#' @importFrom shiny reactive req renderText callModule
 #'
 #' @return a
 #' @export

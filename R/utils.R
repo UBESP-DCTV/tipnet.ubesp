@@ -12,7 +12,10 @@ tipnet_token <- function() {
 
 skip_if_no_auth <- function() {
   if (identical(Sys.getenv("REDCAP_TIPNET_PAT"), "")) {
-    skip("No authentication available")
+    testthat::skip("No authentication available")
   }
 }
 
+data_path <- function() {
+  fs::dir_create(here::here("data"))
+}

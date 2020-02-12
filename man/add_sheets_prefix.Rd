@@ -9,6 +9,10 @@ add_sheets_prefix(data, exept = NULL)
 \arguments{
 \item{data}{(data.frame) a "data" data frame inside the object
 exported from REDCap using the \link{read_redcap} function.}
+
+\item{exept}{(chr) Character vector of variable's names in \code{data} to
+exclude from being considered into a sheet (i.e. REDCap
+infromations not included into a specific form, e.g., ID)}
 }
 \value{
 the data \link[tibble:tibble-package]{tibble} with modified
@@ -26,7 +30,8 @@ This function add the name of every sheets as a prefix of the name
 of each of its corresponding variable (if not already present).
 }
 \examples{
-sample_df <- tibble(
+
+sample_df <- data.frame(
   a = sample(1),
   b = sample(1),
   c_complete = sample(1),
