@@ -1,6 +1,7 @@
 #' Extract field from REDCap db
 #'
-#' @param data (list) the output of [read_redcap]
+#' @param data (list) the output of [tidy_extract] to extract the
+#'   data (not the meta-data).
 #'
 #' @return [tibble][tibble::tibble-package]
 #' @export
@@ -18,8 +19,8 @@ nest_tables <- function(data) {
       tables = purrr::map(.data$tables, ~{
         janitor::remove_empty(.x, c("rows", "cols")) %>%
           add_sheets_prefix(exept = "codpat") %>%
-          sheets_to_var(exept = "codpat") %>%
-          tidyr::nest(tables = -.data$sheets) %>%
+          sheets_to_var("sheet", exept = "codpat") %>%
+          tidyr::nest(tables = -.data$sheet) %>%
           dplyr::mutate(
             tables = purrr::map(.data$tables,
               janitor::remove_empty,
@@ -33,7 +34,7 @@ nest_tables <- function(data) {
 }
 
 
-sheets_to_var <- function(data, name = "sheets", exept = NULL) {
+sheets_to_var <- function(data, name = "sheet", exept = NULL) {
 
   names_pattern <- paste0(
     "(", paste(attr(data, 'sheet_names'), collapse = '|'), ")",
@@ -49,9 +50,3 @@ sheets_to_var <- function(data, name = "sheets", exept = NULL) {
 }
 
 
-tidy_data_extraction <- function(data) {
-  tibble::as_tibble(data[["data"]][["data"]]) %>%
-    janitor::clean_names() %>%
-    dplyr::mutate_if(is.character, tolower) %>%
-    dplyr::rename(fields = .data$redcap_event_name)
-}
