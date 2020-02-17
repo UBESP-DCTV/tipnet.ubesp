@@ -1,0 +1,303 @@
+--- 
+params:
+    export: FALSE
+    period: "2010 -- 2014"
+    picu_type: ["M/S", "C/N", "n/p"]
+    breaks: 20
+    bins: 30
+    iris_x: !r names(iris)[[1]]
+    iris_y: !r names(iris)[[2]]
+    iris_nclust: 3
+    pre_pim_x: "be"
+    pre_pim_y: "pim2"
+    pre_pim_nclust: 3
+
+output:
+    bookdown::html_document2:
+        toc: true
+        toc_float: true
+        toc_depth: 2
+        df_print: paged
+
+runtime: shiny_prerendered
+
+title: "`r paste0('TIPNet long-term report, years ', params$period)`"
+subtitle: '<style> div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;} </style><div class = "blue"> Prototype by Corrado Lanera and Dario Gregori<br>**Artificial Intelligence and Data Mining Lab** within the<br>**Unit of Biostatistics, Epidemiology, and Public Health** of the<br>_Department of Cardiac, Thoracic, Vascular Sciences and Public Health_ at the University of Padova</div>'
+author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI) and CINECA"
+date: "**Last update**: `r Sys.Date()`"
+
+biblio-style: apalike
+link-citations: yes
+bibliography:
+  - bibliography.bib
+  - packages.bib
+
+description: "`r paste0('Prototype example for the TIPNet long-term report (years ', params$period, ')')`"
+---
+
+
+```{r setup, include=FALSE}
+options(knitr.duplicate.label = 'allow')
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+
+suppressPackageStartupMessages(library(tidyverse, quietly = TRUE))
+suppressPackageStartupMessages(library(plotly, quietly = TRUE))
+suppressPackageStartupMessages(library(DT, quietly = TRUE))
+suppressPackageStartupMessages(library(glue, quietly = TRUE))
+suppressPackageStartupMessages(library(here, quietly = TRUE))
+# suppressPackageStartupMessages(library(tipnet.ubesp, quietly = TRUE))
+
+# When approved, those function should be included in the `tipnet.ubesp`
+# package.
+gg_picu_type <- function(param) {
+  filter(foo, type %in% param) %>% 
+    mutate(year = as.numeric(year)) %>% 
+    ggplot(aes(x = year, y = beds, colour = unit)) +
+    geom_point() +
+    geom_smooth(se = TRUE) +
+    xlab("Years") +
+    ylab("Beds")
+}
+
+gg_bins <- function(param) {
+    x <- faithful[, 2]  # Old Faithful Geyser data
+    bins <- seq(min(x), max(x), length.out = param + 1)
+    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+}
+
+
+gg_breaks <- function(param) {
+  par(mar = c(4, 4, .1, .5))
+  hist(
+    faithful$eruptions, as.numeric(param),
+    col = 'gray', border = 'white',
+    xlab = 'Duration (minutes)', main = ''
+  )
+}
+```
+
+```{r data, include=FALSE, cache=TRUE, cache.extra=file.info(here("..", "..", "..", "data"))$mtime}
+# cache.extra option in the knitr tags here above needs to speed up
+# normal computation and running time (render side) as the data are not
+# changed. Note that server-side data are loaded from the render-side
+# if included in the chunck named "data" (like this is), hence setting
+# cache.extra provide a further speed up.
+
+
+# DATA IMPORT =========================================================
+anagrafica <- read_rds(here("..", "..", "..", "data", "tip_anagrafica.rds"))
+
+accettazione <- read_rds(
+  here("..", "..", "..", "data", "tip_accettazione.rds")
+)
+
+pre_pim <- read_rds(
+  here("..", "..", "..", "data", "pre_pim.rds")
+) %>% # this is only for the sample kmeans model plot
+  select_if(is.double)
+
+# INTRO ===============================================================
+intro_accettazione <- accettazione %>% 
+    mutate(`Date of admission` = lubridate::dmy(ingresso_dt)) %>% 
+    filter(
+        `Date of admission` >= lubridate::dmy("01/01/2010"),
+        `Date of admission` <= lubridate::dmy("31/12/2014")
+    ) %>% 
+    select(center, `Date of admission`, codpat, d_is_prematuro, d_ex_prematuro, eta) %>% 
+    mutate(
+        Center = as.factor(center),
+        Ingresso = `Date of admission`,
+        Preterm = d_is_prematuro | d_ex_prematuro,
+        `Over 16`   = eta > 16 * 365.25
+    ) %>% 
+    distinct() %>% 
+    select(Center, `Date of admission`, Preterm, `Over 16`)
+
+
+# PICUs ===============================================================
+# Partecipating Units -------------------------------------------------
+# ADMISSIONS ==========================================================
+# Trends --------------------------------------------------------------
+admission_trends <- intro_accettazione %>%
+    mutate(Year = lubridate::year(`Date of admission`)) %>% 
+    arrange(Year) %>% 
+    group_by(Year) %>% 
+    mutate(`Overall admissions` = n()) %>% 
+    group_by(Year, Center) %>% 
+    mutate(`Center admissions` = n()) %>%
+    distinct(
+      Center, Year, `Overall admissions`, `Center admissions`
+    ) %>% 
+    ungroup()
+
+gg_admission_trends <- admission_trends %>% 
+        ggplot(aes(x = Year)) +
+        geom_line(aes(y = `Overall admissions`)) +
+        geom_line(aes(y = `Center admissions`, colour = Center)) +
+        ylab("Admissions")
+
+# Distributions -------------------------------------------------------
+# Gender --------------------------------------------------------------
+# Ethnicity -----------------------------------------------------------
+# Age -----------------------------------------------------------------
+# 
+# DEMOGRAPHICS ========================================================
+# 
+
+bar <- read_csv("bar.csv")
+n <- 7
+units <- letters[seq_len(n)]
+foo <- tibble(
+    unit = units,
+    type = c("M/S", "C/N", "n/p")[sample.int(3, n, replace = TRUE)]
+  ) %>% 
+  full_join(tibble(
+    unit = rep(units, 5),
+    year = rep(2010:2014, n),
+    beds = sample(c(NA, 0:10), n*5, replace = TRUE)
+  ))
+```
+
+
+# Colophon {-}
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+**Network coordinator**: Andrea Wolfler, MD ([Department of Anesthesia and Intensive Care Unit](https://www.asst-fbf-sacco.it/reparti-e-servizi/info/anestesia-e-rianimazione-pediatrica) -- [Children’s Hospital Vittore Buzzi](https://www.asst-fbf-sacco.it/reparti-e-servizi/ricerca-reparto-presidio/buzzi)) --- Milan
+
+**In collaboration with**: [Unit of Biostatistics, Epidemiology and Public Helath](https://ubesp.jimdo.com/) ([Department Cardiac, Toracic, Vascular sciences and Public Health](https://www.dctv.unipd.it/) -- [University of Padova](https://www.unipd.it/)) --- Interuniversity Consortium
+
+
+**Business intelligence analyst**: Roberta Amato
+
+**IT Project Managers**: Chiara Dellacasa, Giulia Stabile
+
+**With the contribution of**:
+
+- F. Racca, J Gualino - Alessandria
+- F. Ferrero, R Osello, R Gilodi - Novara
+- I Salvo, E. Zoia, A. Mandelli - Milano
+- E Calderini, C. Montani, E. Prandi - Milano
+- P. Biban, P Santuz - Verona
+- A. Pettenazzo, A Amigoni - Padova
+- S. Furlan, F Savron - Trieste
+- F Caramelli, C. Mondardini, E. Iannella - Bologna
+- C Cecchetti, D Perrotta - Roma
+- S Picardo, E Rossetti - Roma
+- M Corbari - Roma
+- G. Conti, M Piastra, O. Genovese - Roma
+- R Testa, A Dolcini, L. D’Amato - Napoli
+- G Coffaro, A. M. Guddo, A. M. Giglio - Palermo
+- E Gitto - Messina
+- G Stancanelli - Catania
+
+**TIPNet study group** - participating center:
+
+- Department of Anesthesia and Intensive Care, Children’s Hospital Sant’Antonio e Biagio e Cesare Arrigo, Alessandria:
+- Department of Pediatrics, Ospedale Maggiore della Carità, Novara:
+- Department of Anesthesia and Intensive Care, Children’s Hospital V Buzzi, Milan:
+- Department of Anesthesia and Intensive Care, Fondazione IRCCS Ca Granda, Ospedale Maggiore Policlinico, Milan:
+- Department of Pediatric Anesthesia and Intensive Care, Spedali Civili, Brescia
+- Department of Neonatal and Paediatric Intensive Care, Azienda Ospedaliera Universitaria Integrata, Verona
+- Department of Woman’s and Child’s Health, Pediatric ICU, University Hospital, Padova
+- Department of Anesthesia and Intensive Care, Institute for Maternal and Child health, IRCCS Burlo Garofolo, Trieste
+- Department of Pediatric Anesthesia and Intensive Care, Ospedale Sant’Orsola Malpighi, Bologna
+- Department of Anesthesia and Intensive Care, Children’s Hospital Meyer, Firenze
+- Department of Anesthesia and Intensive Care, Children’s Hospital Bambino Gesù, Rome DEA, ARCO, Palidoro
+- Anesthesia and Intensive Care Department, Pediatric ICU, Policlinico Universitario A.Gemelli, Università Cattolica
+del Sacro Cuore, Rome
+- Department of Anesthesia and Intensive Care, Children’s Hospital Santobono-Pausillipon, Napoli
+- Department of Anesthesia and Intensive Care, Children’s Hospital G Di Cristina, Palermo
+- Department of Anesthesia and Intensive Care Ospedale Garibaldi – Nesima, Catania
+- Department of Pediatrics Ospedale Policlinico –Universitario G Martino, Messina
+
+</div>
+
+```{r, child = "010-descriptives.Rmd"}
+```
+
+```{r, child = "020-origin.Rmd"}
+```
+
+```{r, child = "030-ccc.Rmd"}
+```
+
+```{r, child = "040-severity.Rmd"}
+```
+
+```{r, child = "050-los.Rmd"}
+```
+
+
+
+```{r, results='asis', eval=!params$export}
+cat("# Download current report {-}")
+```
+
+
+```{r, eval=!params$export}
+downloadLink("report", "Generate report")
+```
+
+```{r, context="server", eval=!params$export}
+output$report <- downloadHandler("tipnet-repor.html",
+  
+  content = function(file) {
+    temp_dir <- tempdir()
+    file.copy(".", temp_dir,
+        overwrite = TRUE,
+        recursive = TRUE,
+        copy.date = TRUE # this is needed to not invalidate caches
+    )
+    temp_report <- file.path(temp_dir, "index.Rmd")
+    
+    read_lines(temp_report) %>% 
+      str_replace("^runtime: shiny_prerendered$", "") %>% 
+      str_replace_all(
+        "\\.tabset \\.tabset-fade \\.tabset-pills",
+        ""
+      ) %>% 
+      write_lines(temp_report)
+    
+    # Set up parameters to pass to Rmd document
+    params <- list(
+      export = TRUE,
+      
+      breaks = input$breaks,
+      bins   = input$bins,
+      iris_x = input$xcol,
+      iris_y = input$ycol,
+      iris_nclust = input$clusters,
+      pre_pim_x = input$pre_pim_xcol,
+      pre_pim_y = input$pre_pim_ycol,
+      pre_pim_nclust = input$pre_pim_clusters
+    )
+
+    # Knit the document, passing in the `params` list, and eval it in a
+    # child of the global environment (this isolates the code in the
+    # document from the code in this app).
+    rmarkdown::render(temp_report, output_file = file,
+      params = params,
+      envir = new.env(parent = globalenv())
+    )
+  }
+)
+```
+
+
+# References {-}
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

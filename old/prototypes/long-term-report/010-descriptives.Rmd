@@ -1,0 +1,194 @@
+# Descriptive and Demographic {#descriptives .tabset .tabset-fade .tabset-pills}
+
+
+In Italy there are 23 medical surgical (M/S) Pediatric Intensive Care Units (PICUs):
+
+- 11 in the north
+- 8 in the center
+- 4 in the south
+
+of the country.
+
+The number of units participating in the registry increased from 13 in
+2011 to 18 in 2014.
+
+Due to different reasons, not all the units recorded efficiently during
+the years. This is the first report published by the network. Data
+reported here analyze patients admitted in PICUs during
+`r params$period`.
+
+Only children 0 -- 16 years old who have a severity score on admission
+which allow to estimate a Standardized Mortality Ratio (SMR) were
+considered.
+
+### Overview
+
+Below are reported all the admissions in the registry. Exclusion
+criteria were" preterm or > 16 years old, or not completed data entry
+```{r}
+DT::datatable(intro_accettazione,
+    filter = "top",
+    selection = "multiple",
+    rownames = FALSE
+)
+
+included <- accettazione %>% 
+    mutate(`Date of admission` = lubridate::dmy(ingresso_dt)) %>% 
+    filter(
+        `Date of admission` >= lubridate::dmy("01/01/2010"),
+        `Date of admission` <= lubridate::dmy("31/12/2014")
+    ) %>% 
+    mutate(
+        Center = as.factor(center),
+        Ingresso = `Date of admission`,
+        Preterm = d_is_prematuro | d_ex_prematuro,
+        `Over 16`   = eta > 16 * 365.25
+    ) %>% 
+    filter(!Preterm, !`Over 16`)
+```
+
+
+- record in the registry are `r nrow(intro_accettazione)`
+- record analyzed are `r nrow(included)`
+
+
+
+---
+
+###### Info: Click on a tab to explore its content {- .alert .alert-info}
+
+## PICUs {.tabset .tabset-dropdown}
+
+
+### Partecipating Units
+
+##### Warn: Data missing {- .alert .alert-warning}
+
+
+### Shiny-engine examples:
+
+#### pre_pim k-means clustering live"
+
+```{r, eval=!params$export}
+sidebarLayout(
+    sidebarPanel(
+    
+        selectInput('xcol', 'X Variable', names(pre_pim),
+            selected = params$pre_pim_x
+        ),
+    
+        selectInput('ycol', 'Y Variable', names(pre_pim),
+            selected = params$pre_pim_y
+        ),
+    
+        numericInput('clusters', 'Cluster count', min = 1, max = 9,
+            value = params$pre_pim_nclust
+        )
+    
+    ),
+    mainPanel(
+        plotOutput('plot1')
+    )
+)
+```
+
+```{r, context="server", eval=!params$export}
+# Combine the selected variables into a new data frame
+  selectedData <- reactive({
+    pre_pim[, c(input$xcol, input$ycol)] %>% 
+      remove_missing()
+  })
+
+  clusters <- reactive({
+    kmeans(selectedData(), input$clusters)
+  })
+
+  output$plot1 <- renderPlot({
+    palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+      "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })
+```
+
+```{r, eval=params$export}
+selected_data <- pre_pim[, c(params$pre_pim_x, params$pre_pim_y)] %>% 
+      remove_missing()
+clusters <- kmeans(selected_data, params$pre_pim_nclust)
+
+par(mar = c(5.1, 4.1, 0, 1))
+plot(selected_data, col = clusters$cluster, pch = 20, cex = 3)
+points(clusters$centers, pch = 4, cex = 4, lwd = 4)
+```
+
+
+### Number of beds
+```{r, echo=FALSE, eval=!params$export}
+sliderInput("bins", "Number of bins:",
+    min = 1, max = 50, value = params$bins
+)
+plotOutput("distPlot2")
+```
+
+
+```{r, context="server", eval=!params$export}
+output$distPlot2 <- renderPlot({
+  gg_bins(input$bins)
+})
+
+```
+
+```{r, eval=params$export}
+glue("Number of bins: {params$bins}")
+gg_bins(params$bins)
+```
+
+
+## Admissions {.tabset .tabset-dropdown}
+
+### Trends
+```{r}
+ggplotly(gg_admission_trends)
+```
+
+
+### Distributions
+
+foo
+
+### Gender
+
+foo
+
+### Ethnicity
+
+foo
+
+### Age
+
+foo
+
+## Demographics {.tabset .tabset-dropdown}
+```{r, eval=!params$export}
+selectInput(
+  'breaks', label = 'Number of bins:',
+  choices = c(10, 20, 35, 50), selected = params$breaks
+)
+plotOutput("distPlot3")
+```
+
+
+```{r, context="server", eval=!params$export}
+output$distPlot3 <- renderPlot({
+  gg_breaks(input$breaks)
+})
+```
+
+```{r, eval=params$export}
+glue("Number of breaks: {params$breaks}")
+gg_breaks(params$breaks)
+```

@@ -4,8 +4,6 @@
 
 report/*\.html
 
-report/long-term-report/*\.html
-
-report/long-term-report/index_data/
-
-report/long-term-report/index_cache/
+report/data
+report/index_cache/
+report/index_data/
