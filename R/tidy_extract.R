@@ -1,6 +1,6 @@
 #' Extract data from REDCap import in tidy way
 #'
-#' After that informartions are retrieved by [read_redcap], this
+#' After that information are retrieved by [read_redcap], this
 #' function extract data or metadata from it, cleaning variables
 #' names, lowering every textual column, and renaming the event
 #' field like "fields"
@@ -40,17 +40,17 @@ tidy_extract <- function(data, type = c("data", "meta")) {
   if (type == "meta_data") {
     res <- res %>%
       dplyr::rename(
-        sheet = form_name,
-        fct_level = select_choices_or_calculations
+        sheet = .data$form_name,
+        fct_level = .data$select_choices_or_calculations
       ) %>%
       dplyr::mutate(
-        fct_level = purrr::map2(fct_level, field_type, ~{
+        fct_level = purrr::map2(.data$fct_level, .data$field_type, ~{
           dplyr::case_when(
             !is.na(.x) & !(.y %in% c("calc", "text")) ~ str_to_level(.x),
             TRUE ~ .x
           )
         }) %>%
-          purrr::set_names(field_name),
+          purrr::set_names(.data$field_name),
 
         sheet = stringr::str_replace(
           .data$sheet,

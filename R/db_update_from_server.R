@@ -27,7 +27,7 @@ db_update_from_server <- function(path_data = data_path(),
     tipnet <- tipnet_raw %>%
       tidy_extract("data") %>%
       nest_tables() %>%
-      mutate(
+      dplyr::mutate(
         tables = purrr::map2(
           .data$sheet, .data$tables, factorize_sheet,
           meta = tipnet_meta

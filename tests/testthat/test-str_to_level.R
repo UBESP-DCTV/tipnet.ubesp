@@ -14,3 +14,14 @@ test_that("str_to_level works", {
   expect_equal(str_to_level(coded_na), expected_na)
   expect_equal(str_to_level(coded_duplicate), expected_duplicate)
 })
+
+
+test_that("str_to_level manage wrong input", {
+
+  expect_error(str_to_level(""), "x has no characters")
+  expect_error(
+    str_to_level(c("1, a", "2, b")),
+    "x has length [0-9]+, not 1"
+  )
+
+})
