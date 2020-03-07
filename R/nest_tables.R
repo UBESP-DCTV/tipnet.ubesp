@@ -13,7 +13,7 @@
 #' }
 nest_tables <- function(data) {
 
-  global_redcap_info <- c("codpat", "redcap_repeat_instance")
+  global_redcap_info <- c("patient_id", "center", "redcap_repeat_instance")
 
   data %>%
     add_sheets_prefix(exept = c(global_redcap_info, "fields")) %>%
@@ -34,24 +34,4 @@ nest_tables <- function(data) {
     tidyr::unnest(.data$tables)
 
 }
-
-
-sheets_to_var <- function(data, name = "sheet", exept = NULL) {
-
-  names_pattern <- paste0(
-    "(", paste(attr(data, 'sheet_names'), collapse = '|'), ")",
-    "_(.*)"
-  )
-
-  unused <- setdiff(exept, names(data))
-  cols_to_exclude <- setdiff(exept, unused)
-
-  tidyr::pivot_longer(
-    data = data,
-    cols = -tidyselect::all_of(cols_to_exclude),
-    names_to = c(name, ".value"),
-    names_pattern = names_pattern
-  )
-}
-
 

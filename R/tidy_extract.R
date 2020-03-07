@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'   tipnet_raw <- read_redcap(tipnet_redcap_url()) %>%
+#'   tipnet_raw <- read_redcap(tipnet_redcap_url())
 #'
 #'   tidy_extract(tipnet_raw, "data")
 #'   tidy_extract(tipnet_raw, "meta")
@@ -34,7 +34,16 @@ tidy_extract <- function(data, type = c("data", "meta")) {
 
   if (type == "data") {
     res <- res %>%
-      dplyr::rename(fields = .data$redcap_event_name)
+      dplyr::rename(fields = .data$redcap_event_name) %>%
+      dplyr::mutate(codpat = fix_codpat(.data$codpat)) %>%
+      tidyr::separate(.data$codpat,
+        c("patient_id", "center"),
+        convert = TRUE
+      ) %>%
+      dplyr::mutate_at(
+        dplyr::vars(.data$patient_id, .data$center),
+        ~as.factor(.)
+      )
   }
 
   if (type == "meta_data") {

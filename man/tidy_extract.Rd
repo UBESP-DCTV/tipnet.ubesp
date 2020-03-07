@@ -23,7 +23,7 @@ field like "fields"
 }
 \examples{
 \dontrun{
-  tipnet_raw <- read_redcap(tipnet_redcap_url()) \%>\%
+  tipnet_raw <- read_redcap(tipnet_redcap_url())
 
   tidy_extract(tipnet_raw, "data")
   tidy_extract(tipnet_raw, "meta")

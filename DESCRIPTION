@@ -31,7 +31,9 @@ Imports:
     fs,
     here,
     readr,
-    tidyselect
+    tidyselect,
+    glue,
+    ggplot2
 Suggests: 
     covr (>= 3.2.1),
     roxygen2 (>= 6.1.1),
