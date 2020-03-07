@@ -13,13 +13,15 @@
 #' }
 nest_tables <- function(data) {
 
+  global_redcap_info <- c("codpat", "redcap_repeat_instance")
+
   data %>%
+    add_sheets_prefix(exept = c(global_redcap_info, "fields")) %>%
     tidyr::nest(tables = -.data$fields) %>%
     dplyr::mutate(
       tables = purrr::map(.data$tables, ~{
         janitor::remove_empty(.x, c("rows", "cols")) %>%
-          add_sheets_prefix(exept = "codpat") %>%
-          sheets_to_var("sheet", exept = "codpat") %>%
+          sheets_to_var("sheet", exept = global_redcap_info) %>%
           tidyr::nest(tables = -.data$sheet) %>%
           dplyr::mutate(
             tables = purrr::map(.data$tables,
@@ -41,9 +43,12 @@ sheets_to_var <- function(data, name = "sheet", exept = NULL) {
     "_(.*)"
   )
 
+  unused <- setdiff(exept, names(data))
+  cols_to_exclude <- setdiff(exept, unused)
+
   tidyr::pivot_longer(
     data = data,
-    cols = -exept,
+    cols = -tidyselect::all_of(cols_to_exclude),
     names_to = c(name, ".value"),
     names_pattern = names_pattern
   )
