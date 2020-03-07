@@ -8,7 +8,7 @@
 #'   one field exist with the required sheet, and field is NULL, an error
 #'   is thrown suggesting the possible fields to consider.
 #'
-#' @return the reuired sheet [tibble][tibble::tibble-package]
+#' @return the required sheet [tibble][tibble::tibble-package]
 #' @export
 #'
 #' @examples
@@ -27,6 +27,7 @@ get_sheet <- function(x, sheet, field = NULL) {
 
 
   possible_fields <- x[["fields"]][where_sheet]
+
   if (!is.null(field) && (!field %in% possible_fields)) {
     ui_stop("
       Sheet {ui_value(sheet)} is not present in the field {ui_value(field)}.
@@ -44,7 +45,7 @@ get_sheet <- function(x, sheet, field = NULL) {
   sheet_row <- if (is.null(field)) {
     where_sheet
   } else {
-    where_sheet && (field == x[["fields"]])
+    where_sheet & (field == x[["fields"]])
   }
 
   x[["tables"]][[which(sheet_row)]]

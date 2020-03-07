@@ -11,7 +11,11 @@ sample_df <- tibble(
 
 test_that("get_sheet works", {
   expect_is(get_sheet(sample_df, "b"), "tbl_df")
-  expect_is(get_sheet(sample_df, "a", field = "a"), "tbl_df")
+  expect_is(get_sheet(sample_df, "a", field = "r"), "tbl_df")
+  expect_equal(
+    get_sheet(sample_df, "a", field = "r"),
+    tibble(f = "r", s = "a")
+  )
 
   expect_error(
     get_sheet(sample_df, "e"),

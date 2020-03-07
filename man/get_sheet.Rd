@@ -18,7 +18,7 @@ one field exist with the required sheet, and field is NULL, an error
 is thrown suggesting the possible fields to consider.}
 }
 \value{
-the reuired sheet \link[tibble:tibble-package]{tibble}
+the required sheet \link[tibble:tibble-package]{tibble}
 }
 \description{
 Get a sheet table

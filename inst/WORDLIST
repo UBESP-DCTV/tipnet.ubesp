@@ -5,6 +5,7 @@ chr
 codecov
 Codecov
 dctv
+df
 eval
 gpl
 https
@@ -16,6 +17,7 @@ REDCap
 REDCap's
 roxygen
 summarise
+tbl
 testthat
 tibble
 tipnet
