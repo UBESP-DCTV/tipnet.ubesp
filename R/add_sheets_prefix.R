@@ -15,8 +15,6 @@
 #'   exclude from being considered into a sheet (i.e. REDCap
 #'   infromations not included into a specific form, e.g., ID)
 #'
-#' @importFrom stringr str_detect
-#'
 #' @return the data [tibble][tibble::tibble-package] with modified
 #'   names.
 #' @export
@@ -39,7 +37,7 @@ add_sheets_prefix <- function(data, exept = NULL) {
 
   data_names <- names(data)
 
-  is_sheet_marker <- str_detect(data_names, "_complete$")
+  is_sheet_marker <- stringr::str_detect(data_names, "_complete$")
   if (!any(is_sheet_marker)) ui_stop("
     There are not any variables terminanting with {ui_value('_complete')},
     which is supposed to be the sheets marker.
