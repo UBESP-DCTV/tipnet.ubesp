@@ -32,15 +32,18 @@ read_redcap <- function(url, token = tipnet_token()) {
   assertive::assert_is_a_string(token)
   assertive::assert_is_a_string(url)
 
+  max_n <- 2000
+
   # Import all the field of ROLEX db
   df <- REDCapR::redcap_read(
     redcap_uri = url,
     token = token,
-    batch_size = 1000L,
+    batch_size = max_n,
     raw_or_label = "label",
     export_checkbox_label = TRUE,
     export_survey_fields = TRUE,
     guess_type = TRUE,
+    guess_max = max_n,
     verbose = FALSE
   )
 

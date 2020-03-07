@@ -1,4 +1,4 @@
-#' Title
+#' Pull REDCap data from the server
 #'
 #' @param path_data (chr) path for data folder (default is `data/`
 #'   under the current project or the [here][here::here] path, if it not
