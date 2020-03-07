@@ -2,7 +2,7 @@
 % Please edit documentation in R/db_update_from_server.R
 \name{db_update_from_server}
 \alias{db_update_from_server}
-\title{Title}
+\title{Pull REDCap data from the server}
 \usage{
 db_update_from_server(path_data = data_path(), file_name = "tipnet.rds")
 }
@@ -17,7 +17,7 @@ exists it will be created)}
 (lgl) \code{TRUE} if success, \code{FALSE} otherwise
 }
 \description{
-Title
+Pull REDCap data from the server
 }
 \examples{
 \dontrun{
