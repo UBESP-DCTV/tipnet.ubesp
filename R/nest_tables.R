@@ -13,7 +13,7 @@
 #' }
 nest_tables <- function(data) {
 
-  global_redcap_info <- c("patient_id", "center", "redcap_repeat_instance")
+  global_redcap_info <- c("codpat", "center", "redcap_repeat_instance")
 
   data %>%
     add_sheets_prefix(exept = c(global_redcap_info, "fields")) %>%

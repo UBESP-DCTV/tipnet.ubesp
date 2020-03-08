@@ -34,16 +34,11 @@ tidy_extract <- function(data, type = c("data", "meta")) {
 
   if (type == "data") {
     res <- res %>%
-      dplyr::rename(fields = .data$redcap_event_name) %>%
-      dplyr::mutate(codpat = fix_codpat(.data$codpat)) %>%
-      tidyr::separate(.data$codpat,
-        c("patient_id", "center"),
-        convert = TRUE
+      dplyr::rename(
+        center = .data$redcap_data_access_group,
+        fields = .data$redcap_event_name
       ) %>%
-      dplyr::mutate_at(
-        dplyr::vars(.data$patient_id, .data$center),
-        ~as.factor(.)
-      )
+      dplyr::mutate(center = factorize_centers(center))
   }
 
   if (type == "meta_data") {

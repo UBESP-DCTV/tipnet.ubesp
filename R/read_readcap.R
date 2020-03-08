@@ -42,6 +42,7 @@ read_redcap <- function(url, token = tipnet_token()) {
     raw_or_label = "label",
     export_checkbox_label = TRUE,
     export_survey_fields = TRUE,
+    export_data_access_groups = TRUE,
     guess_type = TRUE,
     guess_max = max_n,
     verbose = FALSE
