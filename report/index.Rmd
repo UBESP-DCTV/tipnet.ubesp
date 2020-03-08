@@ -1,8 +1,9 @@
 --- 
 params:
+    cache: FALSE
     export: FALSE
-    first_y: 2010
-    last_y:  2014
+    first_y: 2020
+    last_y:  2020
 
 output:
     bookdown::html_document2:
@@ -59,7 +60,7 @@ library(here)
 tipnet_path <- db_update_from_server()
 ```
 
-```{r data, include=FALSE, cache=TRUE, cache.extra=tools::md5sum(tipnet_path)}
+```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(tipnet_path)}
 # cache.extra option in the knitr tags here above needs to speed up
 # normal computation and running time (render side) as the data are not
 # changed. Note that server-side data are loaded from the render-side
@@ -68,19 +69,7 @@ tipnet_path <- db_update_from_server()
 
 tipnet <- read_rds(tipnet_path)
 
-anagrafica <- get_sheet(tipnet, "anagrafica") %>% 
-  mutate(
-    years = as.period(interval(
-        start = nascita_dt,
-        end   = today())
-      )$year,
-    age_upto_18 = years <= 18,
-    age_upto_16 = factor(years <= 16,
-      levels = c(TRUE, FALSE),
-      labels = c("age <= 16", "16 < age <= 18")
-    )
-  )
-
+anagrafica   <- get_sheet(tipnet, "anagrafica")
 accettazione <- get_sheet(tipnet, "accettazione")
 ingresso     <- get_sheet(tipnet, "ingresso")
 pim          <- get_sheet(tipnet, "pim")
@@ -91,18 +80,48 @@ ventilazione <- get_sheet(tipnet, "procedure_di_ventilazione")
 infezione    <- get_sheet(tipnet, "infezione")
 dimissione   <- get_sheet(tipnet, "dimissione")
 
-full_records <- anagrafica %>% 
-  full_join(accettazione,
+
+full_records <- accettazione %>% 
+  full_join(anagrafica,
     by = c("codpat", "center"),
-    suffix = c(".anagrafica", ".accettazione")
+    suffix = c(".accettazione", ".anagrafica")
   ) %>%
-  full_join(pim, by = c("codpat", "center", "redcap_repeat_instance")) %>% 
+  
+  full_join(ingresso, by = c("codpat", "center", "redcap_repeat_instance")) %>% 
+  full_join(pim,
+    by = c("codpat", "center", "redcap_repeat_instance"),
+    suffix = c(".ingresso", ".pim")
+  ) %>% 
+  
+  full_join(pelod, by = c("codpat", "center", "redcap_repeat_instance")) %>% 
+  full_join(aristotle,
+    by = c("codpat", "center", "redcap_repeat_instance"),
+    suffix = c(".pelod", ".aristotle")
+  ) %>% 
+  
+  full_join(degenza, by = c("codpat", "center", "redcap_repeat_instance")) %>% 
+  full_join(ventilazione,
+    by = c("codpat", "center", "redcap_repeat_instance"),
+    suffix = c(".degenza", ".ventilazione")
+  ) %>% 
+  
+  full_join(infezione, by = c("codpat", "center", "redcap_repeat_instance")) %>% 
   full_join(dimissione,
     by = c("codpat", "center", "redcap_repeat_instance"),
-    suffix = c(".pim", ".dimissione")
+    suffix = c(".infezione", ".dimissione")
   ) %>% 
+  
   mutate_at(vars(starts_with("complete")), ~{. == "complete"}) %>% 
   mutate(
+    eta = as.integer(eta),
+    age_class = factor(
+      dplyr::case_when(
+        eta > 18 ~ "eta > 18",
+        eta > 16 ~ "16 < eta <= 18",
+        eta >= 0 ~ "0 <= eta <= 16",
+        TRUE ~ "[wrong/missing age]"
+      )
+    ),
     complete = complete.anagrafica &
       complete.accettazione &
       complete.pim &

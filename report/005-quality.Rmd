@@ -1,23 +1,11 @@
 # Quality {#quality .tabset .tabset-fade .tabset-pills}
 
-
-foo
+A record is considered _completed_ when it has at least the sheets 
+**anagrafica**, **accettazione**, **pim**, **dimissione** marked as completed.
 
 ---
 
-###### Info: Click on a tab to explore its content {- .alert .alert-info}
-
 ## Complete records {.tabset .tabset-dropdown}
-
-```{r, context = "server"}
-data_hosp <- filter(full_records, !is.na(reparto))
-```
-
-
-A record is considered completed when it has at least **anagrafica**,
-**accettazione**, **pim**, **dimissione** filled.
-
-### Overall
 
 ```{r}
 qualityReportUI("q_overall")
@@ -28,18 +16,19 @@ qualityReport("q_overall", data = full_records)
 ```
 
 
+## Hospitalized {.tabset .tabset-dropdown}
 
-
-### Hospitalized
+Records are considered related to an "hospitalized" patient if the field 
+**reparto** is not missing in the sheet **dimissione**.
 
 ```{r}
 qualityReportUI("q_hosp")
 ```
 
 ```{r, context = "server"}
+data_hosp <- filter(full_records, !is.na(reparto))
 qualityReport("q_hosp", data = data_hosp)
 ```
 
 
-
-### Data errors
+## Data errors {.tabset .tabset-dropdown}
