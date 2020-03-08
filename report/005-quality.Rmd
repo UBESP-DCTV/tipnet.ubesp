@@ -115,4 +115,45 @@ datatable(data_miss, filter = list(position = 'top', clear = TRUE))
 ### Possible errors into the data
 
 
+For numerical variables, outliers are considered possible errors, i.e. values
+farther than 1.5 times the inter quartile range from the median.
 
+
+
+```{r}
+outliers <- full_records %>% 
+  group_by(center, codpat, redcap_repeat_instance) %>% 
+  select_if(is.numeric) %>%
+  ungroup() %>% 
+  mutate_at(vars(-center, -codpat, -redcap_repeat_instance),
+    ~ abs(. - median(., na.rm = TRUE)) > 
+      1.5 * diff(quantile(., probs = c(0.25, 0.75), na.rm = TRUE))
+  ) %>% 
+  janitor::remove_empty("cols") %>%
+  group_by(center, codpat, redcap_repeat_instance) %>% 
+  select_if(~any(. == TRUE, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  pivot_longer(-c(center, codpat, redcap_repeat_instance)) %>% 
+  group_by(center) %>% 
+  mutate(n = n()) %>% 
+  filter(value) %>% 
+  summarize(
+    n_outliers = n(),
+    prop_outliers = round(n_outliers / unique(n), 2),
+    codpats = list(tibble(
+      codpat = codpat,
+      var = name,
+      rep_instance = redcap_repeat_instance,
+      value = pmap_dbl(
+        list(x = codpat, y = var, z = rep_instance, c = center),
+        function(x, y, z, c) {
+          res <- full_records %>% 
+            filter(codpat == x, redcap_repeat_instance == z, center == c)
+          res[[y]]
+        }
+      )
+    ))
+  )
+
+outliers[["codpats"]][[3]]
+```
