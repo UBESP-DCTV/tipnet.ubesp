@@ -1,6 +1,13 @@
-#' TIPNet database
+#' Table of TIPNet centers
 #'
-#' Here we describe the tipnet database structure
+#' A dataset containing the ids, name, and city of the centers participating to
+#' the TIPNet.
 #'
-#' @name tipnet_db
-NULL
+#' @format a [tibble](tibble::tibble) with 32 rows and 3 columns
+#' \describe{
+#'   \item{id}{(int) ID of the center}
+#'   \item{center}{(fct) Name of the center}
+#'   \item{center_city}{(fct) City in which the center is}
+#' }
+#'
+"centers_table"
