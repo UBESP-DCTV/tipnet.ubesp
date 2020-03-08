@@ -34,4 +34,4 @@ centers_table <- tibble::tribble(
 
 
 
-usethis::use_data(centers_table)
+usethis::use_data(centers_table, internal = TRUE)

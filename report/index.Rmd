@@ -46,7 +46,6 @@ library(lubridate)
 library(fs)
 
 library(tipnet.ubesp)
-  data("centers_table")
   
 library(plotly)
 library(DT)

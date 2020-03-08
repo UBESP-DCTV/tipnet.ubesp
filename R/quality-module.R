@@ -1,12 +1,14 @@
 #' Quality module
 #'
-#' Genral description
+#' General description
 #'
 #' @param id numeric vectors.
 #' @param data database to use
 #'
-#' @importFrom shiny NS fluidRow selectInput textOutput plotOutput
-#' @importFrom shiny reactive req renderText callModule renderPlot
+#' @importFrom shiny NS callModule reactive req
+#' @importFrom shiny fluidRow selectInput textOutput plotOutput
+#' @importFrom shiny renderText renderPlot
+#' @importFrom plotly renderPlotly plotlyOutput ggplotly
 #' @importFrom ggplot2 aes element_text ggplot xlab ylab coord_flip
 #' @importFrom ggplot2 geom_bar facet_wrap theme
 #'
@@ -15,7 +17,7 @@ NULL
 
 #' @describeIn qualityReport user interface
 #'
-#' UI description
+#' User Interface description
 #'
 #' @export
 qualityReportUI <- function(id) {
@@ -37,8 +39,8 @@ qualityReportUI <- function(id) {
 #' @export
 qualityReport <- function(id, data) {
 
-  out_of_age <- filter(data, !.data$age_upto_18)
-  used_data <- filter(data, .data$age_upto_18) %>%
+  out_of_age <- dplyr::filter(data, !.data$age_upto_18)
+  used_data <- dplyr::filter(data, .data$age_upto_18) %>%
     dplyr::mutate(
       name = "TIPNet",
       complete_int = as.integer(.data$complete)
@@ -52,8 +54,8 @@ qualityReport <- function(id, data) {
 
     fun_y <- reactive({
       switch(type(),
-             Total      = "sum",
-             Proportion = "mean"
+        Total      = "sum",
+        Proportion = "mean"
       )
     })
 
@@ -71,7 +73,7 @@ qualityReport <- function(id, data) {
     output$plot_global <- renderPlot({
       used_data %>%
         ggplot(
-          aes(x = name, y = .data$complete_int)
+          aes(x = .data$name, y = .data$complete_int)
         ) +
         geom_bar(
           stat = "summary",
@@ -106,7 +108,7 @@ qualityReport <- function(id, data) {
         ylab("") +
         coord_flip()
 
-        plotly::ggplotly(gg)
+        ggplotly(gg)
     })
 
   })

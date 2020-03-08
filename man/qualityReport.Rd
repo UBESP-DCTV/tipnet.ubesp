@@ -15,13 +15,13 @@ qualityReport(id, data)
 \item{data}{database to use}
 }
 \description{
-Genral description
+General description
 }
 \section{Functions}{
 \itemize{
 \item \code{qualityReportUI}: user interface
 
-UI description
+User Interface description
 
 \item \code{qualityReport}: server function
 

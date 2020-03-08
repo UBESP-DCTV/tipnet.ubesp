@@ -38,7 +38,7 @@ tidy_extract <- function(data, type = c("data", "meta")) {
         center = .data$redcap_data_access_group,
         fields = .data$redcap_event_name
       ) %>%
-      dplyr::mutate(center = factorize_centers(center))
+      dplyr::mutate(center = factorize_centers(.data$center))
   }
 
   if (type == "meta_data") {
