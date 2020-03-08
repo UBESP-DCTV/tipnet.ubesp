@@ -48,14 +48,66 @@ Two types of errors are considerend at the moment:
 
 ### Missing values
 
+
 ```{r}
-errorReportUI("q_error")
+n_missing <- map_int(full_records, ~sum(is.na(.)))
+are_w_missing <- n_missing > 0
 ```
 
-```{r, context = "server"}
-errorReport("q_error")
+Overall, there are `r sum(are_w_missing)` variables with some missing data (out of `r length(full_records)`) for a total number of `r sum(n_missing)` missing entries in the whole dataset (`r round(100 * mean(is.na(full_records)), 2)`% of missingness).
+
+```{r}
+data_miss <- full_records %>%
+  group_by(center) %>%
+  summarise_all(~sum(is.na(.))) %>%
+  pivot_longer(-center, names_to = "field")
+
+n_each <- full_records %>%
+  group_by(center) %>%
+  tally()
+
+data_miss <- data_miss %>%
+  left_join(n_each) %>%
+  mutate(prop = round(value / n, 2))
 ```
 
+```{r}
+gg_miss_all <- tibble(TIPNet = n_missing) %>% 
+    ggplot(aes(y = TIPNet)) +
+      geom_boxplot() +
+      ylab(glue(
+        "N missing (out of N = {nrow(full_records)})"
+      )) +
+      ggtitle('Distribution of overall missingness')
+
+
+ggplotly(gg_miss_all)
+
+```
+
+```{r}
+gg_miss_each <- data_miss %>%
+    dplyr::mutate(
+      center = fct_reorder(center, prop, .fun = "median")
+    ) %>% 
+    ggplot(aes(x = center, y = prop, colour = center)) +
+      geom_boxplot() +
+      theme(
+        legend.position = "none",
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)
+      ) + 
+      ylab("Proportions") +
+      xlab("") +
+      coord_flip() +
+      ggtitle('Distributions of missigness by center')
+
+ggplotly(gg_miss_each)
+```
+
+
+```{r}
+datatable(data_miss, filter = list(position = 'top', clear = TRUE))
+```
 
 
 
