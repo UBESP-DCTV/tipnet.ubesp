@@ -1,43 +1,113 @@
-#' Title
+#' Quality module
 #'
-#' @param id a
-#' @param label a
+#' Genral description
 #'
-#' @importFrom shiny NS fluidRow textInput textOutput
-#' @return a
+#' @param id numeric vectors.
+#' @param data database to use
+#'
+#' @importFrom shiny NS fluidRow selectInput textOutput plotOutput
+#' @importFrom shiny reactive req renderText callModule renderPlot
+#' @importFrom ggplot2 aes element_text ggplot xlab ylab coord_flip
+#' @importFrom ggplot2 geom_bar facet_wrap theme
+#'
+#' @name qualityReport
+NULL
+
+#' @describeIn qualityReport user interface
+#'
+#' UI description
+#'
 #' @export
-qualityReportUI <- function(id, label) {
+qualityReportUI <- function(id) {
   ns <- NS(id)
-  label <- paste0(label, " (yyyy-mm-dd)")
 
   fluidRow(
-    textInput(ns("date"), label),
-    textOutput(ns("error"))
+    textOutput(ns("stat_global")),
+    textOutput(ns("out_of_age")),
+    selectInput(ns("type"), "Summary type", c("Total", "Proportion")),
+    plotOutput(ns("plot_global")),
+    plotlyOutput(ns("plot_center"))
   )
 }
 
-#' Title a
+#' @describeIn qualityReport server function
 #'
-#' @param id  a
+#' Server description
 #'
-#' @importFrom shiny reactive req renderText callModule
-#'
-#' @return a
 #' @export
-#'
-qualityReport <- function(id) {
+qualityReport <- function(id, data) {
+
+  out_of_age <- filter(data, !.data$age_upto_18)
+  used_data <- filter(data, .data$age_upto_18) %>%
+    dplyr::mutate(
+      name = "TIPNet",
+      complete_int = as.integer(.data$complete)
+    )
+
   callModule(id = id, function(input, output, session) {
-    date <- reactive({
-      req(input$date)
-      lubridate::ymd(input$date, quiet = TRUE)
+
+    type <- reactive({
+      req(input$type)
     })
 
-    output$error <- renderText({
-      if (is.na(date())) {
-        "Please enter valid date in yyyy-mm-dd form"
-      }
+    fun_y <- reactive({
+      switch(type(),
+             Total      = "sum",
+             Proportion = "mean"
+      )
     })
 
-    date
+    output$out_of_age <- renderText(glue::glue(
+      "There are {nrow(out_of_age)} people with more than 18 years, i.e. {ui_value(out_of_age[['years']])}"
+    ))
+
+    output$stat_global <- renderText(glue::glue(
+      "There where {sum(used_data[['complete']], na.rm = TRUE)} completed data recorded (out of {nrow(used_data)}; proportion of complete data = {round(mean(used_data[['complete']], na.rm = TRUE), 2)})."
+    ))
+
+
+
+
+    output$plot_global <- renderPlot({
+      used_data %>%
+        ggplot(
+          aes(x = name, y = .data$complete_int)
+        ) +
+        geom_bar(
+          stat = "summary",
+          fun.y = fun_y(), na.rm = TRUE,
+          position = "dodge",
+          fill = "green"
+        ) +
+        facet_wrap(~age_upto_16) +
+        theme(legend.position = "none") +
+        xlab("") +
+        ylab("")
+    })
+
+
+
+
+    output$plot_center <- renderPlotly({
+      gg <- used_data %>%
+        ggplot(
+          aes(x = .data$center, y = .data$complete_int, fill = .data$center)
+        ) +
+        geom_bar(stat = "summary",
+            fun.y = fun_y(), na.rm = TRUE,
+            position = "dodge"
+        ) +
+        facet_wrap(~age_upto_16) +
+        theme(
+          axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+          legend.position = "none"
+        ) +
+        xlab("") +
+        ylab("") +
+        coord_flip()
+
+        plotly::ggplotly(gg)
+    })
+
   })
 }

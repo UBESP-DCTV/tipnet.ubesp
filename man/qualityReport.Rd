@@ -2,16 +2,29 @@
 % Please edit documentation in R/quality-module.R
 \name{qualityReport}
 \alias{qualityReport}
-\title{Title a}
+\alias{qualityReportUI}
+\title{Quality module}
 \usage{
-qualityReport(id)
+qualityReportUI(id)
+
+qualityReport(id, data)
 }
 \arguments{
-\item{id}{a}
-}
-\value{
-a
+\item{id}{numeric vectors.}
+
+\item{data}{database to use}
 }
 \description{
-Title a
+Genral description
 }
+\section{Functions}{
+\itemize{
+\item \code{qualityReportUI}: user interface
+
+UI description
+
+\item \code{qualityReport}: server function
+
+Server description
+}}
+
