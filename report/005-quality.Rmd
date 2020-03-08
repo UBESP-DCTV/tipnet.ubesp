@@ -1,0 +1,45 @@
+# Quality {#quality .tabset .tabset-fade .tabset-pills}
+
+
+foo
+
+---
+
+###### Info: Click on a tab to explore its content {- .alert .alert-info}
+
+## Complete records {.tabset .tabset-dropdown}
+
+```{r, context = "server"}
+data_hosp <- filter(full_records, !is.na(reparto))
+```
+
+
+A record is considered completed when it has at least **anagrafica**,
+**accettazione**, **pim**, **dimissione** filled.
+
+### Overall
+
+```{r}
+qualityReportUI("q_overall")
+```
+
+```{r, context = "server"}
+qualityReport("q_overall", data = full_records)
+```
+
+
+
+
+### Hospitalized
+
+```{r}
+qualityReportUI("q_hosp")
+```
+
+```{r, context = "server"}
+qualityReport("q_hosp", data = data_hosp)
+```
+
+
+
+### Data errors

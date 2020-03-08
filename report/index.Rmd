@@ -42,9 +42,12 @@ knitr::opts_chunk$set(
 
 library(tidyverse)
 library(stringr)
+library(lubridate)
 library(fs)
 
 library(tipnet.ubesp)
+  data("centers_table")
+  
 library(plotly)
 library(DT)
 
@@ -66,7 +69,19 @@ tipnet_path <- db_update_from_server()
 
 tipnet <- read_rds(tipnet_path)
 
-anagrafica   <- get_sheet(tipnet, "anagrafica")
+anagrafica <- get_sheet(tipnet, "anagrafica") %>% 
+  mutate(
+    years = as.period(interval(
+        start = nascita_dt,
+        end   = today())
+      )$year,
+    age_upto_18 = years <= 18,
+    age_upto_16 = factor(years <= 16,
+      levels = c(TRUE, FALSE),
+      labels = c("age <= 16", "16 < age <= 18")
+    )
+  )
+
 accettazione <- get_sheet(tipnet, "accettazione")
 ingresso     <- get_sheet(tipnet, "ingresso")
 pim          <- get_sheet(tipnet, "pim")
@@ -77,16 +92,22 @@ ventilazione <- get_sheet(tipnet, "procedure_di_ventilazione")
 infezione    <- get_sheet(tipnet, "infezione")
 dimissione   <- get_sheet(tipnet, "dimissione")
 
-
 full_records <- anagrafica %>% 
   full_join(accettazione,
-    by = "codpat",
+    by = c("codpat", "center"),
     suffix = c(".anagrafica", ".accettazione")
   ) %>%
-  full_join(pim, by = c("codpat", "redcap_repeat_instance")) %>% 
+  full_join(pim, by = c("codpat", "center", "redcap_repeat_instance")) %>% 
   full_join(dimissione,
-    by = c("codpat", "redcap_repeat_instance"),
+    by = c("codpat", "center", "redcap_repeat_instance"),
     suffix = c(".pim", ".dimissione")
+  ) %>% 
+  mutate_at(vars(starts_with("complete")), ~{. == "complete"}) %>% 
+  mutate(
+    complete = complete.anagrafica &
+      complete.accettazione &
+      complete.pim &
+      complete.dimissione
   )
 ```
 
@@ -154,8 +175,6 @@ del Sacro Cuore, Rome
 </div>
 
 ```{r, child = "005-quality.Rmd"}
-
-
 ```
 
 
