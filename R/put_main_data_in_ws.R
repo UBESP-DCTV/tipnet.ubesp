@@ -1,4 +1,4 @@
-put_main_data_in_ws <- function() {
+generate_main_data <- function() {
 
   tipnet <- if (fs::dir_exists(file.path(data_path(), "..", "report"))) {
     readr::read_rds(file.path(data_path(), "..", "report", "data", "tipnet.rds"))
@@ -6,19 +6,19 @@ put_main_data_in_ws <- function() {
     readr::read_rds(file.path(data_path(), "tipnet.rds"))
   }
 
-  anagrafica   <<- get_sheet(tipnet, "anagrafica")
-  accettazione <<- get_sheet(tipnet, "accettazione")
-  ingresso     <<- get_sheet(tipnet, "ingresso")
-  pim          <<- get_sheet(tipnet, "pim")
-  pelod        <<- get_sheet(tipnet, "pelod")
-  aristotle    <<- get_sheet(tipnet, "punteggio_di_aristotle")
-  degenza      <<- get_sheet(tipnet, "degenza")
-  ventilazione <<- get_sheet(tipnet, "procedure_di_ventilazione")
-  infezione    <<- get_sheet(tipnet, "infezione")
-  dimissione   <<- get_sheet(tipnet, "dimissione")
+  anagrafica   <- get_sheet(tipnet, "anagrafica")
+  accettazione <- get_sheet(tipnet, "accettazione")
+  ingresso     <- get_sheet(tipnet, "ingresso")
+  pim          <- get_sheet(tipnet, "pim")
+  pelod        <- get_sheet(tipnet, "pelod")
+  aristotle    <- get_sheet(tipnet, "punteggio_di_aristotle")
+  degenza      <- get_sheet(tipnet, "degenza")
+  ventilazione <- get_sheet(tipnet, "procedure_di_ventilazione")
+  infezione    <- get_sheet(tipnet, "infezione")
+  dimissione   <- get_sheet(tipnet, "dimissione")
 
 
-  full_records <<- accettazione %>%
+  full_records <- accettazione %>%
     dplyr::full_join(anagrafica,
               by = c("codpat", "center"),
               suffix = c(".accettazione", ".anagrafica")
@@ -50,7 +50,7 @@ put_main_data_in_ws <- function() {
 
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("complete")), ~{. == "complete"}) %>%
     dplyr::mutate(
-      eta = as.integer(eta),
+      eta = as.integer(.data$eta),
       age_class = factor(
         dplyr::case_when(
           eta > 18 ~ "eta > 18",
@@ -59,9 +59,25 @@ put_main_data_in_ws <- function() {
           TRUE ~ "[wrong/missing age]"
         )
       ),
-      complete = complete.anagrafica &
-        complete.accettazione &
-        complete.pim &
-        complete.dimissione
+      complete = .data$complete.anagrafica &
+        .data$complete.accettazione &
+        .data$complete.pim &
+        .data$complete.dimissione
     )
+
+
+  list(
+    anagrafica   = anagrafica  ,
+    accettazione = accettazione,
+    ingresso     = ingresso    ,
+    pim          = pim         ,
+    pelod        = pelod       ,
+    aristotle    = aristotle   ,
+    degenza      = degenza     ,
+    ventilazione = ventilazione,
+    infezione    = infezione   ,
+    dimissione   = dimissione  ,
+    full_records = full_records
+  )
+
 }
