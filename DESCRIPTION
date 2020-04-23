@@ -34,7 +34,8 @@ Imports:
     tidyselect,
     glue,
     ggplot2,
-    plotly
+    plotly,
+    stats
 Suggests: 
     covr (>= 3.2.1),
     roxygen2 (>= 6.1.1),

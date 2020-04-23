@@ -32,6 +32,12 @@ centers_table <- tibble::tribble(
 ) %>%
   dplyr::mutate_if(is.character, as.factor)
 
+old_ids <- readr::read_csv(
+  here::here("../data-raw/old_ids.csv"),
+  col_types = "i"
+)
 
-
-usethis::use_data(centers_table, internal = TRUE)
+usethis::use_data(centers_table, old_ids,
+  internal = TRUE,
+  overwrite = TRUE
+)
