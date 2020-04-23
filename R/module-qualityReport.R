@@ -6,8 +6,8 @@
 #' @param data database to use
 #'
 #' @importFrom shiny NS callModule reactive req
-#' @importFrom shiny fluidRow selectInput textOutput plotOutput
-#' @importFrom shiny renderText renderPlot
+#' @importFrom shiny fluidPage fluidRow selectInput textOutput plotOutput
+#' @importFrom shiny renderText renderPlot column
 #' @importFrom plotly renderPlotly plotlyOutput ggplotly
 #' @importFrom ggplot2 ggplot aes geom_bar facet_wrap coord_flip
 #' @importFrom ggplot2 theme ggtitle xlab ylab element_text
@@ -23,13 +23,22 @@ NULL
 qualityReportUI <- function(id) {
   ns <- NS(id)
 
-  fluidRow(
-    textOutput(ns("stat_global")),
-    textOutput(ns("out_of_age")),
-    selectInput(ns("completed"), "Records to show", c("Completed", "Not completed")),
-    selectInput(ns("type"), "Summary type", c("Total", "Proportion")),
-    plotOutput(ns("plot_global")),
-    plotlyOutput(ns("plot_center"))
+  fluidPage(
+    fluidRow(textOutput(ns("stat_global"))),
+    fluidRow(textOutput(ns("out_of_age"))),
+
+    fluidRow(
+      column(5, selectInput(ns("completed"),
+        label   = "Records to show",
+        choices = c("Completed", "Not completed")
+      )),
+      column(5, selectInput(ns("type"),
+        label   = "Summary type",
+        choices = c("Total", "Proportion")))
+    ),
+
+    fluidRow(plotOutput(ns("plot_global"))),
+    fluidRow(plotlyOutput(ns("plot_center")))
   )
 }
 
@@ -68,7 +77,7 @@ qualityReport <- function(id, data) {
       "There are {sum(are_out_age)} people to exclude because of their age:
       { data_to_use()$codpat[are_out_age] %>%
           paste(
-            paste0('(', data_to_use()$codpat[are_out_age], ')'),
+            paste0('(', data_to_use()$eta[are_out_age], ')'),
             collapse = ', '
           )
       }"
