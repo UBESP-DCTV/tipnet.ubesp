@@ -1,6 +1,6 @@
 --- 
 params:
-    cache: FALSE
+    cache: TRUE
     export: FALSE
     first_y: 2020
     last_y:  2020
@@ -36,6 +36,7 @@ description: "`r paste0('TIPNet long-term report (', params$first_y, ' - ', para
 options(knitr.duplicate.label = 'allow')
 
 knitr::opts_chunk$set(
+  cache = FALSE,
   echo = FALSE,
   message = FALSE,
   warning = FALSE
@@ -64,9 +65,103 @@ tipnet_path <- db_update_from_server()
 # cache.extra option in the knitr tags here above needs to speed up
 # normal computation and running time (render side) as the data are not
 # changed. Note that server-side data are loaded from the render-side
-# if included in the chunck named "data" (like this is), hence setting
+# if included in the chunk named "data" (like this is), hence setting
 # cache.extra provide a further speed up.
-purrr::iwalk(tipnet.ubesp:::generate_main_data(), ~assign(.y, .x, pos = 1))
+tipnet <- read_rds(file.path(tipnet.ubesp:::data_path(), "tipnet.rds"))
+
+anagrafica   <- get_sheet(tipnet, "anagrafica")
+accettazione <- get_sheet(tipnet, "accettazione")
+ingresso     <- get_sheet(tipnet, "ingresso")
+pim          <- get_sheet(tipnet, "pim")
+pelod        <- get_sheet(tipnet, "pelod")
+aristotle    <- get_sheet(tipnet, "punteggio_di_aristotle")
+degenza      <- get_sheet(tipnet, "degenza")
+ventilazione <- get_sheet(tipnet, "procedure_di_ventilazione")
+infezione    <- get_sheet(tipnet, "infezione")
+dimissione   <- get_sheet(tipnet, "dimissione")
+
+
+full_records <- accettazione %>%
+  dplyr::full_join(anagrafica,
+            by = c("codpat", "center"),
+            suffix = c(".accettazione", ".anagrafica")
+  ) %>%
+
+  dplyr::full_join(ingresso, by = c("codpat", "center", "redcap_repeat_instance")) %>%
+  dplyr::full_join(pim,
+            by = c("codpat", "center", "redcap_repeat_instance"),
+            suffix = c(".ingresso", ".pim")
+  ) %>%
+
+  dplyr::full_join(pelod, by = c("codpat", "center", "redcap_repeat_instance")) %>%
+  dplyr::full_join(aristotle,
+            by = c("codpat", "center", "redcap_repeat_instance"),
+            suffix = c(".pelod", ".aristotle")
+  ) %>%
+
+  dplyr::full_join(degenza, by = c("codpat", "center", "redcap_repeat_instance")) %>%
+  dplyr::full_join(ventilazione,
+            by = c("codpat", "center", "redcap_repeat_instance"),
+            suffix = c(".degenza", ".ventilazione")
+  ) %>%
+
+  dplyr::full_join(infezione, by = c("codpat", "center", "redcap_repeat_instance")) %>%
+  dplyr::full_join(dimissione,
+            by = c("codpat", "center", "redcap_repeat_instance"),
+            suffix = c(".infezione", ".dimissione")
+  ) %>%
+
+  dplyr::mutate_at(dplyr::vars(dplyr::starts_with("complete")), ~{. == "complete"}) %>%
+  dplyr::mutate(
+    eta = as.integer(.data$eta),
+    age_class = factor(
+      dplyr::case_when(
+        eta > 18 ~ "eta > 18",
+        eta > 16 ~ "16 < eta <= 18",
+        eta >= 0 ~ "0 <= eta <= 16",
+        TRUE ~ "[wrong/missing age]"
+      )
+    ),
+    complete = .data$complete.anagrafica &
+      .data$complete.accettazione &
+      .data$complete.pim &
+      .data$complete.dimissione
+  )
+
+
+outliers <- full_records %>% 
+  group_by(center, codpat, redcap_repeat_instance) %>% 
+  select_if(is.numeric) %>%
+  ungroup() %>% 
+  mutate_at(vars(-center, -codpat, -redcap_repeat_instance),
+    ~ abs(. - median(., na.rm = TRUE)) > 
+      1.5 * diff(quantile(., probs = c(0.25, 0.75), na.rm = TRUE))
+  ) %>% 
+  janitor::remove_empty("cols") %>%
+  group_by(center, codpat, redcap_repeat_instance) %>% 
+  select_if(~any(. == TRUE, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  pivot_longer(-c(center, codpat, redcap_repeat_instance)) %>% 
+  group_by(center) %>% 
+  mutate(n = n()) %>% 
+  filter(value) %>% 
+  summarize(
+    n_outliers = n(),
+    prop_outliers = round(n_outliers / unique(n), 2),
+    codpats = list(tibble(
+      codpat = codpat,
+      var = name,
+      rep_instance = redcap_repeat_instance,
+      value = pmap_dbl(
+        list(x = codpat, y = var, z = rep_instance, c = center),
+        function(x, y, z, c) {
+          res <- full_records %>% 
+            filter(codpat == x, redcap_repeat_instance == z, center == c)
+          res[[y]]
+        }
+      )
+    ))
+  )
 ```
 
 

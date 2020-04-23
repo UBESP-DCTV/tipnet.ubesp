@@ -1,9 +1,9 @@
 generate_main_data <- function() {
 
-  tipnet <- if (fs::dir_exists(file.path(data_path(), "..", "report"))) {
-    readr::read_rds(file.path(data_path(), "..", "report", "data", "tipnet.rds"))
+  tipnet <- if (fs::dir_exists(file.path(tipnet.ubesp:::data_path(), "..", "report"))) {
+    readr::read_rds(file.path(tipnet.ubesp:::data_path(), "..", "report", "data", "tipnet.rds"))
   } else {
-    readr::read_rds(file.path(data_path(), "tipnet.rds"))
+    readr::read_rds(file.path(tipnet.ubesp:::data_path(), "tipnet.rds"))
   }
 
   anagrafica   <- get_sheet(tipnet, "anagrafica")
@@ -65,6 +65,45 @@ generate_main_data <- function() {
         .data$complete.dimissione
     )
 
+  outliers <- full_records %>%
+    dplyr::group_by(.data$center, .data$codpat, .data$redcap_repeat_instance) %>%
+    dplyr::select_if(is.numeric) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate_at(
+      dplyr::vars(-.data$center, -.data$codpat, -.data$redcap_repeat_instance),
+      ~ abs(. - median(., na.rm = TRUE)) >
+        1.5 * diff(stats::quantile(., probs = c(0.25, 0.75), na.rm = TRUE))
+    ) %>%
+    janitor::remove_empty("cols") %>%
+    dplyr::group_by(.data$center, .data$codpat, .data$redcap_repeat_instance) %>%
+    dplyr::select_if(~any(. == TRUE, na.rm = TRUE)) %>%
+    dplyr::ungroup() %>%
+    tidyr::pivot_longer(-c(.data$center, .data$codpat, .data$redcap_repeat_instance)) %>%
+    dplyr::group_by(.data$center) %>%
+    dplyr::mutate(n = dplyr::n()) %>%
+    dplyr::filter(.data$value) %>%
+    dplyr::summarize(
+      n_outliers = dplyr::n(),
+      prop_outliers = round(.data$n_outliers / unique(.data$n), 2),
+      codpats = list(tibble::tibble(
+        codpat = codpat,
+        var = name,
+        rep_instance = redcap_repeat_instance,
+        value = purrr::pmap_dbl(
+          list(x = codpat, y = var, z = rep_instance, c = center),
+          function(x, y, z, c) {
+            res <- full_records %>%
+              dplyr::filter(
+                codpat == x,
+                redcap_repeat_instance == z,
+                center == c
+              )
+            res[[y]]
+          }
+        )
+      ))
+    )
+
 
   list(
     anagrafica   = anagrafica  ,
@@ -77,7 +116,8 @@ generate_main_data <- function() {
     ventilazione = ventilazione,
     infezione    = infezione   ,
     dimissione   = dimissione  ,
-    full_records = full_records
+    full_records = full_records,
+    outliers     = outliers
   )
 
 }
