@@ -27,12 +27,15 @@
 #'   rc <- read_redcap(token = token, url = url)
 #' }
 #'
-read_redcap <- function(url, token = tipnet_token()) {
+read_redcap <- function(
+  url, # = tipnet_redcap_url(),
+  token = tipnet_token()
+  ) {
 
   assertive::assert_is_a_string(token)
   assertive::assert_is_a_string(url)
 
-  max_n <- 2000
+  max_n <- 1e6
 
   # Import all the field of ROLEX db
   df <- REDCapR::redcap_read(
