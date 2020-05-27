@@ -4,12 +4,14 @@
 \name{centers_table}
 \alias{centers_table}
 \title{Table of TIPNet centers}
-\format{a \href{tibble::tibble}{tibble} with 32 rows and 3 columns
+\format{
+a \href{tibble::tibble}{tibble} with 32 rows and 3 columns
 \describe{
 \item{id}{(integer) ID of the center}
 \item{center}{(factor) Name of the center}
 \item{center_city}{(factor) City in which the center is}
-}}
+}
+}
 \usage{
 centers_table
 }
