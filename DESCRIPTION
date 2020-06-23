@@ -40,7 +40,8 @@ Suggests:
     covr (>= 3.2.1),
     roxygen2 (>= 6.1.1),
     spelling (>= 2.1),
-    testthat (>= 2.1.1)
+    testthat (>= 2.1.1),
+    attempt
 Encoding: UTF-8
 Language: en-US
 LazyData: true

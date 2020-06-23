@@ -34,6 +34,9 @@ tidy_extract <- function(data, type = c("data", "meta")) {
 
   if (type == "data") {
     res <- res %>%
+      dplyr::filter(
+        stringr::str_detect(.data[["codpat"]], "^0000-", negate = TRUE)
+      ) %>%
       dplyr::rename(
         center = .data$redcap_data_access_group,
         fields = .data$redcap_event_name
@@ -64,5 +67,5 @@ tidy_extract <- function(data, type = c("data", "meta")) {
       )
   }
 
-  janitor::remove_empty(res, c("rows", "cols"))
+  janitor::remove_empty(res, c("rows"))
 }

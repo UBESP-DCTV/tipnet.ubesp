@@ -37,35 +37,26 @@ read_redcap <- function(
 
   # list of two: `data` and `meta_data`
   # ~ 9 min/call (1.5-1.8 s/batch)
-  REDCapR::redcap_read(
+  data <- REDCapR::redcap_read(
     batch_size = 300L,
     redcap_uri = url,
     token = token,
     raw_or_label = "label",
-    raw_or_label_headers = "label",
+    raw_or_label_headers = "raw",
     export_checkbox_label = TRUE,
+    export_data_access_groups = TRUE,
     col_types = NULL,
     guess_type = TRUE,
     verbose = FALSE
   )
 
+  meta_data <- REDCapR::redcap_metadata_read(
+    redcap_uri = url,
+    token = token,
+    verbose = FALSE
+  )
+
+  list(data = data, meta_data = meta_data)
+
 }
 
-
-
-check_types <- function(x = NULL) {
-  x <- x %||% read_redcap(tipnet_redcap_url(), tipnet_token())
-
-  current <- x$data$data %>%
-    purrr::map_dfr(~class(.x)[[1]]) %>%
-    tidyr::pivot_longer(dplyr::everything(),
-      names_to = "variable",
-      values_to = "class"
-    )
-
-  reference <- readr::read_rds(here::here("data", "dd_class.rds"))
-
-  all.equal(current, reference)
-}
-
-check_types(df)

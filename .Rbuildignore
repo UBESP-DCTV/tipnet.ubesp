@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^tipnet\.ubesp\.Rproj$
 ^\.Rproj\.user$
 ^report$

@@ -4,14 +4,12 @@
 \alias{db_update_from_server}
 \title{Pull REDCap data from the server}
 \usage{
-db_update_from_server(path_data = NULL, file_name = "tipnet.rds")
+db_update_from_server(path_data = NULL)
 }
 \arguments{
 \item{path_data}{(chr) path for data folder (default is \verb{data/}
 under the current project or the \link[here:here]{here} path, if it not
 exists it will be created)}
-
-\item{file_name}{(chr) name for the file to store the data}
 }
 \value{
 (lgl) \code{TRUE} if success, \code{FALSE} otherwise

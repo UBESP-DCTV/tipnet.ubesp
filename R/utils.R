@@ -17,5 +17,5 @@ skip_if_no_auth <- function() {
 }
 
 data_path <- function() {
-  fs::dir_create(here::here("data"))
+  fs::dir_create(here::here("..", "data"))
 }

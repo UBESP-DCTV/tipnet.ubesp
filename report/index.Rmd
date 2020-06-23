@@ -4,6 +4,10 @@ params:
     export: FALSE
     first_y: 2020
     last_y:  2020
+    auto_update: TRUE
+    force_update: FALSE
+    max_days_update: 28
+    dev: TRUE
 
 output:
     bookdown::html_document2:
@@ -42,34 +46,60 @@ knitr::opts_chunk$set(
   warning = FALSE
 )
 
-library(tidyverse)
-library(stringr)
-library(lubridate)
-library(fs)
+stopifnot(here::here() == normalizePath(".."))
 
-library(tipnet.ubesp)
-  
-library(plotly)
+if (params$dev) {
+    all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
+    attempt::attempt(suppressWarnings(invisible(lapply(
+      all_attached, detach, character.only = TRUE, unload = TRUE
+    ))), silent = TRUE)
+    rstudioapi::documentSaveAll()
+    roxygen2::roxygenise(package.dir = here::here())
+    devtools::load_all(quiet =  TRUE)
+} else {
+  library(tipnet.ubesp)
+}
+
 library(DT)
-
 library(glue) 
-library(here)
 ```
 
 
 ```{r server-start, include = FALSE}
-tipnet_path <- db_update_from_server()
+last_update <- list.files(tipnet.ubesp:::data_path(),
+  pattern = "^\\d{4}-\\d{2}-\\d{2}-tipnet.*\\.rds$",
+  full.names = TRUE
+) %>% 
+  purrr::map_df(fs::file_info, follow = TRUE) %>% 
+  dplyr::pull(.data[["modification_time"]]) %>% 
+  max() %>% 
+  as.Date()
+
+expired <- (lubridate::today() - last_update) > params$max_days_update
+
+if (
+  (
+    (expired && params$auto_update) || params$force_update
+  ) &&
+    db_update_from_server()
+) {
+  last_update <- lubridate::today()
+}
 ```
 
-```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(tipnet_path)}
+```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(last_update)}
 # cache.extra option in the knitr tags here above needs to speed up
 # normal computation and running time (render side) as the data are not
 # changed. Note that server-side data are loaded from the render-side
 # if included in the chunk named "data" (like this is), hence setting
 # cache.extra provide a further speed up.
-tipnet <- read_rds(file.path(tipnet.ubesp:::data_path(), "tipnet.rds"))
 
-anagrafica   <- get_sheet(tipnet, "anagrafica")
+data_name <- paste0(last_update, "-", "tipnet.rds") 
+tipnet <- readr::read_rds(
+  file.path(tipnet.ubesp:::data_path(), data_name)
+)
+
+anagrafica   <- get_sheet(tipnet, "anagrafica", field = "anagrafica")
 accettazione <- get_sheet(tipnet, "accettazione")
 ingresso     <- get_sheet(tipnet, "ingresso")
 pim          <- get_sheet(tipnet, "pim")
@@ -129,35 +159,47 @@ full_records <- accettazione %>%
   )
 
 
-outliers <- full_records %>% 
-  group_by(center, codpat, redcap_repeat_instance) %>% 
-  select_if(is.numeric) %>%
-  ungroup() %>% 
-  mutate_at(vars(-center, -codpat, -redcap_repeat_instance),
+aux_out <- full_records %>% 
+  dplyr::select(
+    center, codpat, redcap_repeat_instance,
+    where(is.numeric)
+  ) %>% 
+  dplyr::mutate_at(
+    dplyr::vars(-center, -codpat, -redcap_repeat_instance),
     ~ abs(. - median(., na.rm = TRUE)) > 
       1.5 * diff(quantile(., probs = c(0.25, 0.75), na.rm = TRUE))
   ) %>% 
   janitor::remove_empty("cols") %>%
-  group_by(center, codpat, redcap_repeat_instance) %>% 
-  select_if(~any(. == TRUE, na.rm = TRUE)) %>% 
-  ungroup() %>% 
-  pivot_longer(-c(center, codpat, redcap_repeat_instance)) %>% 
-  group_by(center) %>% 
-  mutate(n = n()) %>% 
-  filter(value) %>% 
-  summarize(
-    n_outliers = n(),
+  dplyr::select(
+    center, codpat, redcap_repeat_instance,
+    where(~any(. == TRUE, na.rm = TRUE))
+  ) %>% 
+  tidyr::pivot_longer(-c(center, codpat, redcap_repeat_instance)) %>% 
+  dplyr::group_by(center) %>% 
+  dplyr::mutate(n = dplyr::n()) %>% 
+  dplyr::filter(value)
+
+
+cps <- full_records[["codpat"]]
+rri <- full_records[["redcap_repeat_instance"]]
+data_lst <- as.list(full_records)
+
+outliers10 <- aux_out %>% 
+  dplyr::summarize(
+    n_outliers = dplyr::n(),
     prop_outliers = round(n_outliers / unique(n), 2),
-    codpats = list(tibble(
+    codpats = list(tibble::tibble(
       codpat = codpat,
       var = name,
       rep_instance = redcap_repeat_instance,
-      value = pmap_dbl(
-        list(x = codpat, y = var, z = rep_instance, c = center),
-        function(x, y, z, c) {
-          res <- full_records %>% 
-            filter(codpat == x, redcap_repeat_instance == z, center == c)
-          res[[y]]
+      value = purrr::map_dbl(seq_along(codpat),
+        ~{
+          target_codpat <- cps == codpat[[.x]]
+          target_repeat <- rri == rep_instance[[.x]]
+
+          target_record <- target_codpat & target_repeat
+          
+          data_lst[[var[[.x]]]][target_record]
         }
       )
     ))
