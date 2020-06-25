@@ -24,7 +24,7 @@ subtitle: '<style> div.blue { background-color:#e6f0ff; border-radius: 5px; padd
 
 author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with the Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI), and the Unit of Biostatistics, Epidemiology and Public Health (UBEP) of the University of Padova."
 
-date: "**Last update**: `r as.Date(file.info('index.Rmd')$mtime)`"
+date: "**Last report update**: `r as.Date(file.info('index.Rmd')$mtime)`"
 
 biblio-style: apalike
 link-citations: yes
@@ -46,164 +46,54 @@ knitr::opts_chunk$set(
   warning = FALSE
 )
 
-stopifnot(here::here() == normalizePath(".."))
-
-if (params$dev) {
+dev <- TRUE
+if (dev) {
     all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
     attempt::attempt(suppressWarnings(invisible(lapply(
       all_attached, detach, character.only = TRUE, unload = TRUE
     ))), silent = TRUE)
     rstudioapi::documentSaveAll()
-    roxygen2::roxygenise(package.dir = here::here())
+    roxygen2::roxygenise(package.dir = here::here(".."))
     devtools::load_all(quiet =  TRUE)
 } else {
   library(tipnet.ubesp)
 }
 
+library(tidyverse)
+library(lubridate)
+library(plotly)
+library(shiny)
 library(DT)
 library(glue) 
+library(here)
 ```
 
 
 ```{r server-start, include = FALSE}
-last_update <- list.files(tipnet.ubesp:::data_path(),
-  pattern = "^\\d{4}-\\d{2}-\\d{2}-tipnet.*\\.rds$",
-  full.names = TRUE
-) %>% 
-  purrr::map_df(fs::file_info, follow = TRUE) %>% 
-  dplyr::pull(.data[["modification_time"]]) %>% 
-  max() %>% 
-  as.Date()
+path_to_data <- tipnet.ubesp:::data_path()
+last_file <- file.path(path_to_data, "tipnet.rds")
 
-expired <- (lubridate::today() - last_update) > params$max_days_update
+is_to_update <- params$auto_update &&
+  is_expired(last_file, params$max_days_update)
 
-if (
-  (
-    (expired && params$auto_update) || params$force_update
-  ) &&
-    db_update_from_server()
-) {
-  last_update <- lubridate::today()
-}
+if (params$force_update || is_to_update) db_update_from_server()
+
+tipnet <- readr::read_rds(last_file) 
+tipnet_meta <- file.path(path_to_data, "tipnet_meta.rds") %>% 
+  readr::read_rds()
 ```
 
-```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(last_update)}
+```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(last_file)}
 # cache.extra option in the knitr tags here above needs to speed up
 # normal computation and running time (render side) as the data are not
 # changed. Note that server-side data are loaded from the render-side
 # if included in the chunk named "data" (like this is), hence setting
 # cache.extra provide a further speed up.
 
-data_name <- paste0(last_update, "-", "tipnet.rds") 
-tipnet <- readr::read_rds(
-  file.path(tipnet.ubesp:::data_path(), data_name)
+purrr::iwalk(
+  tipnet.ubesp:::generate_main_data(tipnet),
+  ~ assign(.y, .x, pos = 1)
 )
-
-anagrafica   <- get_sheet(tipnet, "anagrafica", field = "anagrafica")
-accettazione <- get_sheet(tipnet, "accettazione")
-ingresso     <- get_sheet(tipnet, "ingresso")
-pim          <- get_sheet(tipnet, "pim")
-pelod        <- get_sheet(tipnet, "pelod")
-aristotle    <- get_sheet(tipnet, "punteggio_di_aristotle")
-degenza      <- get_sheet(tipnet, "degenza")
-ventilazione <- get_sheet(tipnet, "procedure_di_ventilazione")
-infezione    <- get_sheet(tipnet, "infezione")
-dimissione   <- get_sheet(tipnet, "dimissione")
-
-
-full_records <- accettazione %>%
-  dplyr::full_join(anagrafica,
-            by = c("codpat", "center"),
-            suffix = c(".accettazione", ".anagrafica")
-  ) %>%
-
-  dplyr::full_join(ingresso, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-  dplyr::full_join(pim,
-            by = c("codpat", "center", "redcap_repeat_instance"),
-            suffix = c(".ingresso", ".pim")
-  ) %>%
-
-  dplyr::full_join(pelod, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-  dplyr::full_join(aristotle,
-            by = c("codpat", "center", "redcap_repeat_instance"),
-            suffix = c(".pelod", ".aristotle")
-  ) %>%
-
-  dplyr::full_join(degenza, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-  dplyr::full_join(ventilazione,
-            by = c("codpat", "center", "redcap_repeat_instance"),
-            suffix = c(".degenza", ".ventilazione")
-  ) %>%
-
-  dplyr::full_join(infezione, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-  dplyr::full_join(dimissione,
-            by = c("codpat", "center", "redcap_repeat_instance"),
-            suffix = c(".infezione", ".dimissione")
-  ) %>%
-
-  dplyr::mutate_at(dplyr::vars(dplyr::starts_with("complete")), ~{. == "complete"}) %>%
-  dplyr::mutate(
-    eta = as.integer(.data$eta),
-    age_class = factor(
-      dplyr::case_when(
-        eta > 18 ~ "eta > 18",
-        eta > 16 ~ "16 < eta <= 18",
-        eta >= 0 ~ "0 <= eta <= 16",
-        TRUE ~ "[wrong/missing age]"
-      )
-    ),
-    complete = .data$complete.anagrafica &
-      .data$complete.accettazione &
-      .data$complete.pim &
-      .data$complete.dimissione
-  )
-
-
-aux_out <- full_records %>% 
-  dplyr::select(
-    center, codpat, redcap_repeat_instance,
-    where(is.numeric)
-  ) %>% 
-  dplyr::mutate_at(
-    dplyr::vars(-center, -codpat, -redcap_repeat_instance),
-    ~ abs(. - median(., na.rm = TRUE)) > 
-      1.5 * diff(quantile(., probs = c(0.25, 0.75), na.rm = TRUE))
-  ) %>% 
-  janitor::remove_empty("cols") %>%
-  dplyr::select(
-    center, codpat, redcap_repeat_instance,
-    where(~any(. == TRUE, na.rm = TRUE))
-  ) %>% 
-  tidyr::pivot_longer(-c(center, codpat, redcap_repeat_instance)) %>% 
-  dplyr::group_by(center) %>% 
-  dplyr::mutate(n = dplyr::n()) %>% 
-  dplyr::filter(value)
-
-
-cps <- full_records[["codpat"]]
-rri <- full_records[["redcap_repeat_instance"]]
-data_lst <- as.list(full_records)
-
-outliers10 <- aux_out %>% 
-  dplyr::summarize(
-    n_outliers = dplyr::n(),
-    prop_outliers = round(n_outliers / unique(n), 2),
-    codpats = list(tibble::tibble(
-      codpat = codpat,
-      var = name,
-      rep_instance = redcap_repeat_instance,
-      value = purrr::map_dbl(seq_along(codpat),
-        ~{
-          target_codpat <- cps == codpat[[.x]]
-          target_repeat <- rri == rep_instance[[.x]]
-
-          target_record <- target_codpat & target_repeat
-          
-          data_lst[[var[[.x]]]][target_record]
-        }
-      )
-    ))
-  )
 ```
 
 
@@ -260,8 +150,7 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 - Department of Pediatric Anesthesia and Intensive Care, Ospedale Sant’Orsola Malpighi, Bologna
 - Department of Anesthesia and Intensive Care, Children’s Hospital Meyer, Firenze
 - Department of Anesthesia and Intensive Care, Children’s Hospital Bambino Gesù, Rome DEA, ARCO, Palidoro
-- Anesthesia and Intensive Care Department, Pediatric ICU, Policlinico Universitario A.Gemelli, Università Cattolica
-del Sacro Cuore, Rome
+- Anesthesia and Intensive Care Department, Pediatric ICU, Policlinico Universitario A.Gemelli, Università Cattolica del Sacro Cuore, Rome
 - Department of Anesthesia and Intensive Care, Children’s Hospital Santobono-Pausillipon, Napoli
 - Department of Anesthesia and Intensive Care, Children’s Hospital G Di Cristina, Palermo
 - Department of Anesthesia and Intensive Care Ospedale Garibaldi – Nesima, Catania
@@ -269,9 +158,15 @@ del Sacro Cuore, Rome
 
 </div>
 
+
+
+
+
+
+
+
 ```{r, child = "005-quality.Rmd"}
 ```
-
 
 ```{r, child = "010-descriptives.Rmd"}
 ```
@@ -290,13 +185,18 @@ del Sacro Cuore, Rome
 
 
 
+
+
+
+
+
 ```{r, results='asis', eval=!params$export}
 cat("# Download current report {-}")
 ```
 
 
 ```{r, eval=!params$export}
-downloadLink("report", "Generate report")
+shiny::downloadLink("report", "Generate report")
 ```
 
 ```{r, context="server", eval=!params$export}
@@ -337,6 +237,12 @@ output$report <- downloadHandler("tipnet-repor.html",
   }
 )
 ```
+
+
+
+
+
+
 
 
 # References {-}

@@ -73,19 +73,15 @@ qualityReport <- function(id, data) {
       )
     })
 
-    output$out_of_age <- renderText(glue::glue(
-      "There are {sum(are_out_age)} people to exclude because of their age:
-      { data_to_use()$codpat[are_out_age] %>%
-          paste(
-            paste0('(', data_to_use()$eta[are_out_age], ')'),
-            collapse = ', '
-          )
-      }"
-    ))
-
     output$stat_global <- renderText(glue::glue(
       "Out of {sum(!are_out_age)}, there are {sum(data_to_use()[['complete']][!are_out_age], na.rm = TRUE)} records with completed data
       (proportion of complete data = {round(mean(data_to_use()[['complete']][!are_out_age], na.rm = TRUE), 2)})."
+    ))
+
+        output$out_of_age <- renderText(glue::glue(
+      "There are {sum(are_out_age)} people to exclude because of their
+       age is missing or more than 18 (strictly)
+      "
     ))
 
     output$plot_global <- renderPlot({

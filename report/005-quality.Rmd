@@ -30,7 +30,7 @@ qualityReportUI("q_hosp")
 ```
 
 ```{r, context = "server"}
-data_hosp <- filter(full_records, !is.na(reparto))
+data_hosp <- dplyr::filter(full_records, !is.na(reparto))
 qualityReport("q_hosp", data = data_hosp)
 ```
 
@@ -50,7 +50,7 @@ Two types of errors are considered at the moment:
 
 
 ```{r}
-n_missing <- map_int(full_records, ~sum(is.na(.)))
+n_missing <- purrr::map_int(full_records, ~sum(is.na(.)))
 are_w_missing <- n_missing > 0
 ```
 
@@ -58,17 +58,17 @@ Overall, there are `r sum(are_w_missing)` variables with some missing data (out 
 
 ```{r}
 data_miss <- full_records %>%
-  group_by(center) %>%
-  summarise_all(~sum(is.na(.))) %>%
-  pivot_longer(-center, names_to = "field")
+  dplyr::group_by(center) %>%
+  dplyr::summarise_all(~sum(is.na(.))) %>%
+  tidyr::pivot_longer(-center, names_to = "field")
 
 n_each <- full_records %>%
-  group_by(center) %>%
-  tally()
+  dplyr::group_by(center) %>%
+  dplyr::tally()
 
 data_miss <- data_miss %>%
-  left_join(n_each) %>%
-  mutate(prop = round(value / n, 2))
+  dplyr::left_join(n_each) %>%
+  dplyr::mutate(prop = round(value / n, 2))
 ```
 
 #### Overall

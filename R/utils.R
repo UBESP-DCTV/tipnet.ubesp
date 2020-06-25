@@ -17,5 +17,14 @@ skip_if_no_auth <- function() {
 }
 
 data_path <- function() {
-  fs::dir_create(here::here("..", "data"))
+  current_folder <- basename(here::here())
+  path_to_data <- switch(current_folder,
+    "tipnet.ubesp" = here::here("../data"),
+    "report"       = here::here("../../data"),
+    current_folder
+  )
+
+  if (path_to_data == current_folder) stop(current_folder)
+
+  fs::dir_create(path_to_data)
 }

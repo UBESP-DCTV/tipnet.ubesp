@@ -46,8 +46,14 @@ db_update_from_server <- function(path_data = NULL) {
       )
     )
 
-  readr::write_rds(tipnet, data_path)
+  readr::write_rds(tipnet, data_path, compress = "xz")
+  readr::write_rds(tipnet,
+    file.path(path_data, "tipnet.rds"),
+    compress = "xz"
+  )
+
   readr::write_rds(tipnet_meta, meta_path)
+  readr::write_rds(tipnet_meta, file.path(path_data, "tipnet_meta.rds"))
 
   invisible(TRUE)
 

@@ -7,8 +7,8 @@
 \title{tipnet.ubesp: TIPNet reports}
 \description{
 The goal of tipnet.ubesp is to implement and
-    collect all the code needed for the development of the TIPNet reports
-    by UBESP.
+    collect all the code needed for the development of the TIPNet
+    reports by UBESP.
 }
 \seealso{
 Useful links:
@@ -19,7 +19,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Corrado Lanera \email{corrado.lanera@gmail.com}
+\strong{Maintainer}: Corrado Lanera \email{corrado.lanera@gmail.com} [copyright holder]
 
 }
 \keyword{internal}

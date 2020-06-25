@@ -1,7 +1,10 @@
 library(shiny)
 
 devtools::load_all(".")
-purrr::iwalk(tipnet.ubesp:::generate_main_data(), ~assign(.y, .x, pos = 1))
+purrr::iwalk(
+  tipnet.ubesp:::generate_main_data(),
+  ~assign(.y, .x, pos = 1)
+)
 
 
 # Define UI for application that draws a histogram

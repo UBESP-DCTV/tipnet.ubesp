@@ -13,7 +13,7 @@
   - Shiny (`runtime: shiny_prerendered`)
 
 * Title parametrized by the year (for future development)
-* Add the **Colphone** (filled with the original one modified including
+* Add the **Colphon** (filled with the original one modified including
   UBESP attribution), and the **Reference** (empty at the time) sections
 
 * Allowed support to cross-reference (thanks to
