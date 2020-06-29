@@ -77,14 +77,13 @@ data_miss <- data_miss %>%
 gg_miss_all <- tibble(TIPNet = n_missing) %>% 
     ggplot(aes(y = TIPNet)) +
       geom_boxplot() +
-      ylab(glue(
+      ylab(glue::glue(
         "N missing (out of N = {nrow(full_records)})"
       )) +
       ggtitle('Distribution of overall missingness')
 
 
 ggplotly(gg_miss_all)
-
 ```
 
 

@@ -1,72 +1,129 @@
-generate_main_data <- function(tipnet = NULL) {
-
-  if (is.null(tipnet)) {
-    tipnet <- if (fs::dir_exists(file.path(tipnet.ubesp:::data_path(), "..", "report"))) {
-      readr::read_rds(file.path(tipnet.ubesp:::data_path(), "..", "report", "data", "tipnet.rds"))
-    } else {
-      readr::read_rds(file.path(tipnet.ubesp:::data_path(), "tipnet.rds"))
-    }
-  }
-
-  anagrafica   <- get_sheet(tipnet, "anagrafica", field = "anagrafica")
-  accettazione <- get_sheet(tipnet, "accettazione")
-  ingresso     <- get_sheet(tipnet, "ingresso")
-  pim          <- get_sheet(tipnet, "pim")
-  pelod        <- get_sheet(tipnet, "pelod")
-  aristotle    <- get_sheet(tipnet, "punteggio_di_aristotle")
-  degenza      <- get_sheet(tipnet, "degenza")
-  ventilazione <- get_sheet(tipnet, "procedure_di_ventilazione")
-  infezione    <- get_sheet(tipnet, "infezione")
-  dimissione   <- get_sheet(tipnet, "dimissione")
+utils::globalVariables("where")
 
 
-  full_records <- accettazione %>%
-    dplyr::full_join(anagrafica,
+generate_main_data <- function() {
+
+  tipnet <- fetch_tipnet()
+  sheets <- extract_sheets(tipnet)
+  full_records <- join_all_sheets(sheets)
+  outliers <- extract_outliers(full_records)
+
+  c(sheets, list(full_records = full_records, outliers = outliers))
+
+}
+
+
+
+
+
+
+
+
+fetch_tipnet <- function() {
+  readr::read_rds(file.path(data_path(), "tipnet.rds"))
+}
+
+
+
+
+
+
+
+
+extract_sheets <- function(tipnet) {
+  c(
+    anagrafica = list(
+      get_sheet(tipnet, "anagrafica", field = "anagrafica")
+    ),
+
+    purrr::set_names(c(
+      "accettazione", "ingresso", "degenza", "infezione", "dimissione",
+      "punteggio_di_aristotle", "pelod", "pim",
+      "procedure_di_ventilazione"
+    )) %>%
+      purrr::map(get_sheet, x = tipnet)
+  )
+}
+
+
+
+
+
+
+
+
+join_all_sheets <- function(sheets) {
+
+  sheets[["accettazione"]] %>%
+    dplyr::full_join(sheets[["anagrafica"]],
                      by = c("codpat", "center"),
                      suffix = c(".accettazione", ".anagrafica")
     ) %>%
 
-    dplyr::full_join(ingresso, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-    dplyr::full_join(pim,
+    dplyr::full_join(sheets[["ingresso"]],
+                     by = c("codpat", "center", "redcap_repeat_instance")
+    ) %>%
+    dplyr::full_join(sheets[["pim"]],
                      by = c("codpat", "center", "redcap_repeat_instance"),
                      suffix = c(".ingresso", ".pim")
     ) %>%
 
-    dplyr::full_join(pelod, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-    dplyr::full_join(aristotle,
+    dplyr::full_join(sheets[["pelod"]],
+                     by = c("codpat", "center", "redcap_repeat_instance")
+    ) %>%
+    dplyr::full_join(sheets[["punteggio_di_aristotle"]],
                      by = c("codpat", "center", "redcap_repeat_instance"),
                      suffix = c(".pelod", ".aristotle")
     ) %>%
 
-    dplyr::full_join(degenza, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-    dplyr::full_join(ventilazione,
+    dplyr::full_join(sheets[["degenza"]],
+                     by = c("codpat", "center", "redcap_repeat_instance")
+    ) %>%
+    dplyr::full_join(sheets[["procedure_di_ventilazione"]],
                      by = c("codpat", "center", "redcap_repeat_instance"),
                      suffix = c(".degenza", ".ventilazione")
     ) %>%
 
-    dplyr::full_join(infezione, by = c("codpat", "center", "redcap_repeat_instance")) %>%
-    dplyr::full_join(dimissione,
+    dplyr::full_join(sheets[["infezione"]],
+                     by = c("codpat", "center", "redcap_repeat_instance")
+    ) %>%
+    dplyr::full_join(sheets[["dimissione"]],
                      by = c("codpat", "center", "redcap_repeat_instance"),
                      suffix = c(".infezione", ".dimissione")
     ) %>%
 
-    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("complete")), ~{. == "complete"}) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::starts_with("complete")),
+      ~{. == "complete"}
+    ) %>%
     dplyr::mutate(
-      eta = as.integer(.data$eta),
+      eta = as.integer(.data[["eta"]]),
       age_class = factor(
         dplyr::case_when(
-          eta > 18 ~ "eta > 18",
-          eta > 16 ~ "16 < eta <= 18",
-          eta >= 0 ~ "0 <= eta <= 16",
+          .data[["eta"]] >  18 ~ "eta > 18",
+          .data[["eta"]] >  16 ~ "16 < eta <= 18",
+          .data[["eta"]] >=  0 ~ "0 <= eta <= 16",
           TRUE ~ "[wrong/missing age]"
         )
       ),
-      complete = .data$complete.anagrafica &
-        .data$complete.accettazione &
-        .data$complete.pim &
-        .data$complete.dimissione
+      complete =
+        .data[["complete.anagrafica"]] &
+        .data[["complete.accettazione"]] &
+        .data[["complete.pim"]] &
+        .data[["complete.dimissione"]]
     )
+}
 
+
+
+
+
+
+
+
+extract_outliers <- function(full_records) {
+
+  full_records[["center"]] <- as.character(full_records[["center"]])
 
   aux_out <- full_records %>%
     dplyr::select(
@@ -90,46 +147,46 @@ generate_main_data <- function(tipnet = NULL) {
     ) %>%
     dplyr::group_by(.data$center) %>%
     dplyr::mutate(n = dplyr::n()) %>%
+    dplyr::ungroup() %>%
     dplyr::filter(.data$value) %>%
     dplyr::select(-.data$value)
 
 
-  cps <- full_records[["codpat"]]
-  rri <- full_records[["redcap_repeat_instance"]]
-  data_lst <- as.list(full_records)
 
-  outliers <- aux_out %>%
-    dplyr::summarize(
-      n_outliers = dplyr::n(),
-      prop_outliers = round(n_outliers / unique(n), 2),
-      codpats = list(tibble::tibble(
-        codpat = codpat,
-        var = name,
-        rep_instance = redcap_repeat_instance,
-        value = purrr::map_dbl(seq_along(codpat), ~{
-          target_codpat <- cps == codpat[[.x]]
-          target_repeat <- rri == rep_instance[[.x]]
+  data_lst <- unclass(full_records)
 
-          target_record <- target_codpat & target_repeat
 
-          data_lst[[var[[.x]]]][target_record]
-        })
-      ))
+  aux_out %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      value = extract_value(data_lst,
+        .data[["codpat"]],
+        .data[["redcap_repeat_instance"]],
+        .data[["name"]]
+      )
+    ) %>%
+    dplyr::nest_by(.data$center) %>%
+    dplyr::mutate(
+      n_outliers = nrow(.data$data),
+      prop_outliers = .data$n_outliers / .data$data[["n"]][[1L]]
     )
+}
 
-  list(
-    anagrafica   = anagrafica  ,
-    accettazione = accettazione,
-    ingresso     = ingresso    ,
-    pim          = pim         ,
-    pelod        = pelod       ,
-    aristotle    = aristotle   ,
-    degenza      = degenza     ,
-    ventilazione = ventilazione,
-    infezione    = infezione   ,
-    dimissione   = dimissione  ,
-    full_records = full_records,
-    outliers     = outliers
-  )
 
+
+
+
+
+
+
+extract_value <- function(data_lst, codpat, instance, name) {
+
+  cod <- data_lst[["codpat"]] == codpat
+
+  if (sum(cod) == 1L) {
+    data_lst[[name]][cod]
+  } else {
+    rep <- data_lst[["redcap_repeat_instance"]] == instance
+    data_lst[[name]][cod & rep]
+  }
 }

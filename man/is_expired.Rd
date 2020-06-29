@@ -12,7 +12,8 @@ is_expired(filepath, max_days)
 \item{max_days}{(int) number of days until expiration}
 }
 \value{
-
+(lgl) \code{TRUE} if the file at \code{filepath} is expired respect
+\code{max_days}. \code{FALSE} otherwise
 }
 \description{
 Check if a file is expired

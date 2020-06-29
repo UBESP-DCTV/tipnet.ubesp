@@ -11,6 +11,8 @@ outlierReport(id, data)
 }
 \arguments{
 \item{id}{numeric vectors.}
+
+\item{data}{data frame}
 }
 \description{
 General description

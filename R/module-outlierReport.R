@@ -3,6 +3,7 @@
 #' General description
 #'
 #' @param id numeric vectors.
+#' @param data data frame
 #'
 #' @importFrom shiny NS callModule reactive req
 #' @importFrom shiny fluidRow selectInput textOutput plotOutput

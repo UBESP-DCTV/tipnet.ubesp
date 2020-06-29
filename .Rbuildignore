@@ -13,3 +13,4 @@
 ^\.covrignore$
 ^cran-comments\.md$
 ^data-raw$
+^sharing-docs-app$

@@ -3,10 +3,10 @@
 #' @param filepath (chr) file path
 #' @param max_days (int) number of days until expiration
 #'
-#' @return
+#' @return (lgl) `TRUE` if the file at `filepath` is expired respect
+#'   `max_days`. `FALSE` otherwise
 #' @export
 #'
-#' @examples
 is_expired <- function(filepath, max_days) {
   stopifnot(fs::file_exists(filepath))
 

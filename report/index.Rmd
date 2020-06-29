@@ -2,7 +2,7 @@
 params:
     cache: TRUE
     export: FALSE
-    first_y: 2020
+    first_y: 1992
     last_y:  2020
     auto_update: TRUE
     force_update: FALSE
@@ -18,13 +18,15 @@ output:
 
 runtime: shiny_prerendered
 
-title: "TIPNet report"
+title: "TIPNet report (`r paste0(params$first_y, ' - ', params$last_y)`)"
 
-subtitle: '<style> div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;} </style><div class = "blue">long-term `r paste0("(", params$first_y, " - ", params$last_y, ")")`</div>'
-
-author: "Italian Pediatric Intensive Care Units Network (TIPNet) in collaboration with the Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (SARNePI), and the Unit of Biostatistics, Epidemiology and Public Health (UBEP) of the University of Padova."
-
-date: "**Last report update**: `r as.Date(file.info('index.Rmd')$mtime)`"
+author: "Italian Pediatric Intensive Care Units Network (**TIPNet**)
+  </br>
+  \\ \\ \\ \\ in collaboration with:
+  </br>
+  \\* Italian Society of Pediatric and Neonatal Anesthesia and Intensive Care (**SARNePI**)
+  </br>
+  \\* Unit of Biostatistics, Epidemiology and Public Health (**UBEP**) --- University of Padova."
 
 biblio-style: apalike
 link-citations: yes
@@ -32,11 +34,13 @@ bibliography:
   - bibliography.bib
   - packages.bib
 
-description: "`r paste0('TIPNet long-term report (', params$first_y, ' - ', params$last_y, ')')`"
 ---
 
 
 ```{r setup, include=FALSE}
+# This is run only once both to the render and server side, and it
+# is the very first chunk of code that will be run
+
 options(knitr.duplicate.label = 'allow')
 
 knitr::opts_chunk$set(
@@ -46,19 +50,6 @@ knitr::opts_chunk$set(
   warning = FALSE
 )
 
-dev <- TRUE
-if (dev) {
-    all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
-    attempt::attempt(suppressWarnings(invisible(lapply(
-      all_attached, detach, character.only = TRUE, unload = TRUE
-    ))), silent = TRUE)
-    rstudioapi::documentSaveAll()
-    roxygen2::roxygenise(package.dir = here::here(".."))
-    devtools::load_all(quiet =  TRUE)
-} else {
-  library(tipnet.ubesp)
-}
-
 library(tidyverse)
 library(lubridate)
 library(plotly)
@@ -66,12 +57,35 @@ library(shiny)
 library(DT)
 library(glue) 
 library(here)
+
+# if (params$dev) {
+# # this cannot work into the setup chunk because it is
+# # the chunk which load params  variable...
+#     all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
+#     attempt::attempt(suppressWarnings(invisible(lapply(
+#       all_attached, detach, character.only = TRUE, unload = TRUE
+#     ))), silent = TRUE)
+#     rstudioapi::documentSaveAll()
+#     roxygen2::roxygenise(package.dir = here::here(".."))
+#     devtools::load_all(quiet =  TRUE)
+# } else {
+  library(tipnet.ubesp)
+# }
+
+path_to_data <- tipnet.ubesp:::data_path()
+last_file <- file.path(path_to_data, "tipnet.rds")
 ```
 
 
-```{r server-start, include = FALSE}
-path_to_data <- tipnet.ubesp:::data_path()
-last_file <- file.path(path_to_data, "tipnet.rds")
+
+```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(last_file)}
+# This run only once bot in the render and server side
+
+# cache.extra option in the knitr tags here above needs to speed up
+# normal computation and running time (render side) as the data are not
+# changed. Note that server-side data are loaded from the render-side
+# if included in the chunk named "data" (like this is), hence setting
+# cache.extra provide a further speed up.
 
 is_to_update <- params$auto_update &&
   is_expired(last_file, params$max_days_update)
@@ -81,21 +95,18 @@ if (params$force_update || is_to_update) db_update_from_server()
 tipnet <- readr::read_rds(last_file) 
 tipnet_meta <- file.path(path_to_data, "tipnet_meta.rds") %>% 
   readr::read_rds()
+
+global_vars_list <- tipnet.ubesp:::generate_main_data()
+purrr::iwalk(global_vars_list,~ assign(.y, .x, pos = 1))
 ```
 
-```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(last_file)}
-# cache.extra option in the knitr tags here above needs to speed up
-# normal computation and running time (render side) as the data are not
-# changed. Note that server-side data are loaded from the render-side
-# if included in the chunk named "data" (like this is), hence setting
-# cache.extra provide a further speed up.
 
-purrr::iwalk(
-  tipnet.ubesp:::generate_main_data(tipnet),
-  ~ assign(.y, .x, pos = 1)
-)
+```{r server-start, include = FALSE}
+# this run only once on the server session when it starts (after
+# setup and data chunks)
 ```
 
+**Last report update**: `r as.Date(file.info('index.Rmd')$mtime)`  ---  **Last data update**: `r as.Date(file.info(last_file)$mtime)`
 
 # Colophon {-}
 
@@ -212,17 +223,18 @@ output$report <- downloadHandler("tipnet-repor.html",
     )
     temp_report <- file.path(temp_dir, "index.Rmd")
     
-    read_lines(temp_report) %>% 
-      str_replace("^runtime: shiny_prerendered$", "") %>% 
-      str_replace_all(
+    out <- readr::read_lines(temp_report) %>% 
+      stringr::str_replace("^runtime: shiny_prerendered$", "") %>% 
+      stringr::str_replace_all(
         "\\.tabset \\.tabset-fade \\.tabset-pills",
         ""
-      ) %>% 
-      write_lines(temp_report)
+      ) 
+    readr::write_lines(out, temp_report)
     
     # Set up parameters to pass to Rmd document
     params <- list(
-      export = TRUE
+      export = TRUE,
+      dev = FALSE
       
       # foo = input$foo, # bring the current state of the report
     )
