@@ -179,20 +179,20 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 ```{r, child = "005-quality.Rmd"}
 ```
 
-```{r, child = "010-descriptives.Rmd"}
-```
+<!-- ```{r, child = "010-descriptives.Rmd"} -->
+<!-- ``` -->
 
-```{r, child = "020-origin.Rmd"}
-```
+<!-- ```{r, child = "020-origin.Rmd"} -->
+<!-- ``` -->
 
-```{r, child = "030-ccc.Rmd"}
-```
+<!-- ```{r, child = "030-ccc.Rmd"} -->
+<!-- ``` -->
 
-```{r, child = "040-severity.Rmd"}
-```
+<!-- ```{r, child = "040-severity.Rmd"} -->
+<!-- ``` -->
 
-```{r, child = "050-los.Rmd"}
-```
+<!-- ```{r, child = "050-los.Rmd"} -->
+<!-- ``` -->
 
 
 

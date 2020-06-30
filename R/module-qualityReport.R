@@ -2,14 +2,14 @@
 #'
 #' General description
 #'
-#' @param id numeric vectors.
+#' @param id name for the specific instance of the module.
 #' @param data database to use
 #'
 #' @importFrom shiny NS callModule reactive req
 #' @importFrom shiny fluidPage fluidRow selectInput textOutput plotOutput
 #' @importFrom shiny renderText renderPlot column
 #' @importFrom plotly renderPlotly plotlyOutput ggplotly
-#' @importFrom ggplot2 ggplot aes geom_bar facet_wrap coord_flip
+#' @importFrom ggplot2 ggplot aes stat_summary facet_wrap coord_flip
 #' @importFrom ggplot2 theme ggtitle xlab ylab element_text
 #'
 #' @name qualityReport
@@ -27,6 +27,7 @@ qualityReportUI <- function(id) {
     fluidRow(textOutput(ns("stat_global"))),
     fluidRow(textOutput(ns("out_of_age"))),
 
+
     fluidRow(
       column(5, selectInput(ns("completed"),
         label   = "Records to show",
@@ -36,6 +37,7 @@ qualityReportUI <- function(id) {
         label   = "Summary type",
         choices = c("Total", "Proportion")))
     ),
+
 
     fluidRow(plotOutput(ns("plot_global"))),
     fluidRow(plotlyOutput(ns("plot_center")))
@@ -57,9 +59,12 @@ qualityReport <- function(id, data) {
       req(input$type)
     })
 
-    data_to_use <- reactive({
+    completed <- reactive({
       req(input$completed)
-      if (input$completed == "Completed") {
+    })
+
+    data_to_use <- reactive({
+      if (completed() == "Completed") {
         data
       } else {
         dplyr::mutate(data, complete = !.data$complete)
@@ -73,12 +78,16 @@ qualityReport <- function(id, data) {
       )
     })
 
-    output$stat_global <- renderText(glue::glue(
-      "Out of {sum(!are_out_age)}, there are {sum(data_to_use()[['complete']][!are_out_age], na.rm = TRUE)} records with completed data
-      (proportion of complete data = {round(mean(data_to_use()[['complete']][!are_out_age], na.rm = TRUE), 2)})."
+    output$stat_global <- renderText(glue::glue("
+      Out of {sum(!are_out_age)}, there are
+      {sum(data_to_use()[['complete']][!are_out_age], na.rm = TRUE)}
+      records with {completed()} data
+      (proportion of {completed()} data =
+       {round(mean(data_to_use()[['complete']][!are_out_age], na.rm = TRUE), 2)}
+      )."
     ))
 
-        output$out_of_age <- renderText(glue::glue(
+    output$out_of_age <- renderText(glue::glue(
       "There are {sum(are_out_age)} people to exclude because of their
        age is missing or more than 18 (strictly)
       "
@@ -87,10 +96,10 @@ qualityReport <- function(id, data) {
     output$plot_global <- renderPlot({
       data_to_use() %>%
         ggplot(aes(x = "TIPNet", y = as.integer(.data$complete))) +
-        geom_bar(
-          stat = "summary",
-          fun.y = fun_y(),
+        stat_summary(
+          fun = fun_y(),
           na.rm = TRUE,
+          geom = "bar",
           position = "dodge",
           fill = "darkgreen"
         ) +
@@ -98,7 +107,7 @@ qualityReport <- function(id, data) {
         theme(legend.position = "none") +
         xlab("") +
         ylab("") +
-        ggtitle(paste(input$completed, "cases."))
+        ggtitle(paste(completed(), "cases."))
     })
 
     output$plot_center <- renderPlotly({

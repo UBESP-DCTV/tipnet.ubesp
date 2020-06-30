@@ -10,7 +10,7 @@ qualityReportUI(id)
 qualityReport(id, data)
 }
 \arguments{
-\item{id}{numeric vectors.}
+\item{id}{name for the specific instance of the module.}
 
 \item{data}{database to use}
 }
