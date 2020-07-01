@@ -7,13 +7,29 @@ A record is considered _completed_ when it has at least the sheets
 
 ## Complete records {.tabset .tabset-dropdown}
 
-```{r}
+```{r, eval=!params$export}
 qualityReportUI("q_overall")
 ```
 
-```{r, context = "server"}
+```{r, context = "server", eval=!params$export}
 qualityReport("q_overall", data = full_records)
 ```
+
+```{r, context = "server", eval=params$export, fig.height=11, out.height=11}
+are_out_age <- areOutAge(full_records)
+data_to_use <- dataToUse(full_records, params$quality_completed)
+fun_y <- summaryFun(params$quality_type)
+completed <- params$quality_completed
+
+statGlobal(data_to_use, completed)
+outOfAge(are_out_age)
+
+completeDataPlot(data_to_use, fun_y, completed)
+```
+
+
+
+
 
 
 
@@ -23,11 +39,11 @@ qualityReport("q_overall", data = full_records)
 Records are considered related to an "hospitalized" patient if the field 
 **reparto** is not missing in the sheet **dimissione**.
 
-```{r}
+```{r, eval=!params$export}
 qualityReportUI("q_hosp")
 ```
 
-```{r, context = "server"}
+```{r, context = "server", eval=!params$export}
 data_hosp <- dplyr::filter(full_records, !is.na(reparto))
 qualityReport("q_hosp", data = data_hosp)
 ```
@@ -54,7 +70,7 @@ are_w_missing <- n_missing > 0
 
 Overall, there are `r sum(are_w_missing)` variables with some missing data (out of `r length(full_records)`) for a total number of `r sum(n_missing)` missing entries in the whole dataset (`r round(100 * mean(is.na(full_records)), 2)`% of missingness).
 
-```{r}
+```{r, eval=!params$export}
 data_miss <- full_records %>%
   dplyr::group_by(center) %>%
   dplyr::summarise_all(~sum(is.na(.))) %>%
@@ -71,7 +87,7 @@ data_miss <- data_miss %>%
 
 #### Overall
 
-```{r}
+```{r, eval=!params$export}
 gg_miss_all <- tibble(TIPNet = n_missing) %>% 
     ggplot(aes(y = TIPNet)) +
       geom_boxplot() +
@@ -87,7 +103,7 @@ ggplotly(gg_miss_all)
 
 #### By center
 
-```{r}
+```{r, eval=!params$export}
 gg_miss_each <- data_miss %>%
     dplyr::mutate(
       center = fct_reorder(center, prop, .fun = "median")
@@ -107,7 +123,7 @@ ggplotly(gg_miss_each)
 ```
 
 
-```{r}
+```{r, eval=!params$export}
 datatable(data_miss, filter = list(position = 'top', clear = TRUE))
 ```
 
@@ -120,10 +136,10 @@ datatable(data_miss, filter = list(position = 'top', clear = TRUE))
 For numerical variables, outliers are considered possible errors, i.e. values
 farther than 1.5 times the inter quartile range from the median.
 
-```{r}
+```{r, eval=!params$export}
 outlierReportUI("q_hosp", data = outliers)
 ```
 
-```{r, context = "server"}
+```{r, context = "server", eval=!params$export}
 outlierReport("q_hosp", data = outliers)
 ```

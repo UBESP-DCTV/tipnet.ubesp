@@ -7,6 +7,9 @@ params:
     auto_update: TRUE
     force_update: FALSE
     max_days_update: 28
+    
+    quality_completed: "Completed"
+    quality_type: "Proportion"
 
 output:
     bookdown::html_document2:
@@ -46,6 +49,7 @@ options(
 )
 
 knitr::opts_chunk$set(
+  comment = "",
   cache = FALSE,
   echo = FALSE,
   message = FALSE,
@@ -57,9 +61,9 @@ knitr::opts_chunk$set(
   dpi = 192           # set output resolution (impact weight)
  )
 
-if (!is.null(getOption("TIPNet_dev")) && isTRUE(getOption("TIPNet_dev"))) {
-# this cannot work into the setup chunk because it is
-# the chunk which load params  variable...
+if (
+  !is.null(getOption("TIPNet_dev")) && isTRUE(getOption("TIPNet_dev"))
+) {
     all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
     attempt::attempt(suppressWarnings(invisible(lapply(
       all_attached, detach, character.only = TRUE, unload = TRUE
@@ -221,36 +225,44 @@ shiny::downloadLink("report", "Generate report")
 output$report <- downloadHandler("tipnet-repor.html",
   
   content = function(file) {
-    temp_dir <- tempdir()
-    file.copy(".", temp_dir,
+    to_copy <- list.files(".", all.files = TRUE, include.dirs = TRUE) %>% 
+      setdiff(c(".", "..", "static"))
+    
+    dir <- fs::dir_create("./static")
+    
+    file.copy(to_copy, dir,
         overwrite = TRUE,
         recursive = TRUE,
         copy.date = TRUE # this is needed to not invalidate caches
     )
-    temp_report <- file.path(temp_dir, "index.Rmd")
+    report <- file.path(dir, "index.Rmd")
     
-    out <- readr::read_lines(temp_report) %>% 
+    out <- readr::read_lines(report) %>% 
       stringr::str_replace("^runtime: shiny_prerendered$", "") %>% 
       stringr::str_replace_all(
         "\\.tabset \\.tabset-fade \\.tabset-pills",
         ""
       ) 
-    readr::write_lines(out, temp_report)
+    readr::write_lines(out, report)
     
     # Set up parameters to pass to Rmd document
     params <- list(
       export = TRUE,
-      dev = FALSE
-      
+      quality_completed = input[[NS("q_overall", "completed")]],
+      quality_type = input[[NS("q_overall", "type")]]
       # foo = input$foo, # bring the current state of the report
     )
 
     # Knit the document, passing in the `params` list, and eval it in a
     # child of the global environment (this isolates the code in the
     # document from the code in this app).
-    rmarkdown::render(temp_report, output_file = file,
-      params = params,
-      envir = new.env(parent = globalenv())
+    withr::with_options(
+      list(TIPNet_dev = FALSE),
+      
+      rmarkdown::render(report, output_file = file,
+        params = params,
+        envir = new.env(parent = globalenv())
+      )
     )
   }
 )

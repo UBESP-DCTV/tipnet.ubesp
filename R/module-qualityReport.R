@@ -31,11 +31,14 @@ qualityReportUI <- function(id) {
     fluidRow(
       column(5, selectInput(ns("completed"),
         label   = "Records to show",
-        choices = c("Completed", "Not completed")
+        choices = c("Completed", "Not completed"),
+        selected = params$quality_completed
       )),
       column(5, selectInput(ns("type"),
         label   = "Summary type",
-        choices = c("Proportion", "Total")))
+        choices = c("Proportion", "Total"),
+        selected = params$quality_type
+      ))
     ),
 
 
@@ -50,51 +53,32 @@ qualityReportUI <- function(id) {
 #' @export
 qualityReport <- function(id, data) {
 
-  are_out_age <- data[["age_class"]] %in% c("[wrong/missing age]", "eta > 18")
+  are_out_age <- areOutAge(data)
 
   callModule(id = id, function(input, output, session) {
 
-    type <- reactive({
+    data_to_use <- reactive({
+      dataToUse(data, completed())
+    })
+
+    fun_y <- reactive({
       req(input$type)
+      summaryFun(input$type)
     })
 
     completed <- reactive({
       req(input$completed)
     })
 
-    data_to_use <- reactive({
-      if (completed() == "Completed") {
-        data
-      } else {
-        dplyr::mutate(data, complete = !.data$complete)
-      }
-    })
 
-    fun_y <- reactive({
-      switch(type(),
-        Total      = "sum",
-        Proportion = "mean"
-      )
-    })
-
-    output$stat_global <- renderText(glue::glue("
-      Out of {sum(!are_out_age)}, there are
-      {sum(data_to_use()[['complete']][!are_out_age], na.rm = TRUE)}
-      records with {completed()} data
-      (proportion of {completed()} data =
-       {round(mean(data_to_use()[['complete']][!are_out_age], na.rm = TRUE), 2)}
-      )."
-    ))
-
-    output$out_of_age <- renderText(glue::glue(
-      "There are {sum(are_out_age)} people to exclude because of their
-       age is missing or more than 18 (strictly)
-      "
-    ))
+    output$stat_global <- renderText(
+      statGlobal(data_to_use(), completed())
+    )
+    output$out_of_age <- renderText(outOfAge(are_out_age))
 
     output$plot_global <- renderPlot({
-      data_to_use() %>%
-        complete_data_plot(fun_y(), completed())
+      completeDataPlot(data_to_use(), fun_y(), completed())
     })
+
   })
 }
