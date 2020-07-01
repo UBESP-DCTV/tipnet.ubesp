@@ -7,7 +7,6 @@ params:
     auto_update: TRUE
     force_update: FALSE
     max_days_update: 28
-    dev: TRUE
 
 output:
     bookdown::html_document2:
@@ -41,14 +40,36 @@ bibliography:
 # This is run only once both to the render and server side, and it
 # is the very first chunk of code that will be run
 
-options(knitr.duplicate.label = 'allow')
+options(
+  knitr.duplicate.label = 'allow',
+  width = 144
+)
 
 knitr::opts_chunk$set(
   cache = FALSE,
   echo = FALSE,
   message = FALSE,
-  warning = FALSE
-)
+  warning = FALSE,
+  
+  width      = 150,   # output size
+  out.width = "100%", # part of output covered
+  fig.width = 11,     # set size creation-time
+  dpi = 192           # set output resolution (impact weight)
+ )
+
+if (!is.null(getOption("TIPNet_dev")) && isTRUE(getOption("TIPNet_dev"))) {
+# this cannot work into the setup chunk because it is
+# the chunk which load params  variable...
+    all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
+    attempt::attempt(suppressWarnings(invisible(lapply(
+      all_attached, detach, character.only = TRUE, unload = TRUE
+    ))), silent = TRUE)
+    rstudioapi::documentSaveAll()
+    roxygen2::roxygenise(package.dir = here::here(".."))
+    devtools::load_all(quiet =  TRUE)
+} else {
+  library(tipnet.ubesp)
+}
 
 library(tidyverse)
 library(lubridate)
@@ -58,24 +79,9 @@ library(DT)
 library(glue) 
 library(here)
 
-# if (params$dev) {
-# # this cannot work into the setup chunk because it is
-# # the chunk which load params  variable...
-#     all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
-#     attempt::attempt(suppressWarnings(invisible(lapply(
-#       all_attached, detach, character.only = TRUE, unload = TRUE
-#     ))), silent = TRUE)
-#     rstudioapi::documentSaveAll()
-#     roxygen2::roxygenise(package.dir = here::here(".."))
-#     devtools::load_all(quiet =  TRUE)
-# } else {
-  library(tipnet.ubesp)
-# }
-
-path_to_data <- tipnet.ubesp:::data_path()
-last_file <- file.path(path_to_data, "tipnet.rds")
+last_file <- file.path(data_path(), "tipnet.rds")
+set.seed(1)
 ```
-
 
 
 ```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(last_file)}
@@ -93,7 +99,7 @@ is_to_update <- params$auto_update &&
 if (params$force_update || is_to_update) db_update_from_server()
 
 tipnet <- readr::read_rds(last_file) 
-tipnet_meta <- file.path(path_to_data, "tipnet_meta.rds") %>% 
+tipnet_meta <- file.path(data_path(), "tipnet_meta.rds") %>% 
   readr::read_rds()
 
 global_vars_list <- tipnet.ubesp:::generate_main_data()
@@ -101,10 +107,10 @@ purrr::iwalk(global_vars_list,~ assign(.y, .x, pos = 1))
 ```
 
 
-```{r server-start, include = FALSE}
-# this run only once on the server session when it starts (after
-# setup and data chunks)
-```
+<!-- ```{r server-start, include = FALSE} -->
+<!-- # this run only once on the server session when it starts (after -->
+<!-- # setup and data chunks) -->
+<!-- ``` -->
 
 **Last report update**: `r as.Date(file.info('index.Rmd')$mtime)`  ---  **Last data update**: `r as.Date(file.info(last_file)$mtime)`
 

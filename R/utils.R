@@ -16,6 +16,15 @@ skip_if_no_auth <- function() {
   }
 }
 
+
+
+#' Path to the data folder
+#'
+#' @return Path to the data folder
+#' @export
+#'
+#' @examples
+#' data_path()
 data_path <- function() {
   current_folder <- basename(here::here())
   path_to_data <- switch(current_folder,

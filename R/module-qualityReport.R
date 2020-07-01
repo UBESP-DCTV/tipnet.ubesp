@@ -35,12 +35,11 @@ qualityReportUI <- function(id) {
       )),
       column(5, selectInput(ns("type"),
         label   = "Summary type",
-        choices = c("Total", "Proportion")))
+        choices = c("Proportion", "Total")))
     ),
 
 
-    fluidRow(plotOutput(ns("plot_global"))),
-    fluidRow(plotlyOutput(ns("plot_center")))
+    fluidRow(plotOutput(ns("plot_global"), height = "800px"))
   )
 }
 
@@ -95,44 +94,7 @@ qualityReport <- function(id, data) {
 
     output$plot_global <- renderPlot({
       data_to_use() %>%
-        ggplot(aes(x = "TIPNet", y = as.integer(.data$complete))) +
-        stat_summary(
-          fun = fun_y(),
-          na.rm = TRUE,
-          geom = "bar",
-          position = "dodge",
-          fill = "darkgreen"
-        ) +
-        facet_wrap(~.data$age_class) +
-        theme(legend.position = "none") +
-        xlab("") +
-        ylab("") +
-        ggtitle(paste(completed(), "cases."))
+        complete_data_plot(fun_y(), completed())
     })
-
-    output$plot_center <- renderPlotly({
-      gg <- data_to_use() %>%
-        ggplot(aes(
-          x = .data$center,
-          y = as.integer(.data$complete),
-          fill = .data$center
-        )) +
-        geom_bar(stat = "summary",
-            fun.y = fun_y(), na.rm = TRUE,
-            position = "dodge"
-        ) +
-        facet_wrap(~.data$age_class) +
-        theme(
-          axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-          legend.position = "none"
-        ) +
-        xlab("") +
-        ylab("") +
-        ggtitle(paste(input$completed, "cases.")) +
-        coord_flip()
-
-        ggplotly(gg)
-    })
-
   })
 }

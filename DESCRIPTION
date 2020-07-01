@@ -7,8 +7,8 @@ Authors@R:
            role = c("aut", "cre", "cph"),
            email = "corrado.lanera@gmail.com")
 Description: The goal of tipnet.ubesp is to implement and
-    collect all the code needed for the development of the TIPNet
-    reports by UBESP.
+    collect all the code needed for the development of the TIPNet reports
+    by UBESP.
 License: GPL-3 + file LICENSE
 URL: https://github.com/UBESP-DCTV/tipnet.ubesp
 BugReports: https://github.com/UBESP-DCTV/tipnet.ubesp/issues
@@ -17,6 +17,7 @@ Depends:
 Imports: 
     assertive (>= 0.3-5),
     dplyr (>= 0.8.3),
+    DT,
     fs,
     ggplot2,
     glue,
@@ -35,8 +36,7 @@ Imports:
     tibble (>= 2.1.3),
     tidyr,
     tidyselect,
-    usethis (>= 1.5.1),
-    DT
+    usethis (>= 1.5.1)
 Suggests: 
     attempt,
     covr (>= 3.2.1),
