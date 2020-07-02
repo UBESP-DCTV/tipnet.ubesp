@@ -20,11 +20,3 @@ ggplot2 plot
 \description{
 Quality plot for completed data
 }
-\examples{
-purrr::iwalk(
-  tipnet.ubesp:::generate_main_data(),
-  ~ assign(.y, .x, pos = 1)
-)
-
-completeDataPlot(full_records, "sum", "Completed")
-}

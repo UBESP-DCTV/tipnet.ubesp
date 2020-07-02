@@ -50,14 +50,6 @@ outOfAge <- function(are_out_age) {
 #'
 #' @return ggplot2 plot
 #' @export
-#'
-#' @examples
-#' purrr::iwalk(
-#'   tipnet.ubesp:::generate_main_data(),
-#'   ~ assign(.y, .x, pos = 1)
-#' )
-#'
-#' completeDataPlot(full_records, "sum", "Completed")
 completeDataPlot <- function(data, summary_fun, type_completed) {
 
   data %>%
