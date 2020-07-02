@@ -28,7 +28,8 @@ outlierReportUI <- function(id, data) {
     fluidRow(
       column(12, selectInput(ns("center"),
         label   = "Choose a center to display its possible outliers",
-        choices = data[["center"]]
+        choices = unique(data[["center"]]),
+        multiple = TRUE
       ))
     ),
     fluidRow(
@@ -49,8 +50,18 @@ outlierReport <- function(id, data) {
       req(input$center)
     })
 
-    output$out_plot <- DT::renderDT(
-      dplyr::filter(data, center == center())[["codpats"]][[1]],
+    db_to_use <- reactive({
+      dplyr::filter(data, center == center())[["data"]] %>%
+        .[[1]] %>%
+          select(
+            `patient's code` = codpat,
+            `instance id` = redcap_repeat_instance,
+            variable = variable,
+            value = value
+          )
+    })
+
+    output$out_plot <- DT::renderDT(db_to_use(),
       filter = list(position = 'top', clear = TRUE)
     )
   })
