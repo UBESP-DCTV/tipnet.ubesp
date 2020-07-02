@@ -15,16 +15,11 @@ qualityReportUI("q_overall")
 qualityReport("q_overall", data = full_records)
 ```
 
-```{r, context = "server", eval=params$export, fig.height=11, out.height=11}
-are_out_age <- areOutAge(full_records)
-data_to_use <- dataToUse(full_records, params$quality_completed)
-fun_y <- summaryFun(params$quality_type)
-completed <- params$quality_completed
-
-statGlobal(data_to_use, completed)
-outOfAge(are_out_age)
-
-completeDataPlot(data_to_use, fun_y, completed)
+```{r, context = "server", eval=params$export, fig.height=11}
+qualityReportStatic(full_records,
+  params$q_overall_completed,
+  params$q_overall_type
+)
 ```
 
 
@@ -48,6 +43,18 @@ data_hosp <- dplyr::filter(full_records, !is.na(reparto))
 qualityReport("q_hosp", data = data_hosp)
 ```
 
+```{r, context = "server", eval=params$export, fig.height=11}
+data_hosp <- dplyr::filter(full_records, !is.na(reparto))
+qualityReportStatic(data_hosp,
+  params$q_hosp_completed,
+  params$q_hosp_type
+)
+```
+
+
+
+
+
 
 
 
@@ -55,76 +62,61 @@ qualityReport("q_hosp", data = data_hosp)
 
 Two types of errors are considered at the moment:
 
-1. missing data
-2. outlier values out of reasonable range, i.e., which have a distance from the
-   median that is farther than 1.5 times the inter quartile range
+1. Missing data.
+
+2. Outlier values out of reasonable range, i.e., which have a distance
+   from the median that is farther than 1.5 times the inter quartile
+   range.
 
 
 ### Missing values
 
 
 ```{r}
-n_missing <- purrr::map_int(full_records, ~sum(is.na(.)))
+n_missing <- map_int(full_records, ~sum(is.na(.)))
+prop_missing <- map_dbl(full_records, ~mean(is.na(.)))
 are_w_missing <- n_missing > 0
 ```
 
-Overall, there are `r sum(are_w_missing)` variables with some missing data (out of `r length(full_records)`) for a total number of `r sum(n_missing)` missing entries in the whole dataset (`r round(100 * mean(is.na(full_records)), 2)`% of missingness).
+Overall, there are `r sum(are_w_missing)` variables with some missing
+data (out of `r length(full_records)`) for a total number of `r
+sum(n_missing)` missing entries in the whole dataset (`r round(100 *
+mean(is.na(full_records)), 2)`% of missingness).
 
 ```{r, eval=!params$export}
 data_miss <- full_records %>%
   dplyr::group_by(center) %>%
-  dplyr::summarise_all(~sum(is.na(.))) %>%
-  tidyr::pivot_longer(-center, names_to = "field")
-
-n_each <- full_records %>%
-  dplyr::group_by(center) %>%
-  dplyr::tally()
-
-data_miss <- data_miss %>%
-  dplyr::left_join(n_each) %>%
-  dplyr::mutate(prop = round(value / n, 2))
+  dplyr::summarise_all(~mean(is.na(.))) %>%
+  tidyr::pivot_longer(-center, names_to = "field", values_to = "prop")
 ```
 
-#### Overall
-
-```{r, eval=!params$export}
-gg_miss_all <- tibble(TIPNet = n_missing) %>% 
-    ggplot(aes(y = TIPNet)) +
-      geom_boxplot() +
-      ylab(glue::glue(
-        "N missing (out of N = {nrow(full_records)})"
-      )) +
-      ggtitle('Distribution of overall missingness')
-
-
-ggplotly(gg_miss_all)
-```
-
-
-#### By center
-
-```{r, eval=!params$export}
-gg_miss_each <- data_miss %>%
-    dplyr::mutate(
-      center = fct_reorder(center, prop, .fun = "median")
-    ) %>% 
-    ggplot(aes(x = center, y = prop, colour = center)) +
-      geom_boxplot() +
-      theme(
-        legend.position = "none",
-        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)
-      ) + 
-      ylab("Proportions") +
-      xlab("") +
-      coord_flip() +
-      ggtitle('Distributions of missigness by center')
-
-ggplotly(gg_miss_each)
+```{r, eval=!params$export, fig.height=9}
+data_miss %>%
+  ggplot(aes(x = center, y = prop, colour = center)) +
+    geom_boxplot(outlier.shape = NA) +
+    geom_boxplot(outlier.shape = NA,
+      data = tibble(TIPmiss = prop_missing),
+      aes(x = "TIPNet", y = TIPmiss), colour = "black"
+    ) +
+    theme_minimal() +
+    theme(
+      legend.position = "none",
+      axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)
+    ) + 
+    ylab("Proportions") +
+    xlab("") +
+    coord_flip(ylim = c(0.5, 1)) +
+    ggtitle('Distributions of missigness by center')
 ```
 
 
 ```{r, eval=!params$export}
-datatable(data_miss, filter = list(position = 'top', clear = TRUE))
+data_miss %>% 
+  transmute(center,
+    field = as.factor(field),
+    `missing (%)` = 100 * round(prop, 4)
+  ) %>% 
+  datatable(filter = list(position = 'top', clear = TRUE))
 ```
 
 
@@ -133,13 +125,13 @@ datatable(data_miss, filter = list(position = 'top', clear = TRUE))
 ### Possible errors into the data
 
 
-For numerical variables, outliers are considered possible errors, i.e. values
-farther than 1.5 times the inter quartile range from the median.
+For numerical variables, outliers are considered possible errors, i.e.
+values farther than 1.5 times the inter quartile range from the median.
 
 ```{r, eval=!params$export}
-outlierReportUI("q_hosp", data = outliers)
+outlierReportUI("q_err", data = outliers)
 ```
 
 ```{r, context = "server", eval=!params$export}
-outlierReport("q_hosp", data = outliers)
+outlierReport("q_err", data = outliers)
 ```

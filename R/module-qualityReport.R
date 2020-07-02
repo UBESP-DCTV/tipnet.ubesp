@@ -17,7 +17,11 @@ NULL
 
 #' @describeIn qualityReport user interface
 #'
-#' User Interface description
+#' This define the User Interface side of the Shiny function. Note that
+#' for every input used here involved in dynamically changes, there
+#' should be a corresponding parameter on the header of the main
+#' `index.Rmd` script, to permit the report to be rendered statically
+#' too.
 #'
 #' @export
 qualityReportUI <- function(id) {
@@ -48,7 +52,10 @@ qualityReportUI <- function(id) {
 
 #' @describeIn qualityReport server function
 #'
-#' Server description
+#' This define the server side of the Shiny function. Note that for
+#' every input used here involved in dynamically changes, there should
+#' be a corresponding parameter on the header of the main `index.Rmd`
+#' script, to permit the report to be rendered statically too.
 #'
 #' @export
 qualityReport <- function(id, data) {
@@ -82,3 +89,27 @@ qualityReport <- function(id, data) {
 
   })
 }
+
+
+
+
+
+#' @describeIn qualityReport static report function
+#'
+#' This should reproduce `qualityReport` for static production, ie
+#' using i input the corresponding values last used by Shiny. They
+#' should be pass to the `render` function as a parameter.
+#'
+#' @export
+qualityReportStatic <- function(data, completed, type) {
+
+  data_to_use <- dataToUse(data, completed)
+  summary_fun <- summaryFun(type)
+  are_out_age <- areOutAge(data)
+
+  statGlobal(data_to_use, completed)
+  outOfAge(are_out_age)
+  completeDataPlot(data_to_use, summary_fun, completed) +
+    labs(subtitle = glue::glue("Summary type: {type} (each group)."))
+}
+
