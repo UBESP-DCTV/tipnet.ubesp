@@ -17,7 +17,6 @@ skip_if_no_auth <- function() {
 }
 
 
-
 #' Path to the data folder
 #'
 #' @return Path to the data folder
@@ -30,6 +29,7 @@ data_path <- function() {
   path_to_data <- switch(current_folder,
     "tipnet.ubesp" = here::here("../data"),
     "report"       = here::here("../../data"),
+    "static"       = here::here("../../../data"),
     current_folder
   )
 

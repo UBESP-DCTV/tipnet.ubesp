@@ -1,27 +1,17 @@
 --- 
 params:
-    cache: TRUE
-    export: FALSE
-    first_y: 1992
-    last_y:  2020
-    auto_update: TRUE
-    force_update: FALSE
-    max_days_update: 28
-    
-    quality_completed: "Completed"
-    quality_type: "Proportion"
+  cache: TRUE
+  export: FALSE
+  first_y: 1992
+  last_y:  2020
 
-output:
-    bookdown::html_document2:
-        toc: true
-        toc_float: true
-        toc_depth: 2
-        df_print: paged
-
-runtime: shiny_prerendered
+  q_overall_completed: "Completed"
+  q_overall_type: "Proportion"
+  
+  q_hosp_completed: "Completed"
+  q_hosp_type: "Proportion"
 
 title: "TIPNet report (`r paste0(params$first_y, ' - ', params$last_y)`)"
-
 author: "Italian Pediatric Intensive Care Units Network (**TIPNet**)
   </br>
   \\ \\ \\ \\ in collaboration with:
@@ -36,6 +26,14 @@ bibliography:
   - bibliography.bib
   - packages.bib
 
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    df_print: paged
+
+runtime: shiny_prerendered
 ---
 
 
@@ -61,13 +59,14 @@ knitr::opts_chunk$set(
   dpi = 192           # set output resolution (impact weight)
  )
 
-if (
-  !is.null(getOption("TIPNet_dev")) && isTRUE(getOption("TIPNet_dev"))
-) {
-    all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
-    attempt::attempt(suppressWarnings(invisible(lapply(
-      all_attached, detach, character.only = TRUE, unload = TRUE
-    ))), silent = TRUE)
+
+all_attached <- paste0("package:", names(sessionInfo()$otherPkgs))
+attempt::attempt(suppressWarnings(invisible(lapply(
+  all_attached, detach, character.only = TRUE, unload = TRUE
+))), silent = TRUE)
+
+
+if (getOption("tipnet.dev", TRUE)) {
     rstudioapi::documentSaveAll()
     roxygen2::roxygenise(package.dir = here::here(".."))
     devtools::load_all(quiet =  TRUE)
@@ -77,18 +76,27 @@ if (
 
 library(tidyverse)
 library(lubridate)
+library(stringr)
 library(plotly)
 library(shiny)
-library(DT)
 library(glue) 
 library(here)
+library(DT)
+library(fs)
 
 last_file <- file.path(data_path(), "tipnet.rds")
+is_to_update <- getOption("tipnet.auto_update", TRUE) &&
+  is_expired(last_file, getOption("tipnet.max_days_update"))
+
+if (getOption("tipnet.force_update") || is_to_update) {
+  db_update_from_server()
+}
+
 set.seed(1)
 ```
 
 
-```{r data, include=FALSE, cache=params$cache, cache.extra=tools::md5sum(last_file)}
+```{r data, include=FALSE, cache=params$cache, cache.extra=file.info(last_file)$mtime}
 # This run only once bot in the render and server side
 
 # cache.extra option in the knitr tags here above needs to speed up
@@ -97,17 +105,11 @@ set.seed(1)
 # if included in the chunk named "data" (like this is), hence setting
 # cache.extra provide a further speed up.
 
-is_to_update <- params$auto_update &&
-  is_expired(last_file, params$max_days_update)
+tipnet <- read_rds(last_file) 
+tipnet_meta <- path(data_path(), "tipnet_meta.rds") %>% 
+  read_rds()
 
-if (params$force_update || is_to_update) db_update_from_server()
-
-tipnet <- readr::read_rds(last_file) 
-tipnet_meta <- file.path(data_path(), "tipnet_meta.rds") %>% 
-  readr::read_rds()
-
-global_vars_list <- tipnet.ubesp:::generate_main_data()
-purrr::iwalk(global_vars_list,~ assign(.y, .x, pos = 1))
+iwalk(generate_main_data(), ~assign(.y, .x, pos = 1))
 ```
 
 
@@ -193,7 +195,7 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <!-- ``` -->
 
 <!-- ```{r, child = "020-origin.Rmd"} -->
-<!-- ``` -->
+<!-- ```50 -->
 
 <!-- ```{r, child = "030-ccc.Rmd"} -->
 <!-- ``` -->
@@ -215,54 +217,43 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 cat("# Download current report {-}")
 ```
 
-
 ```{r, eval=!params$export}
 shiny::downloadLink("report", "Generate report")
 ```
 
 ```{r, context="server", eval=!params$export}
+output$report <- downloadHandler(
+  filename = "tipnet-report.html",
 
-output$report <- downloadHandler("tipnet-repor.html",
-  
   content = function(file) {
-    to_copy <- list.files(".", all.files = TRUE, include.dirs = TRUE) %>% 
-      setdiff(c(".", "..", "static"))
+    static_dir <- "static"
+    dir <- fs::dir_create(static_dir)
     
-    dir <- fs::dir_create("./static")
+    list.files(all.files = TRUE, include.dirs = TRUE) %>% 
+      setdiff(c(".", "..", static_dir)) %>% 
+      file.copy(dir, recursive = TRUE, copy.date = TRUE)
     
-    file.copy(to_copy, dir,
-        overwrite = TRUE,
-        recursive = TRUE,
-        copy.date = TRUE # this is needed to not invalidate caches
-    )
+    
     report <- file.path(dir, "index.Rmd")
     
-    out <- readr::read_lines(report) %>% 
-      stringr::str_replace("^runtime: shiny_prerendered$", "") %>% 
-      stringr::str_replace_all(
-        "\\.tabset \\.tabset-fade \\.tabset-pills",
-        ""
-      ) 
-    readr::write_lines(out, report)
+    read_lines(report) %>% 
+      str_remove("\\.tabset \\.tabset-fade \\.tabset-pills") %>% 
+      write_lines(report)
     
     # Set up parameters to pass to Rmd document
     params <- list(
       export = TRUE,
-      quality_completed = input[[NS("q_overall", "completed")]],
-      quality_type = input[[NS("q_overall", "type")]]
-      # foo = input$foo, # bring the current state of the report
+
+      q_overall_completed = input[[NS("q_overall", "completed")]],
+      q_overall_type = input[[NS("q_overall", "type")]],
+      
+      q_hosp_completed = input[[NS("q_hosp", "completed")]],
+      q_hosp_type = input[[NS("q_hosp", "type")]]
     )
 
-    # Knit the document, passing in the `params` list, and eval it in a
-    # child of the global environment (this isolates the code in the
-    # document from the code in this app).
-    withr::with_options(
-      list(TIPNet_dev = FALSE),
-      
-      rmarkdown::render(report, output_file = file,
-        params = params,
-        envir = new.env(parent = globalenv())
-      )
+    withr::local_options(list(tipnet.dev = FALSE))
+    rmarkdown::render(report, "html_document", file, params = params,
+      runtime = "static", envir = new.env(parent = globalenv())
     )
   }
 )

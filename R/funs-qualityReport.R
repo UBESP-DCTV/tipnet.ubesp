@@ -59,6 +59,7 @@ outOfAge <- function(are_out_age) {
 #'
 #' completeDataPlot(full_records, "sum", "Completed")
 completeDataPlot <- function(data, summary_fun, type_completed) {
+
   data %>%
     ggplot(aes(x = center, y = as.integer(.data$complete))) +
     stat_summary(
@@ -83,6 +84,6 @@ completeDataPlot <- function(data, summary_fun, type_completed) {
     ) +
     xlab("") +
     ylab("") +
-    ggtitle(paste(type_completed, "cases.")) +
+    ggtitle(glue::glue("{type_completed} cases.")) +
     coord_flip()
 }

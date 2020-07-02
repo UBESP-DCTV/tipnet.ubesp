@@ -1,6 +1,7 @@
 utils::globalVariables("where")
 
 
+#' @export
 generate_main_data <- function() {
 
   tipnet <- fetch_tipnet()
@@ -97,6 +98,7 @@ join_all_sheets <- function(sheets) {
       ~{. == "complete"}
     ) %>%
     dplyr::mutate(
+      codpat = as.factor(codpat),
       eta = as.integer(.data[["eta"]]),
       age_class = factor(
         dplyr::case_when(
@@ -123,6 +125,7 @@ join_all_sheets <- function(sheets) {
 
 extract_outliers <- function(full_records) {
 
+  full_records[["codpat"]] <- as.character(full_records[["codpat"]])
   full_records[["center"]] <- as.character(full_records[["center"]])
 
   aux_out <- full_records %>%
@@ -143,10 +146,13 @@ extract_outliers <- function(full_records) {
       where(~any(. == TRUE, na.rm = TRUE))
     ) %>%
     tidyr::pivot_longer(
-      -c(.data$center, .data$codpat, .data$redcap_repeat_instance)
+      -c(.data$center, .data$codpat, .data$redcap_repeat_instance),
+      names_to = "variable"
     ) %>%
     dplyr::group_by(.data$center) %>%
-    dplyr::mutate(n = dplyr::n()) %>%
+    dplyr::mutate(
+      n = dplyr::n()
+    ) %>%
     dplyr::ungroup() %>%
     dplyr::filter(.data$value) %>%
     dplyr::select(-.data$value)
@@ -162,14 +168,20 @@ extract_outliers <- function(full_records) {
       value = extract_value(data_lst,
         .data[["codpat"]],
         .data[["redcap_repeat_instance"]],
-        .data[["name"]]
+        .data[["variable"]]
       )
+    ) %>%
+    ungroup() %>%
+    dplyr::mutate(
+      dplyr::across(c("center", "codpat", "variable"), as.factor)
     ) %>%
     dplyr::nest_by(.data$center) %>%
     dplyr::mutate(
       n_outliers = nrow(.data$data),
-      prop_outliers = .data$n_outliers / .data$data[["n"]][[1L]]
-    )
+      prop_outliers = .data$n_outliers / .data$data[["n"]][[1L]],
+      data = list(dplyr::select(.data$data, -.data$n))
+    ) %>%
+    ungroup()
 }
 
 
@@ -179,14 +191,14 @@ extract_outliers <- function(full_records) {
 
 
 
-extract_value <- function(data_lst, codpat, instance, name) {
+extract_value <- function(data_lst, codpat, instance, variable) {
 
   cod <- data_lst[["codpat"]] == codpat
 
   if (sum(cod) == 1L) {
-    data_lst[[name]][cod]
+    data_lst[[variable]][cod]
   } else {
     rep <- data_lst[["redcap_repeat_instance"]] == instance
-    data_lst[[name]][cod & rep]
+    data_lst[[variable]][cod & rep]
   }
 }
