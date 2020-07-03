@@ -1,0 +1,32 @@
+# Introduction {#intro}
+
+## Tabset ugly {.tabset}
+
+### MT-cars {-}
+
+```{r}
+mtcars
+```
+
+
+### Iris {-}
+
+```{r}
+iris
+```
+
+## Tabset cool {.tabset .tabset-fade .tabset-pills}
+
+### MT-cars {-}
+
+```{r}
+mtcars
+```
+
+
+### Iris {-}
+
+```{r}
+iris
+```
+
