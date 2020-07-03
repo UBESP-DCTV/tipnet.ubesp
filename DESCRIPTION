@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person(given = "Corrado",
            family = "Lanera",
-           role = c("aut", "cre"),
+           role = c("aut", "cre", "cph"),
            email = "corrado.lanera@gmail.com")
 Description: The goal of tipnet.ubesp is to implement and
     collect all the code needed for the development of the TIPNet reports
@@ -15,17 +15,38 @@ BugReports: https://github.com/UBESP-DCTV/tipnet.ubesp/issues
 Depends: 
     R (>= 3.2)
 Imports: 
+    assertive (>= 0.3-5),
+    dplyr (>= 0.8.3),
+    DT,
+    forcats,
+    fs,
+    ggplot2,
+    glue,
+    here,
+    janitor,
+    lubridate,
     magrittr (>= 1.5),
+    plotly,
+    purrr (>= 0.3.2),
+    readr,
+    REDCapR,
     rlang (>= 0.4.0),
+    shiny,
+    stats,
+    stringr (>= 1.4.0),
     tibble (>= 2.1.3),
+    tidyr,
+    tidyselect,
     usethis (>= 1.5.1)
 Suggests: 
+    attempt,
     covr (>= 3.2.1),
     roxygen2 (>= 6.1.1),
     spelling (>= 2.1),
-    testthat (>= 2.1.1)
+    testthat (>= 2.1.1),
+    withr
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

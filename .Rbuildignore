@@ -1,6 +1,8 @@
+^renv$
+^renv\.lock$
 ^tipnet\.ubesp\.Rproj$
 ^\.Rproj\.user$
-^analyses$
+^report$
 ^README\.Rmd$
 ^\.github$
 ^\.github/ISSUE_TEMPLATE$
@@ -11,3 +13,5 @@
 ^\.covrignore$
 ^cran-comments\.md$
 ^data-raw$
+^sharing-docs-app$
+^dev$
