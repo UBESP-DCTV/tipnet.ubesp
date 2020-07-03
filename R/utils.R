@@ -17,14 +17,15 @@ skip_if_no_auth <- function() {
 }
 
 #' Path to data folder
+#' @param path path from which to start looking for the data
 #' @export
-data_path <- function() {
-  current_folder <- basename(here::here())
+data_path <- function(path = here::here()) {
+  current_folder <- basename(normalizePath(path))
   path_to_data <- switch(current_folder,
-    "tipnet.ubesp" = here::here("../data"),
-    "report"       = here::here("../../data"),
-    "static"       = here::here("../../../data"),
-    "TIPNet"       = here::here("../../tipnet-data"),
+    "TIPNet"       = fs::path(path, "..", "..", "tipnet-data"),
+    "tipnet.ubesp" = fs::path(path, "..", "data"),
+    "report"       = data_path(fs::path(path, "..")),
+    "static"       = data_path(fs::path(path, "..")),
     current_folder
   )
 

@@ -4,7 +4,10 @@
 \alias{data_path}
 \title{Path to data folder}
 \usage{
-data_path()
+data_path(path = here::here())
+}
+\arguments{
+\item{path}{path from which to start looking for the data}
 }
 \description{
 Path to data folder
