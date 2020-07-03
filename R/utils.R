@@ -16,6 +16,7 @@ skip_if_no_auth <- function() {
   }
 }
 
+#' Path to data folder
 #' @export
 data_path <- function() {
   current_folder <- basename(here::here())
@@ -23,6 +24,7 @@ data_path <- function() {
     "tipnet.ubesp" = here::here("../data"),
     "report"       = here::here("../../data"),
     "static"       = here::here("../../../data"),
+    "TIPNet"       = here::here("../../tipnet-data"),
     current_folder
   )
 

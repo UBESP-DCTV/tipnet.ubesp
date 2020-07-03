@@ -26,12 +26,12 @@ test_that("integer column are converted and not collapsed", {
 
 
 test_that("behave correctly in strange occasion", {
-    # seehttps://stackoverflow.com/questions/3476782/check-if-the-number-is-integer/57172412#57172412
+    # see https://bit.ly/2NTzW92
 
  expect_trues <- tibble(
     cl  = sqrt(2)^2,
     pp  = 9.0,
-    t   = 1/(1 - 0.98),
+    t   = 1 / (1 - 0.98),
     ar0 = 66L,
     ar1 = 66,
     ar2 = 1 + 2^-50,
@@ -39,7 +39,7 @@ test_that("behave correctly in strange occasion", {
     w1  = 1e4,
     w2  = 1e5,
     # v2  = "1000000000000000000000000000000000001", # too big
-    an   = 2/49*49,
+    an   = 2 / 49 * 49,
     # ju1 = 1e22, # too big
     # ju2 = 1e24, # too big
     al  = floor(1),
@@ -89,14 +89,14 @@ test_that("convert_to_integer works", {
     expect_trues <- c(
         cl  = sqrt(2)^2,
         pp  = 9.0,
-        t   = 1/(1 - 0.98),
+        t   = 1 / (1 - 0.98),
         ar0 = 66L,
         ar1 = 66,
         ar2 = 1 + 2^-50,
         v   = 222e3,
         w1  = 1e4,
         w2  = 1e5,
-        an   = 2/49*49,
+        an   = 2 / 49*49,
         al  = floor(1),
         v5  = 1.0000000000000001 # this is under machine precision!
     )

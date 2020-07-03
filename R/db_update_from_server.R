@@ -58,4 +58,3 @@ db_update_from_server <- function(path_data = NULL) {
   invisible(TRUE)
 
 }
-

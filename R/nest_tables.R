@@ -34,4 +34,3 @@ nest_tables <- function(data) {
     tidyr::unnest(.data$tables)
 
 }
-

@@ -38,7 +38,7 @@ get_sheet <- function(x, sheet, field = NULL) {
   if (n_sheets > 1 && is.null(field)) {
     ui_stop("
       Sheet {ui_value(sheet)} is present in the {ui_field(possible_fields)}.
-      Please, provide the {ui_field('field')} argument to {ui_code('get_table()')}.
+      Provide the {ui_field('field')} argument to {ui_code('get_table()')}.
     ")
   }
 

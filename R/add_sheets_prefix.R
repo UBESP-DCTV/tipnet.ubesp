@@ -62,12 +62,12 @@ add_sheets_prefix <- function(data, exept = NULL) {
     if (is_sheet_marker[[i]]) {
       new_var_names[[i]] <- var_name
       current_sheet[]    <- current_sheet + 1L
-      next()
+      next
     }
 
     if (var_name %in% exept) {
       new_var_names[[i]] <- var_name
-      next()
+      next
     }
 
     new_var_names[[i]] <- paste0(sheet_name, "_", var_name)
@@ -80,5 +80,3 @@ add_sheets_prefix <- function(data, exept = NULL) {
   attr(data, "sheet_names") <- sheets_names
   data
 }
-
-

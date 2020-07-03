@@ -4,6 +4,8 @@
 #'
 #' @param id name for the specific instance of the module.
 #' @param data database to use
+#' @param completed (chr) "Completed" or "Not-completed"
+#' @param type (chr) "Total" or "Proportion"
 #'
 #' @importFrom shiny NS callModule reactive req
 #' @importFrom shiny fluidPage fluidRow selectInput textOutput plotOutput
@@ -12,17 +14,10 @@
 #' @importFrom ggplot2 ggplot aes stat_summary facet_wrap coord_flip
 #' @importFrom ggplot2 theme ggtitle xlab ylab element_text
 #'
-#' @name qualityReport
+#' @name module-qualityReport
 NULL
 
-#' @describeIn qualityReport user interface
-#'
-#' This define the User Interface side of the Shiny function. Note that
-#' for every input used here involved in dynamically changes, there
-#' should be a corresponding parameter on the header of the main
-#' `index.Rmd` script, to permit the report to be rendered statically
-#' too.
-#'
+#' @describeIn module-qualityReport user interface
 #' @export
 qualityReportUI <- function(id) {
   ns <- NS(id)
@@ -36,12 +31,12 @@ qualityReportUI <- function(id) {
       column(5, selectInput(ns("completed"),
         label   = "Records to show",
         choices = c("Completed", "Not completed"),
-        selected = params$quality_completed
+        selected = "Completed"
       )),
       column(5, selectInput(ns("type"),
         label   = "Summary type",
         choices = c("Proportion", "Total"),
-        selected = params$quality_type
+        selected = "Proportion"
       ))
     ),
 
@@ -50,27 +45,21 @@ qualityReportUI <- function(id) {
   )
 }
 
-#' @describeIn qualityReport server function
-#'
-#' This define the server side of the Shiny function. Note that for
-#' every input used here involved in dynamically changes, there should
-#' be a corresponding parameter on the header of the main `index.Rmd`
-#' script, to permit the report to be rendered statically too.
-#'
+#' @describeIn module-qualityReport server function
 #' @export
 qualityReport <- function(id, data) {
 
-  are_out_age <- areOutAge(data)
+  are_out_age <- quality_areOutAge(data)
 
   callModule(id = id, function(input, output, session) {
 
     data_to_use <- reactive({
-      dataToUse(data, completed())
+      quality_dataToUse(data, completed())
     })
 
     fun_y <- reactive({
       req(input$type)
-      summaryFun(input$type)
+      quality_summaryFun(input$type)
     })
 
     completed <- reactive({
@@ -79,12 +68,12 @@ qualityReport <- function(id, data) {
 
 
     output$stat_global <- renderText(
-      statGlobal(data_to_use(), completed())
+      quality_statGlobal(data_to_use(), completed())
     )
-    output$out_of_age <- renderText(outOfAge(are_out_age))
+    output$out_of_age <- renderText(quality_outOfAge(are_out_age))
 
     output$plot_global <- renderPlot({
-      completeDataPlot(data_to_use(), fun_y(), completed())
+      quality_completeDataPlot(data_to_use(), fun_y(), completed())
     })
 
   })
@@ -94,22 +83,16 @@ qualityReport <- function(id, data) {
 
 
 
-#' @describeIn qualityReport static report function
-#'
-#' This should reproduce `qualityReport` for static production, ie
-#' using i input the corresponding values last used by Shiny. They
-#' should be pass to the `render` function as a parameter.
-#'
+#' @describeIn module-qualityReport static report function
 #' @export
 qualityReportStatic <- function(data, completed, type) {
 
-  data_to_use <- dataToUse(data, completed)
-  summary_fun <- summaryFun(type)
-  are_out_age <- areOutAge(data)
+  data_to_use <- quality_dataToUse(data, completed)
+  summary_fun <- quality_summaryFun(type)
+  are_out_age <- quality_areOutAge(data)
 
-  statGlobal(data_to_use, completed)
-  outOfAge(are_out_age)
-  completeDataPlot(data_to_use, summary_fun, completed) +
+  quality_statGlobal(data_to_use, completed)
+  quality_outOfAge(are_out_age)
+  quality_completeDataPlot(data_to_use, summary_fun, completed) +
     labs(subtitle = glue::glue("Summary type: {type} (each group)."))
 }
-

@@ -1,24 +1,26 @@
-#' Outlier module
+#' module for missing-data section
 #'
 #' General description
 #'
 #' @param id numeric vectors.
 #' @param data data frame
 #' @param center (chr) name(s) of the center(s) to consider
+#'
 #' @importFrom shiny NS callModule reactive req
 #' @importFrom shiny fluidRow selectInput textOutput plotOutput
 #' @importFrom shiny renderText renderPlot
 #' @importFrom plotly renderPlotly plotlyOutput ggplotly
 #' @importFrom ggplot2 ggplot aes geom_boxplot facet_wrap coord_flip
 #' @importFrom ggplot2 theme ggtitle xlab ylab element_text
+#' @importFrom ggplot2 theme_minimal
 #'
-#' @name module-outlierReport
+#' @name module-missReport
 NULL
 
 
-#' @describeIn module-outlierReport user interface
+#' @describeIn module-missReport user interface
 #' @export
-outlierReportUI <- function(id, data) {
+missReportUI <- function(id, data) {
   ns <- NS(id)
 
   fluidPage(
@@ -27,7 +29,7 @@ outlierReportUI <- function(id, data) {
     ),
     fluidRow(
       column(12, selectInput(ns("center"),
-         label   = "Choose a center to display its data outliers",
+         label   = "Choose a center to display its missing data",
          choices = unique(data[["center"]]),
          multiple = TRUE
       ))
@@ -38,37 +40,40 @@ outlierReportUI <- function(id, data) {
   )
 }
 
-#' @describeIn module-outlierReport server function
+
+#' @describeIn module-missReport server function
 #' @export
-outlierReport <- function(id, data) {
+missReport <- function(id, data) {
   callModule(id = id, function(input, output, session) {
+
+    data_to_use <- reactive({
+      miss_dataToUse(data)
+    })
+
+    output$out_plot <- renderPlot(
+      miss_dataPlot(data_to_use())
+    )
 
     center <- reactive({
       req(input$center)
     })
 
-    db_to_use <- reactive({
-      outlier_dataToUse(data, center())
-    })
-
-    output$out_plot <- renderPlot(
-      outlier_dataPlot(data)
-    )
-
-    output$out_table <- DT::renderDT(db_to_use(),
+    output$out_table <- DT::renderDT(
+      miss_dataTbl(data_to_use(), center()),
       filter = list(position = "top", clear = TRUE)
     )
   })
 }
 
-#' @describeIn module-outlierReport static report function
+
+#' @describeIn module-missReport static report function
 #' @export
-outlierReportStatic <- function(data, center) {
-  data_to_use <- outlier_dataToUse(data, center)
+missReportStatic <- function(data, center) {
+  data_to_use <- miss_dataToUse(data)
 
-  print(outlier_dataPlot(data))
+  print(miss_dataPlot(data_to_use))
 
-  DT::datatable(data_to_use,
+  DT::datatable(miss_dataTbl(data_to_use, center),
     filter = list(position = "top", clear = TRUE)
   )
 }

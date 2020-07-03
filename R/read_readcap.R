@@ -59,4 +59,3 @@ read_redcap <- function(
   list(data = data, meta_data = meta_data)
 
 }
-

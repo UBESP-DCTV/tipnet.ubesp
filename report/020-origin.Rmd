@@ -1,5 +1,6 @@
 # Type of Admission and Origin {#origin .tabset .tabset-fade .tabset-pills}
 
+## Overview {-}
 
 The system allow to distinguish the first from subsequent admissions in the same unit. Admission was coded as mode, type, origin
 

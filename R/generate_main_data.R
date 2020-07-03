@@ -1,6 +1,12 @@
 utils::globalVariables("where")
 
 
+
+#' Global / extensive data setup
+#'
+#' Here put data that should be cached at the server startup, and
+#' computed only there once.
+#'
 #' @export
 generate_main_data <- function() {
 
@@ -94,11 +100,12 @@ join_all_sheets <- function(sheets) {
     ) %>%
 
     dplyr::mutate_at(
-      dplyr::vars(dplyr::starts_with("complete")),
-      ~{. == "complete"}
+      dplyr::vars(dplyr::starts_with("complete")), ~{
+        . == "complete"
+      }
     ) %>%
     dplyr::mutate(
-      codpat = as.factor(codpat),
+      codpat = as.factor(.data$codpat),
       eta = as.integer(.data[["eta"]]),
       age_class = factor(
         dplyr::case_when(
@@ -171,7 +178,7 @@ extract_outliers <- function(full_records) {
         .data[["variable"]]
       )
     ) %>%
-    ungroup() %>%
+    dplyr::ungroup() %>%
     dplyr::mutate(
       dplyr::across(c("center", "codpat", "variable"), as.factor)
     ) %>%
@@ -181,7 +188,7 @@ extract_outliers <- function(full_records) {
       prop_outliers = .data$n_outliers / .data$data[["n"]][[1L]],
       data = list(dplyr::select(.data$data, -.data$n))
     ) %>%
-    ungroup()
+    dplyr::ungroup()
 }
 
 

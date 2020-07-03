@@ -7,9 +7,10 @@ params:
 
   q_overall_completed: "Completed"
   q_overall_type: "Proportion"
-  
   q_hosp_completed: "Completed"
   q_hosp_type: "Proportion"
+  q_miss_center: ""
+  q_err_center: ""
 
 title: "TIPNet report (`r paste0(params$first_y, ' - ', params$last_y)`)"
 author: "Italian Pediatric Intensive Care Units Network (**TIPNet**)
@@ -66,7 +67,7 @@ attempt::attempt(suppressWarnings(invisible(lapply(
 ))), silent = TRUE)
 
 
-if (getOption("tipnet.dev", TRUE)) {
+if (getOption("tipnet.dev", FALSE)) {
     rstudioapi::documentSaveAll()
     roxygen2::roxygenise(package.dir = here::here(".."))
     devtools::load_all(quiet =  TRUE)
@@ -191,20 +192,20 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 ```{r, child = "005-quality.Rmd"}
 ```
 
-<!-- ```{r, child = "010-descriptives.Rmd"} -->
-<!-- ``` -->
+```{r, child = "010-descriptives.Rmd"}
+```
 
-<!-- ```{r, child = "020-origin.Rmd"} -->
-<!-- ```50 -->
+```{r, child = "020-origin.Rmd"}
+```
 
-<!-- ```{r, child = "030-ccc.Rmd"} -->
-<!-- ``` -->
+```{r, child = "030-ccc.Rmd"}
+```
 
-<!-- ```{r, child = "040-severity.Rmd"} -->
-<!-- ``` -->
+```{r, child = "040-severity.Rmd"}
+```
 
-<!-- ```{r, child = "050-los.Rmd"} -->
-<!-- ``` -->
+```{r, child = "050-los.Rmd"}
+```
 
 
 
@@ -237,6 +238,7 @@ output$report <- downloadHandler(
     report <- file.path(dir, "index.Rmd")
     
     read_lines(report) %>% 
+      str_remove("^runtime: shiny_prerendered$") %>% 
       str_remove("\\.tabset \\.tabset-fade \\.tabset-pills") %>% 
       write_lines(report)
     
@@ -246,14 +248,15 @@ output$report <- downloadHandler(
 
       q_overall_completed = input[[NS("q_overall", "completed")]],
       q_overall_type = input[[NS("q_overall", "type")]],
-      
       q_hosp_completed = input[[NS("q_hosp", "completed")]],
-      q_hosp_type = input[[NS("q_hosp", "type")]]
+      q_hosp_type = input[[NS("q_hosp", "type")]],
+      q_miss_center = input[[NS("q_miss", "center")]],
+      q_err_center = input[[NS("q_err", "center")]]
     )
 
     withr::local_options(list(tipnet.dev = FALSE))
-    rmarkdown::render(report, "html_document", file, params = params,
-      runtime = "static", envir = new.env(parent = globalenv())
+    rmarkdown::render(report, output_file = file, params = params,
+      envir = new.env(parent = globalenv())
     )
   }
 )

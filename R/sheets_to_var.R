@@ -1,7 +1,7 @@
 sheets_to_var <- function(data, name = "sheet", exept = NULL) {
 
   names_pattern <- paste0(
-    "(", paste(attr(data, 'sheet_names'), collapse = '|'), ")",
+    "(", paste(attr(data, "sheet_names"), collapse = "|"), ")",
     "_(.*)"
   )
 
