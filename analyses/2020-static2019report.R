@@ -1,6 +1,6 @@
 #' ---
 #' title: "TIP-Net static report"
-#' subtitle: "2019"
+#' subtitle: "Report 2019"
 #' author: "Corrado Lanera -- UBEP/UniPD"
 #' date: "Padova, `r Sys.Date()`"
 #' output:
@@ -61,6 +61,7 @@ suppressPackageStartupMessages({
   # rendering
   library(pander)
   panderOptions("round", 2)
+  panderOptions("knitr.auto.asis", FALSE)
   panderOptions("table.split.table", Inf)
   panderOptions("table.alignment.default",
                 function(df) c("left", rep("center", length(df) - 1L))
@@ -80,15 +81,18 @@ data_dir <- "../tipnet-data"
 
 tip_data <- read_rds(here(data_dir, "2020-09-24-tipnet.rds"))
 
-#' # Overall TIP-Net
+#'
+#' # Overall
+#' ## TIP-Net {.tabset .tabset-fade .tabset-pills}
+#'
 anagrafica <- tip_data[[3]][[1]] %>%
-  select(codpat, gender, etnia)
+  select(codpat, gender, etnia, center)
 
 accettazione <- tip_data[[3]][[3]] %>%
   filter(year(ingresso_dt) == 2019) %>%
   select(
     codpat, eta_giorni, priorita, ricovero_progr, tipologia,
-    motivo_ricovero, redcap_repeat_instance) %>%
+    motivo_ricovero, redcap_repeat_instance, mal_cronica, center) %>%
   mutate(
     age_class = case_when(
       is.na(eta_giorni) ~ "missing",
@@ -118,7 +122,7 @@ infezione <- tip_data[[3]][[10]] %>%
   select(codpat, tipo_inf, redcap_repeat_instance)
 
 dimissione <- tip_data[[3]][[13]] %>%
-  select(codpat, durata_degenza, esito_osp, mod_decesso, esito_tip,
+  select(codpat, durata_degenza, mod_decesso, esito_tip,
          diagnosi, redcap_repeat_instance)
 
 
@@ -129,29 +133,106 @@ data_to_describe <- left_join(accettazione, pim) %>%
   left_join(anagrafica) %>%
   select(-etnia)
 
-#' ## Anagrafica
-#'
-#' > n = pazienti
-#'
-html(describe(
-  anagrafica %>%
+
+eval_summaries <- function(tip_data, current_center = NULL) {
+
+  if (!is_null(current_center)) {
+    tip_data <- tip_data %>%
+      dplyr::filter(center == current_center)
+  }
+
+  if (!nrow(tip_data)) return(NULL)
+
+  tip_data <- select(tip_data, -center)
+
+  Accettazione <- anagrafica %>%
     inner_join(accettazione) %>%
     select(gender, etnia)
-))
+
+  desc_base <- describe(Accettazione)
+
+  desc_tip <- summary(
+      formula =  gender ~ .,
+      data = select(tip_data, -codpat, -redcap_repeat_instance) %>%
+        remove_empty(),
+      method = "reverse",
+      overall = TRUE,
+      continue = 3
+    ) %>%
+    tidy_summary(digits = 3, exclude1 = FALSE, long = TRUE, prmsd = TRUE)
 
 
-#' ## Descrittive principali
+  smr <- data_to_describe %>%
+    summarise(
+      SMR_pim2 = sum(esito_tip == "morto", na.rm = TRUE) /
+        (sum(pim2, na.rm = TRUE)/100),
+      SMR_pim3 = sum(esito_tip == "morto", na.rm = TRUE) /
+        (sum(pim3, na.rm = TRUE)/100)
+    )
+
+  list(desc_base = desc_base, desc_tip = desc_tip, smr = smr)
+
+}
+
+safe_eval <- safely(eval_summaries)
+
+overall <- safe_eval(data_to_describe)
+
 #'
-#' > n = ingressi
+#' ### Accettazione
 #'
-dd <- rms::datadist(data_to_describe)
-desc_tip <- summary(
-    formula =  gender ~ .,
-    data = select(data_to_describe, -codpat, -redcap_repeat_instance),
-    method = "reverse",
-    overall = TRUE,
-    continue = 4
-  ) %>%
-  tidy_summary(digits = 3, exclude1 = FALSE, long = TRUE, prmsd = TRUE)
+html(overall[["result"]][[1]])
 
-pander(desc_tip)
+#'
+#' ### Descrittive
+#'
+#+ results='asis'
+pander(overall[["result"]][[2]])
+
+#'
+#' ### SMR
+#'
+#+ results='asis'
+cat(
+  " \nSMR PIM2 (overall): ", round(overall[['result']][[3]][[1]], 2), "\n",
+  " \nSMR PIM3 (overall): ", round(overall[['result']][[3]][[2]], 2), "\n\n"
+)
+
+
+centers <- sort(levels(data_to_describe$center)) %>%
+  set_names()
+
+center_summaries <- centers %>%
+  purrr::map(safe_eval, tip_data = data_to_describe)
+
+
+# aa <- transpose(center_summaries)
+
+#' # Centers
+
+#+ results='asis'
+iwalk(center_summaries, ~{
+
+  cat(" \n## ", .y, " {.tabset .tabset-fade .tabset-pills} \n")
+
+  if (is.null(.x[['result']])) {
+    cat(" \n > no data for this center \n\n")
+  } else {
+
+    cat(" \n### Accettazione \n")
+    cat(" \n", html(.x[["result"]][[1]]), " \n")
+
+    cat(" \n### Descrittive \n")
+    cat(
+      " \n",
+      pander(.x[["result"]][[2]]),
+      " \n"
+    )
+
+    cat(" \n### SMR \n")
+    cat(
+      " \nSMR PIM2 (overall): ", round(.x[['result']][[3]][[1]], 2), "\n",
+      " \nSMR PIM3 (overall): ", round(.x[['result']][[3]][[2]], 2), "\n\n"
+    )
+  }
+})
