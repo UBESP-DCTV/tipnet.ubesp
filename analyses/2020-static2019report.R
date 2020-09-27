@@ -2,7 +2,7 @@
 #' title: "TIP-Net"
 #' subtitle: "Report dati `r params$year`"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.1)"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.4)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -86,7 +86,25 @@ suppressPackageStartupMessages({
   library(rms)
   options(datadist = "dd")
 
+  # metadata
+  library(metathis)
+
 })
+
+
+#+ echo=FALSE
+meta() %>%
+  meta_general(
+    description = paste0("TIP-Net annual report (", params$year, ")"),
+    generator = "RMarkdown"
+  ) %>%
+  meta_social(
+    title = "TIP-Net annual report",
+    og_type = "website",
+    og_author = "UBEP",
+    twitter_card_type = "summary",
+    twitter_creator = "@CorradoLanera"
+  )
 
 
 #+ data-load
@@ -227,7 +245,12 @@ data_to_describe <- left_join(accettazione, pim) %>%
   left_join(infezione) %>%
   left_join(dimissione) %>%
   left_join(anagrafica) %>%
-  select(-etnia)
+  select(-etnia) %>%
+  mutate(
+    center = forcats::fct_relabel(center, ~str_replace(.x,
+      "Azienda Ospedaliera Universitaria",
+      "Azienda Ospedaliera Universitaria di Padova"))
+  )
 
 
 eval_summaries <- function(tip_data, current_center = NULL) {
@@ -242,7 +265,7 @@ eval_summaries <- function(tip_data, current_center = NULL) {
   tip_data <- select(tip_data, -center)
 
   Accettazione <- anagrafica %>%
-    inner_join(accettazione) %>%
+    inner_join(tip_data) %>%
     select(gender, etnia)
 
   names(Accettazione) <- label(Accettazione)
@@ -261,7 +284,7 @@ eval_summaries <- function(tip_data, current_center = NULL) {
     tidy_summary(digits = 3, exclude1 = FALSE, long = TRUE, prmsd = TRUE)
 
 
-  smr <- data_to_describe %>%
+  smr <- tip_data %>%
     summarise(
       SMR_pim2 = sum(esito_tip == "morto", na.rm = TRUE) /
         (sum(pim2, na.rm = TRUE)/100),
