@@ -2,7 +2,7 @@
 #' title: "TIP-Net"
 #' subtitle: "Report dati `r params$year`"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.0)"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.1)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -332,8 +332,8 @@ iwalk(center_summaries, ~{
 
     cat(" \n### SMR \n")
     cat(
-      " \nSMR PIM2 (overall): ", round(.x[['result']][[3]][[1]], 2), "\n",
-      " \nSMR PIM3 (overall): ", round(.x[['result']][[3]][[2]], 2), "\n\n"
+      " \nSMR PIM2: ", round(.x[['result']][[3]][[1]], 2), "\n",
+      " \nSMR PIM3: ", round(.x[['result']][[3]][[2]], 2), "\n\n"
     )
   }
 })

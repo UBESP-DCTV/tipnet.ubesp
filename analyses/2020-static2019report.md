@@ -2,7 +2,7 @@
 title: "TIP-Net"
 subtitle: "Report dati 2019"
 author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-date: "Data di creazione del report: 2020-09-27 (ver. 0.3.0)"
+date: "Data di creazione del report: 2020-09-27 (ver. 0.3.1)"
 output:
   bookdown::html_document2:
     toc: true
@@ -716,9 +716,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  IRCCS Burlo Garofalo  {.tabset .tabset-fade .tabset-pills} 
@@ -1042,9 +1042,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  IRCCS Gemelli  {.tabset .tabset-fade .tabset-pills} 
@@ -1392,9 +1392,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  IRCCS Policlinico De Marchi  {.tabset .tabset-fade .tabset-pills} 
@@ -1725,9 +1725,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Bambino Gesù  {.tabset .tabset-fade .tabset-pills} 
@@ -2043,9 +2043,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Bambino Gesù DEA  {.tabset .tabset-fade .tabset-pills} 
@@ -2385,9 +2385,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Bambino Gesù Patologia Neonatale  {.tabset .tabset-fade .tabset-pills} 
@@ -2707,9 +2707,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Bambino Gesù TIP  {.tabset .tabset-fade .tabset-pills} 
@@ -3055,9 +3055,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Bambino Gesù TIP cardiochirurgica  {.tabset .tabset-fade .tabset-pills} 
@@ -3389,9 +3389,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Civile Maggiore  {.tabset .tabset-fade .tabset-pills} 
@@ -3720,9 +3720,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale G Di Cristina  {.tabset .tabset-fade .tabset-pills} 
@@ -3974,9 +3974,9 @@ Comorbidità:&nbsp;altro
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Garibaldi Nomisma  {.tabset .tabset-fade .tabset-pills} 
@@ -4311,9 +4311,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Gaslini  {.tabset .tabset-fade .tabset-pills} 
@@ -4601,9 +4601,9 @@ Esito&nbsp;TIP                                                                  
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Infantile Regina Margherita  {.tabset .tabset-fade .tabset-pills} 
@@ -4940,9 +4940,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Maggiore della Carità  {.tabset .tabset-fade .tabset-pills} 
@@ -5278,9 +5278,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Meyer  {.tabset .tabset-fade .tabset-pills} 
@@ -5642,9 +5642,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale Santo Bono  {.tabset .tabset-fade .tabset-pills} 
@@ -5930,9 +5930,9 @@ Esito&nbsp;TIP                                                                  
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Ospedale SS Biagio e Arrigo  {.tabset .tabset-fade .tabset-pills} 
@@ -6257,9 +6257,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
  
 ##  Patologia Neonatale Buzzi  {.tabset .tabset-fade .tabset-pills} 
@@ -6532,7 +6532,7 @@ Esito&nbsp;TIP
  
 ### SMR 
  
-SMR PIM2 (overall):  1.21 
+SMR PIM2:  1.21 
   
-SMR PIM3 (overall):  1.53 
+SMR PIM3:  1.53 
 
