@@ -2,7 +2,7 @@
 title: "TIP-Net"
 subtitle: "Report dati 2019"
 author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-date: "Data di creazione del report: 2020-09-27 (ver. 0.3.4)"
+date: "Data di creazione del report: 2020-09-27 (ver. 0.3.5)"
 output:
   bookdown::html_document2:
     toc: true
@@ -331,11 +331,13 @@ PIM&nbsp;2                                                                      
 
 PIM&nbsp;3                                                                                                                                1153   0.52/ 1.33/ 3.88 4.87+/-12.46   0.48/ 0.99/ 3.91 4.37+/-10.88   0.50/ 1.22/ 3.91 4.64+/-11.76 
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         187                                                                                                  
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         1043                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                28% ( 30)                       22% ( 18)                       26% ( 48)           
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                42% (230)                       45% (220)                       43% (450)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                 72% ( 77)                       78% ( 62)                       74% (139)           
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                 39% (217)                       39% (189)                       39% (406)           
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                 19% (107)                       16% ( 80)                       18% (187)           
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          606                                                                                                  
 
@@ -665,11 +667,13 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                225   0.690/ 1.520/ 3.880 3.731+/-         0.515/ 1.020/ 4.340          0.620/ 1.350/ 3.980 4.026+/-  
                                                                                                                                                             7.121                       4.430+/-10.472                       8.680              
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         41                                                                                                    
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         196                                                                                                   
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               14% ( 4)                         17% ( 2)                         15% ( 6)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               17% ( 19)                       17% ( 15)                        17% ( 34)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                86% (25)                         83% (10)                         85% (35)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                56% ( 62)                       69% ( 59)                        62% (121)            
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                26% ( 29)                       14% ( 12)                        21% ( 41)            
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          74                                                                                                    
 
@@ -973,11 +977,13 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                34       0.100/0.420/0.840           0.100/0.210/0.550            0.100/0.215/0.738     
                                                                                                                                                      1.323+/-3.279               0.378+/-0.382                0.961+/-2.605       
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         16                                                                                      
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         40                                                                                      
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                            30% ( 3)                     17% ( 1)                    25% ( 4)          
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                            42% (10)                     50% ( 8)                    45% (18)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                             70% ( 7)                     83% ( 5)                    75% (12)          
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                             17% ( 4)                     12% ( 2)                    15% ( 6)          
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                             42% (10)                     38% ( 6)                    40% (16)          
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          22                                                                                      
 
@@ -1292,11 +1298,13 @@ PIM&nbsp;3                                                                      
 
 &nbsp;&nbsp;&nbsp;&nbsp;20.99                                                                                                                     0% (0)          33% (1)           20% (1)     
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         1                                                     
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         5                                                     
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                      100% ( 1)         100% ( 1)    
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                       0% (0)          33% (1)           20% (1)     
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                        0% ( 0)           0% ( 0)     
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                       100% (2)         33% (1)           60% (3)     
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                        0% (0)          33% (1)           20% (1)     
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          5                                                     
 
@@ -1629,11 +1637,13 @@ PIM&nbsp;2                                                                      
 
 PIM&nbsp;3                                                                                                                                45   0.51/ 1.07/ 3.67 6.90+/-19.35   0.45/ 0.69/ 2.77 1.82+/- 2.42   0.46/ 0.74/ 3.23 4.98+/-15.43 
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         5                                                                                                  
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         53                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               67% (2)                         0% (0)                          40% (2)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                              48% (14)                        42% (10)                        45% (24)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                33% (1)                        100% (2)                         60% (3)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                               41% (12)                        50% (12)                        45% (24)            
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                               10% ( 3)                         8% ( 2)                         9% ( 5)            
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          30                                                                                                 
 
@@ -1941,11 +1951,13 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                14         0.547/0.990/1.583              0.348/1.510/4.370              0.460/0.990/2.355       
                                                                                                                                                        3.317+/-5.347                  3.208+/-4.493                  3.286+/-4.946         
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                          5                                                                                               
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         12                                                                                               
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                0% (0)                        50% (1)                        20% (1)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               22% (2)                        33% (1)                        25% (3)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                100% (3)                       50% (1)                        80% (4)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                44% (4)                         0% (0)                        33% (4)            
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                33% (3)                        67% (2)                        42% (5)            
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                           4                                                                                               
 
@@ -2259,11 +2271,13 @@ PIM&nbsp;2                                                                      
 
 PIM&nbsp;3                                                                                                                                47    1.31/ 2.95/11.63 18.31+/-31.94   0.44/ 1.75/ 6.00 7.20+/-12.86   0.55/ 2.20/ 6.62 12.87+/-24.92 
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         14                                                                                                    
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         53                                                                                                    
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                10% ( 1)                        25% ( 1)                         14% ( 2)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                7% ( 2)                         26% ( 6)                         15% ( 8)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                 90% ( 9)                        75% ( 3)                         86% (12)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                 60% (18)                        57% (13)                         58% (31)            
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                 33% (10)                        17% ( 4)                         26% (14)            
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          14                                                                                                    
 
@@ -3257,11 +3271,13 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                307   0.750/ 2.140/ 5.312 4.984+/-         0.460/ 1.340/ 4.540              0.525/ 1.950/ 4.840      
                                                                                                                                                             9.075                       6.649+/-16.283                  5.813+/-13.175         
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         42                                                                                                   
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         300                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               37% ( 7)                         17% ( 4)                        26% (11)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               63% ( 92)                       53% ( 81)                        58% (173)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                63% (12)                         83% (19)                        74% (31)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                24% ( 36)                       32% ( 49)                        28% ( 85)           
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                13% ( 19)                       15% ( 23)                        14% ( 42)           
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          138                                                                                                  
 
@@ -3588,11 +3604,13 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                289        0.450/ 0.800/ 3.570         0.477/ 0.740/ 2.495 2.265+/-    0.460/ 0.760/ 3.170 2.918+/-  
                                                                                                                                                         3.499+/-10.374                       4.698                           8.217             
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         42                                                                                                   
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         246                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                36% ( 9)                        24% ( 4)                        31% (13)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               55% ( 69)                        56% ( 67)                       55% (136)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                 64% (16)                        76% (13)                        69% (29)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                25% ( 32)                        30% ( 36)                       28% ( 68)           
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                20% ( 25)                        14% ( 17)                       17% ( 42)           
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          201                                                                                                  
 
@@ -4146,6 +4164,14 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                10       0.370/0.420/0.470            0.080/0.090/2.050           0.115/0.395/1.655     
                                                                                                                                                      0.714+/-0.793                1.840+/-2.983               1.277+/-2.142       
 
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         9                                                                                       
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                              0% (0)                      0% (0)                      0% (0)           
+
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                              100% (5)                    100% (4)                    100% (9)          
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                               0% (0)                      0% (0)                      0% (0)           
+
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          9                                                                                       
 
 &nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                        40% (2)                     100% (4)                     67% (6)          
@@ -4436,6 +4462,14 @@ PIM&nbsp;3                                                                      
 &nbsp;&nbsp;&nbsp;&nbsp;4.13                                                                                                                     50% (1)           50% (1)     
 
 &nbsp;&nbsp;&nbsp;&nbsp;4.82                                                                                                                     50% (1)           50% (1)     
+
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         2                                    
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                       0% (0)           0% (0)      
+
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                       100% (2)         100% (2)     
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                        0% (0)           0% (0)      
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          2                                    
 
@@ -4736,11 +4770,13 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                33   0.555/ 0.930/ 4.490   0.583/ 0.790/ 1.150 3.099+/-   0.560/ 0.880/ 2.470 
                                                                                                                                                  7.429+/-22.313                 8.489                 5.592+/-17.721    
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         2                                                                             
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         33                                                                            
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                    50% ( 1)                  50% ( 1)       
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                         11% ( 2)                   29% ( 4)                  18% ( 6)       
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                     50% ( 1)                  50% ( 1)       
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                          89% (17)                   57% ( 8)                  76% (25)       
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                           0% ( 0)                   14% ( 2)                   6% ( 2)       
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          12                                                                            
 
@@ -5096,11 +5132,13 @@ PIM&nbsp;3                                                                      
 
 &nbsp;&nbsp;&nbsp;&nbsp;7.27                                                                                                                            33% (1)                      0% (0)                      17% (1)          
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         2                                                                                       
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         7                                                                                       
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                         0% ( 0)                      0% ( 0)          
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                             67% (2)                     50% (2)                      57% (4)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                         100% ( 2)                    100% ( 2)         
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                              33% (1)                      0% (0)                      14% (1)          
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                              0% (0)                      50% (2)                      29% (2)          
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          5                                                                                       
 
@@ -5418,11 +5456,13 @@ PIM&nbsp;2                                                                      
 PIM&nbsp;3                                                                                                                                11         0.170/1.090/3.020               0.195/2.175/9.855               0.170/1.090/5.345       
                                                                                                                                                        2.218+/-2.732                   6.743+/-9.618                   4.686+/-7.404         
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         6                                                                                                  
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         7                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               0% (0)                          25% (1)                         17% (1)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               0% (0)                          0% (0)                          0% (0)             
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                               100% (2)                         75% (3)                         83% (5)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                33% (1)                         0% (0)                          14% (1)            
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                67% (2)                        100% (4)                         86% (6)            
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          6                                                                                                  
 
@@ -5721,9 +5761,11 @@ PIM&nbsp;3                                                                      
 
 Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         1                                                     
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                     100% ( 1)                          100% ( 1)    
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                      0% ( 0)                            0% ( 0)     
 
 &nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                       0% ( 0)                            0% ( 0)     
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                      100% ( 1)                          100% ( 1)    
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          1                                                     
 
@@ -6022,11 +6064,13 @@ PIM&nbsp;2                                                                      
 
 PIM&nbsp;3                                                                                                                                89    0.43/ 0.60/ 2.29 5.11+/-14.92   1.02/ 1.99/ 4.60 3.98+/- 4.41   0.51/ 1.42/ 3.90 4.67+/-11.91 
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                          9                                                                                                  
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                         78                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                60% (3)                         50% (2)                         56% (5)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                               41% (18)                        74% (25)                        55% (43)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                 40% (2)                         50% (2)                         44% (4)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                48% (21)                        15% ( 5)                        33% (26)            
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                11% ( 5)                        12% ( 4)                        12% ( 9)            
 
 Tipologia&nbsp;di&nbsp;infezione                                                                                                          56                                                                                                  
 
@@ -6310,7 +6354,9 @@ Tecnica&nbsp;di&nbsp;ventilazione
 
 &nbsp;&nbsp;&nbsp;&nbsp;niv                                          0% (0)           0% (0)      
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                          100% (1)         100% (1)     
+&nbsp;&nbsp;&nbsp;&nbsp;it                                           0% (0)           0% (0)      
+
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                          100% (1)         100% (1)     
 
 Durata&nbsp;della&nbsp;degenza                                                                    
 

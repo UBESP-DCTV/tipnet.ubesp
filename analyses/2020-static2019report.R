@@ -2,7 +2,7 @@
 #' title: "TIP-Net"
 #' subtitle: "Report dati `r params$year`"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.4)"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.5)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -205,7 +205,7 @@ label(pim, self = FALSE) <- c(
 
 
 ventilazione <- tip_data[[3]][[9]] %>%
-  select(codpat, tecnica_1, redcap_repeat_instance)
+  select(codpat, niv_it, redcap_repeat_instance)
 
 label(ventilazione, self = FALSE) <- c(
   "Codice paziente", "Tecnica di ventilazione", "Redcap rep-id")
