@@ -1,8 +1,8 @@
 #' ---
-#' title: "TIP-Net static report"
-#' subtitle: "Report 2019"
-#' author: "Corrado Lanera -- UBEP/UniPD"
-#' date: "Padova, `r Sys.Date()`"
+#' title: "TIP-Net"
+#' subtitle: "Report dati `r params$year`"
+#' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.2.0)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -11,6 +11,9 @@
 #'     fig_width: 10
 #'     fig_height: 5
 #'     fig_caption: true
+#'
+#' params:
+#'   year: 2019
 #' ---
 #'
 #'
@@ -32,7 +35,19 @@
 #' ```
 #'
 
+#+ echo=FALSE
+htmltools::img(
+  src = knitr::image_uri("img/ubep_logo.jpg"),
+  alt = 'logo',
+  style = 'position:absolute; top:0; right:0; padding:10px',
+  width = '15%')
 
+
+
+
+if (interactive()) {
+  params <- list(year = 2019)
+}
 #+ pkg, include = FALSE
 
 suppressPackageStartupMessages({
@@ -82,14 +97,45 @@ data_dir <- "../tipnet-data"
 tip_data <- read_rds(here(data_dir, "2020-09-24-tipnet.rds"))
 
 #'
-#' # Overall
+#' # Preambolo
+#'
+#' Il seguente report riporta misure di sintesi dei dati della rete
+#' TIP-Net per l'anno `r params$year`. Nel capitolo \@ref(general) sono
+#' riportate le sintesi per l'intera rete TIP-Net, mentre nel capitolo
+#' \@ref(centers) sono riportate le sintesi divise, in ciascuna
+#' sezione, per centro.
+#'
+#' Per ogni sezione (sia generale che per i centri) sono disponibili tre
+#' tab (accessibili facendo _click_ sul loro nome):
+#'
+#'  - **Accettazione**: distribuzioni e caratteristiche per `genere` ed
+#'    `etnia`
+#'  - **Descrittive**: per ciascuna caratteristica di interesse si
+#'    riportano la numerosità (N = dati non mancanti), la distribuzione
+#'    (I, II, e III quartile) con media e deviazione standard per le
+#'    variabili continue, mentre frequenza e numerosità assoluta per le
+#'    variabili discrete. Tutte le metriche sono riportate sia
+#'    stratificate per sesso (_maschio_ o _femmina_), che globali
+#'    (_combined_)
+#'  - **SMR**: _Standardized Mortality Rate_ riportate sia relativamente
+#'    allo score `PIM2` che `PIM3`.
+#'
+
+#'
+#' # Report generale {#general}
 #' ## TIP-Net {.tabset .tabset-fade .tabset-pills}
 #'
 anagrafica <- tip_data[[3]][[1]] %>%
   select(codpat, gender, etnia, center)
 
+label(anagrafica, self = FALSE) <- c(
+  "Codice paziente", "Sesso", "Etnia", "Centro")
+
+
+
+
 accettazione <- tip_data[[3]][[3]] %>%
-  filter(year(ingresso_dt) == 2019) %>%
+  filter(year(ingresso_dt) == params$year) %>%
   select(
     codpat, eta_giorni, priorita, ricovero_progr, tipologia,
     motivo_ricovero, redcap_repeat_instance, mal_cronica, center) %>%
@@ -107,23 +153,51 @@ accettazione <- tip_data[[3]][[3]] %>%
     )
   )
 
+label(accettazione, self = FALSE) <- c(
+  "Codice paziente", "Età (giorni)", "Priorità", "Ricovero programmato",
+  "Tipologia di ricovero", "Motivo del ricovero", "Redcap rep-id",
+  "Comorbidità", "Centro", "Classe di età")
 
-# presenza comorbidità ??
+
+
 
 pim <- tip_data[[3]][[5]] %>%
   select(codpat, pim2, pim3, redcap_repeat_instance)
 
 
+label(pim, self = FALSE) <- c(
+  "Codice paziente", "PIM 2", "PIM 3", "Redcap rep-id")
+
+
+
+
 ventilazione <- tip_data[[3]][[9]] %>%
   select(codpat, tecnica_1, redcap_repeat_instance)
+
+label(ventilazione, self = FALSE) <- c(
+  "Codice paziente", "Tecnica di ventilazione", "Redcap rep-id")
+
+
 
 
 infezione <- tip_data[[3]][[10]] %>%
   select(codpat, tipo_inf, redcap_repeat_instance)
 
+label(infezione, self = FALSE) <- c(
+  "Codice paziente", "Tipologia di infezione", "Redcap rep-id")
+
+
+
+
 dimissione <- tip_data[[3]][[13]] %>%
   select(codpat, durata_degenza, mod_decesso, esito_tip,
          diagnosi, redcap_repeat_instance)
+
+label(dimissione, self = FALSE) <- c(
+  "Codice paziente", "Durata della degenza", "Modalità di decesso",
+  "Esito TIP", "Diagnosi", "Redcap rep-id")
+
+
 
 
 data_to_describe <- left_join(accettazione, pim) %>%
@@ -148,6 +222,9 @@ eval_summaries <- function(tip_data, current_center = NULL) {
   Accettazione <- anagrafica %>%
     inner_join(accettazione) %>%
     select(gender, etnia)
+
+  names(Accettazione) <- label(Accettazione)
+  label(Accettazione, self = FALSE) <- c("", "")
 
   desc_base <- describe(Accettazione)
 
@@ -181,7 +258,7 @@ overall <- safe_eval(data_to_describe)
 #'
 #' ### Accettazione
 #'
-html(overall[["result"]][[1]])
+html(overall[["result"]][[1]], header = c("a", "b"))
 
 #'
 #' ### Descrittive
@@ -208,7 +285,9 @@ center_summaries <- centers %>%
 
 # aa <- transpose(center_summaries)
 
-#' # Centers
+#'
+#' # Report centri {#centers}
+#'
 
 #+ results='asis'
 iwalk(center_summaries, ~{
