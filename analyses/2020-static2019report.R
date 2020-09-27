@@ -2,7 +2,7 @@
 #' title: "TIP-Net"
 #' subtitle: "Report dati `r params$year`"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.2.0)"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.0)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -138,11 +138,14 @@ accettazione <- tip_data[[3]][[3]] %>%
   filter(year(ingresso_dt) == params$year) %>%
   select(
     codpat, eta_giorni, priorita, ricovero_progr, tipologia,
-    motivo_ricovero, redcap_repeat_instance, mal_cronica, center) %>%
+    motivo_ricovero, redcap_repeat_instance, starts_with("mal_cronica"),
+    center) %>%
   mutate(
+    motivo_ricovero = ordered(motivo_ricovero,
+                              levels = sort(unique(motivo_ricovero))),
     age_class = case_when(
-      is.na(eta_giorni) ~ "missing",
-      eta_giorni < 0 ~ "giorni negativi",
+      is.na(eta_giorni) ~ "[dato mancante]",
+      eta_giorni < 0 ~ "[giorni negativi]",
       eta_giorni <= 30 ~ "neonati",
       eta_giorni <= 365.25 ~ "lattanti",
       eta_giorni <= 365.25 * 5 ~ "prescolare",
@@ -150,15 +153,27 @@ accettazione <- tip_data[[3]][[3]] %>%
       eta_giorni <= 365.25 * 18 ~ "adolescente",
       eta_giorni > 365.25 * 18 ~ "adulto",
       TRUE ~ as.character(eta_giorni)
-    )
+    ) %>%
+      ordered(c("neonati", "lattanti", "prescolare", "scolare",
+                "adolescente", "adulto", "[giorni negativi]",
+                "[dato mancante]")),
+    across(mal_cronica0_1:mal_cronica0_11, ~!is.na(.x))
   )
 
 label(accettazione, self = FALSE) <- c(
   "Codice paziente", "Età (giorni)", "Priorità", "Ricovero programmato",
   "Tipologia di ricovero", "Motivo del ricovero", "Redcap rep-id",
-  "Comorbidità", "Centro", "Classe di età")
+  "Presenza di comorbidità", "Comorbidità: cardiologica",
+  "Comorbidità: metabolica", "Comorbidità: neurologica",
+  "Comorbidità: neuromuscolare", "Comorbidità: onco-ematologica",
+  "Comorbidità: renale", "Comorbidità: respiratoria",
+  "Comorbidità: sindromica", "Comorbidità: altro",
+  "Comorbidità: malformato/esiti di malformazione",
+  "Comorbidità: ex-prematuro", "Centro", "Classe di età")
 
-
+accettazione <- accettazione %>%
+  dplyr::relocate(age_class, .after = eta_giorni) %>%
+  dplyr::relocate(mal_cronica0_9, .after = mal_cronica0_11)
 
 
 pim <- tip_data[[3]][[5]] %>%
@@ -191,11 +206,18 @@ label(infezione, self = FALSE) <- c(
 
 dimissione <- tip_data[[3]][[13]] %>%
   select(codpat, durata_degenza, mod_decesso, esito_tip,
-         diagnosi, redcap_repeat_instance)
+         diagnosi, redcap_repeat_instance) %>%
+  mutate(
+    mod_decesso = ordered(mod_decesso,
+                          levels = sort(unique(mod_decesso))),
+    diagnosi = diagnosi %>%
+      ordered(levels = c(
+        sort(setdiff(unique(diagnosi), "altro")), "altro"))
+  )
 
 label(dimissione, self = FALSE) <- c(
   "Codice paziente", "Durata della degenza", "Modalità di decesso",
-  "Esito TIP", "Diagnosi", "Redcap rep-id")
+  "Esito TIP", "Diagnosi alla dimissione", "Redcap rep-id")
 
 
 
