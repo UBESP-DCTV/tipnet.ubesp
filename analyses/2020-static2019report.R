@@ -2,7 +2,7 @@
 #' title: "TIP-Net"
 #' subtitle: "Report dati `r params$year`"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.5)"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.6)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -176,6 +176,10 @@ accettazione <- tip_data[[3]][[3]] %>%
                 "adolescente", "adulto", "[giorni negativi]",
                 "[dato mancante]")),
     across(mal_cronica0_1:mal_cronica0_11, ~!is.na(.x))
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_comorb = sum(c_across(mal_cronica0_1:mal_cronica0_11))
   )
 
 label(accettazione, self = FALSE) <- c(
@@ -187,11 +191,13 @@ label(accettazione, self = FALSE) <- c(
   "Comorbidità: renale", "Comorbidità: respiratoria",
   "Comorbidità: sindromica", "Comorbidità: altro",
   "Comorbidità: malformato/esiti di malformazione",
-  "Comorbidità: ex-prematuro", "Centro", "Classe di età")
+  "Comorbidità: ex-prematuro", "Centro", "Classe di età",
+  "Numero di comorbidità")
 
 accettazione <- accettazione %>%
   dplyr::relocate(age_class, .after = eta_giorni) %>%
-  dplyr::relocate(mal_cronica0_9, .after = mal_cronica0_11)
+  dplyr::relocate(mal_cronica0_9, .after = mal_cronica0_11) %>%
+  dplyr::relocate(n_comorb, .after = mal_cronica0_9)
 
 
 pim <- tip_data[[3]][[5]] %>%
