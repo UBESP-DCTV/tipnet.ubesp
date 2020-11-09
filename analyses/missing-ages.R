@@ -112,7 +112,7 @@ data_dir <- "../tipnet-data"
 # db_update_from_server(data_dir)
 
 
-tip_data <- read_rds(here(data_dir, "2020-09-24-tipnet.rds"))
+tip_data <- read_rds(here(data_dir, "2020-11-09-tipnet.rds"))
 
 
 anagrafica <- tip_data[[3]][[1]] %>%
@@ -135,11 +135,13 @@ label(accettazione, self = FALSE) <- c(
 data_to_describe <- left_join(accettazione, anagrafica) %>%
   select(-etnia) %>%
   mutate(
-    center = forcats::fct_relabel(center, ~str_replace(.x,
-      "Azienda Ospedaliera Universitaria",
-      "Azienda Ospedaliera Universitaria di Padova"))
+    center = forcats::fct_relabel(center, ~str_c(
+      dplyr::filter(centers_table, center == .x) %>%
+        dplyr::pull(center_city),
+      .x,
+      sep = " - "
+    ))
   )
-
 
 #'
 #' # Età mancanti per centro
@@ -169,7 +171,15 @@ wrong_id <- tip_data[[3]][[3]] %>%
 filter(
   year(ingresso_dt) == params$year,
   is.na(eta_giorni)) %>%
-select(center, codpat)
+select(center, codpat) %>%
+  mutate(
+    center = forcats::fct_relabel(center, ~str_c(
+      dplyr::filter(centers_table, center == .x) %>%
+        dplyr::pull(center_city),
+      .x,
+      sep = " - "
+    ))
+  )
 
 DT::datatable(wrong_id, filter = "top")
 

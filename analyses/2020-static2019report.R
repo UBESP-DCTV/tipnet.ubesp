@@ -112,7 +112,7 @@ data_dir <- "../tipnet-data"
 # db_update_from_server(data_dir)
 
 
-tip_data <- read_rds(here(data_dir, "2020-09-24-tipnet.rds"))
+tip_data <- read_rds(here(data_dir, "2020-11-09-tipnet.rds"))
 
 #'
 #' # Preambolo
@@ -253,13 +253,19 @@ data_to_describe <- left_join(accettazione, pim) %>%
   left_join(anagrafica) %>%
   select(-etnia) %>%
   mutate(
-    center = forcats::fct_relabel(center, ~str_replace(.x,
-      "Azienda Ospedaliera Universitaria",
-      "Azienda Ospedaliera Universitaria di Padova"))
+    center = forcats::fct_relabel(center, ~str_c(
+      dplyr::filter(centers_table, center == .x) %>%
+        dplyr::pull(center_city),
+      .x,
+      sep = " - "
+    ))
   )
 
 
 eval_summaries <- function(tip_data, current_center = NULL) {
+
+  tip_data <- tip_data %>%
+    dplyr::ungroup()
 
   if (!is_null(current_center)) {
     tip_data <- tip_data %>%
@@ -291,11 +297,11 @@ eval_summaries <- function(tip_data, current_center = NULL) {
 
 
   smr <- tip_data %>%
-    summarise(
-      SMR_pim2 = sum(esito_tip == "morto", na.rm = TRUE) /
-        (sum(pim2, na.rm = TRUE)/100),
-      SMR_pim3 = sum(esito_tip == "morto", na.rm = TRUE) /
-        (sum(pim3, na.rm = TRUE)/100)
+    dplyr::summarise(
+      SMR_pim2 = sum(.data$esito_tip == "morto", na.rm = TRUE) /
+        (sum(.data$pim2, na.rm = TRUE)/100),
+      SMR_pim3 = sum(.data$esito_tip == "morto", na.rm = TRUE) /
+        (sum(.data$pim3, na.rm = TRUE)/100)
     )
 
   list(desc_base = desc_base, desc_tip = desc_tip, smr = smr)
