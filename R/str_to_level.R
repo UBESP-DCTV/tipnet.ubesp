@@ -17,6 +17,6 @@ str_to_level <- function(x) {
   if (is.na(x)) return(character())
 
   stringr::str_split(x, " \\| ")[[1]] %>%
-    stringr::str_remove(pattern = "^.*, ") %>%
+    stringr::str_remove(pattern = "^.*?, ") %>%
     unique()
 }

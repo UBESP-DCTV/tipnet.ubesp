@@ -36,3 +36,9 @@ test_that("str_to_level manage wrong input", {
   )
 
 })
+
+test_that("str_to_level manage commas-levels", {
+  coded_commas <- "1, a | 2, b, c | 3, d"
+  expect_equal(str_to_level(coded_commas), c("a", "b, c", "d"))
+
+})

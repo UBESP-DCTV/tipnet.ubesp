@@ -1,3 +1,7 @@
+# tipnet.ubesp (development version)
+
+* Fix a bug that prevent variables with levels that incorporate commas
+  (e.g., `levels(x) #> [1] "a", "b, c", "d"`) to be parsed correctly.
 * Updated version of the script "import-dataset.R"
 
 # tipnet.ubesp 0.0.0.9000
