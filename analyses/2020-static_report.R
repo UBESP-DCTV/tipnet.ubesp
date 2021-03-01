@@ -2,7 +2,7 @@
 #' title: "TIP-Net"
 #' subtitle: "Report dati `r params$year`"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.3.6)"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.1.0)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -13,7 +13,7 @@
 #'     fig_caption: true
 #'
 #' params:
-#'   year: 2019
+#'   year: 2020
 #' ---
 #'
 #'
@@ -46,7 +46,7 @@ htmltools::img(
 
 
 if (interactive()) {
-  params <- list(year = 2019)
+  params <- list(year = 2020)
 }
 #+ pkg, include = FALSE
 
@@ -112,7 +112,7 @@ data_dir <- "../tipnet-data"
 # db_update_from_server(data_dir)
 
 
-tip_data <- read_rds(here(data_dir, "2020-11-27-tipnet.rds"))
+tip_data <- read_rds(here(data_dir, "2021-03-01-tipnet.rds"))
 
 #'
 #' # Preambolo
@@ -153,7 +153,7 @@ label(anagrafica, self = FALSE) <- c(
 
 
 accettazione <- tip_data[[3]][[3]] %>%
-  filter(year(ingresso_dt) == params$year) %>%
+  filter(!is.na(ingresso_dt) & year(ingresso_dt) == params$year) %>%
   select(
     codpat, eta_giorni, priorita, ricovero_progr, tipologia,
     motivo_ricovero, redcap_repeat_instance, starts_with("mal_cronica"),

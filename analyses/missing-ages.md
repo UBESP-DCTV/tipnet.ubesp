@@ -2,7 +2,7 @@
 title: "TIP-Net"
 subtitle: "Età mancanti 2019"
 author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-date: "Data di creazione del report: 2020-11-10 (ver. 0.1.1)"
+date: "Data di creazione del report: 2020-11-27 (ver. 0.1.1)"
 output:
   bookdown::html_document2:
     toc: true
