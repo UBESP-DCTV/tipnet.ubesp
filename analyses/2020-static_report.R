@@ -2,7 +2,7 @@
 #' title: "TIP-Net"
 #' subtitle: "Report dati `r params$year`"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-#' date: "Data di creazione del report: `r Sys.Date()` (ver. 0.1.1)"
+#' date: "Data di creazione del report: `r Sys.Date()` (ver. 1.0.0)"
 #' output:
 #'   bookdown::html_document2:
 #'     toc: true
@@ -112,7 +112,7 @@ data_dir <- "../tipnet-data"
 # db_update_from_server(data_dir)
 
 
-tip_data <- read_rds(here(data_dir, "2021-03-04-tipnet.rds"))
+tip_data <- read_rds(here(data_dir, "2021-06-28-tipnet.rds"))
 
 #'
 #' # Preambolo
@@ -333,11 +333,18 @@ cat(
 )
 
 
-centers <- sort(levels(data_to_describe$center)) %>%
-  set_names()
+named_ids <- centers_table$id %>%
+  set_names(as.character(centers_table$center))
+
+centers <- levels(data_to_describe$center) %>%
+  set_names(paste0(
+    "DAG: ", named_ids[str_remove(., "^.*? - ")]
+  ))
 
 center_summaries <- centers %>%
   purrr::map(safe_eval, tip_data = data_to_describe)
+
+
 
 
 # aa <- transpose(center_summaries)
