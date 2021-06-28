@@ -23,7 +23,7 @@ data_path <- function(path = here::here()) {
   current_folder <- basename(normalizePath(path))
   path_to_data <- switch(current_folder,
     "TIPNet"       = fs::path(path, "..", "..", "tipnet-data"),
-    "tipnet.ubesp" = fs::path(path, "..", "data"),
+    "tipnet.ubesp" = fs::path(path, "..", "tipnet-data"),
     "report"       = data_path(fs::path(path, "..")),
     "static"       = data_path(fs::path(path, "..")),
     current_folder

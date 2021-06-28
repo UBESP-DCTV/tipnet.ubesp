@@ -45,7 +45,7 @@ extract_sheets <- function(tipnet) {
 
     purrr::set_names(c(
       "accettazione", "ingresso", "degenza", "infezione", "dimissione",
-      "punteggio_di_aristotle", "pelod", "pim",
+      "punteggio_di_aristotle", "pelod_scheda_facoltativa", "pim",
       "procedure_di_ventilazione"
     )) %>%
       purrr::map(get_sheet, x = tipnet)
@@ -75,7 +75,7 @@ join_all_sheets <- function(sheets) {
                      suffix = c(".ingresso", ".pim")
     ) %>%
 
-    dplyr::full_join(sheets[["pelod"]],
+    dplyr::full_join(sheets[["pelod_scheda_facoltativa"]],
                      by = c("codpat", "center", "redcap_repeat_instance")
     ) %>%
     dplyr::full_join(sheets[["punteggio_di_aristotle"]],
