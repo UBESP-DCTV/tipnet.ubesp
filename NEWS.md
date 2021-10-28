@@ -1,4 +1,4 @@
-# tipnet.ubesp (development version)
+# tipnet.ubesp 0.0.1
 
 * Fixed (locally) automated report generator
 * Used DAG instead of Hospital's name in the static report.
