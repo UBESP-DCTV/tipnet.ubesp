@@ -248,10 +248,11 @@ observeEvent(input$generate, {
   )
 
   static_dir <- "static"
+  fs::dir_delete(static_dir)
   dir <- normalizePath(fs::dir_create(static_dir))
-  
+
   list.files(all.files = TRUE, include.dirs = TRUE) %>% 
-    setdiff(c(".", "..", static_dir)) %>% 
+    setdiff(c(".", "..", static_dir, ".here", "report.Rproj")) %>% 
     file.copy(dir, recursive = TRUE, copy.date = TRUE)
   
   report_raw <- file.path(dir, "index.Rmd")
@@ -295,7 +296,7 @@ observeEvent(input$generate, {
       This window will disappear in 10 seconds."
   )
   Sys.sleep(10)
-  
+
   report_path$filepath <- report_out
   
 
