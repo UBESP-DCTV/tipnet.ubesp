@@ -6,9 +6,7 @@
 \alias{tipnet.ubesp-package}
 \title{tipnet.ubesp: TIPNet reports}
 \description{
-The goal of tipnet.ubesp is to implement and
-    collect all the code needed for the development of the TIPNet reports
-    by UBESP.
+The goal of tipnet.ubesp is to implement and collect all the code needed for the development of the TIPNet reports by UBESP.
 }
 \seealso{
 Useful links:

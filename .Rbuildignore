@@ -15,3 +15,7 @@
 ^data-raw$
 ^sharing-docs-app$
 ^dev$
+^overall.html$
+^analyses$
+^old$
+^\.git$
