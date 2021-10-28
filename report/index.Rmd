@@ -3,7 +3,7 @@ params:
   cache: TRUE
   export: FALSE
   first_y: 1992
-  last_y:  2020
+  last_y:  2021
 
   q_overall_completed: "Completed"
   q_overall_type: "Proportion"
