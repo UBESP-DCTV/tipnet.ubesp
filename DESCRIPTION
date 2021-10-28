@@ -2,13 +2,9 @@ Package: tipnet.ubesp
 Title: TIPNet reports
 Version: 0.0.0.9001
 Authors@R: 
-    person(given = "Corrado",
-           family = "Lanera",
-           role = c("aut", "cre", "cph"),
-           email = "corrado.lanera@gmail.com")
-Description: The goal of tipnet.ubesp is to implement and
-    collect all the code needed for the development of the TIPNet reports
-    by UBESP.
+    person("Corrado", "Lanera", , "corrado.lanera@gmail.com", role = c("aut", "cre", "cph"))
+Description: The goal of tipnet.ubesp is to implement and collect all the
+    code needed for the development of the TIPNet reports by UBESP.
 License: GPL-3 + file LICENSE
 URL: https://github.com/UBESP-DCTV/tipnet.ubesp
 BugReports: https://github.com/UBESP-DCTV/tipnet.ubesp/issues
@@ -49,4 +45,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

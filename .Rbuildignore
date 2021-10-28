@@ -17,3 +17,5 @@
 ^dev$
 ^overall.html$
 ^analyses$
+^old$
+^\.git$
