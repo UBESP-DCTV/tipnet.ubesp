@@ -1,6 +1,6 @@
 #' ---
 #' title: "TIP-Net"
-#' subtitle: "Report dati `r params$year`"
+#' subtitle: "Report dati `r params$year` (mesi: `r params$first_month` - `r params$last_month`)"
 #' author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
 #' date: "Data di creazione del report: `r Sys.Date()` (ver. 1.0.0)"
 #' output:
@@ -15,6 +15,8 @@
 #'
 #' params:
 #'   year: 2023
+#'   first_month: 1
+#'   last_month: 12
 #' ---
 #'
 #'
@@ -47,9 +49,23 @@ htmltools::img(
 
 
 if (interactive()) {
-  params <- list(year = 2023)
+  params <- list(
+    year = 2023,
+    first_month = 1,
+    last_month = 12
+  )
 }
 #+ pkg, include = FALSE
+
+report_type <- if (params$first_month == 1) {
+  if (params$last_month == 6) "I semester" else "annual"
+} else {
+  if (params$first_month == 6 && params$last_month == 12) {
+    "II semester"
+    } else{
+     ui_stop("month paramenters wrongly set")
+    }
+}
 
 suppressPackageStartupMessages({
 
@@ -96,11 +112,11 @@ suppressPackageStartupMessages({
 #+ echo=FALSE
 meta() %>%
   meta_general(
-    description = paste0("TIP-Net annual report (", params$year, ")"),
+    description = paste0("TIP-Net ", report_type, " report (", params$year, ")"),
     generator = "RMarkdown"
   ) %>%
   meta_social(
-    title = "TIP-Net annual report",
+    title = paste0("TIP-Net ", report_type, " report (", params$year, ")"),
     og_type = "website",
     og_author = "UBEP",
     twitter_card_type = "summary",
@@ -113,31 +129,30 @@ data_dir <- here::here("../tipnet-data")
 # db_update_from_server(data_dir)
 
 
-tip_data <- read_rds(here(data_dir, "2023-10-04-tipnet.rds"))
+tip_data <- read_rds(here(data_dir, "tipnet.rds"))
 
 #'
 #' # Preambolo
 #'
 #' Il seguente report riporta misure di sintesi dei dati della rete
-#' TIP-Net per l'anno `r params$year`. Nel capitolo \@ref(general) sono
-#' riportate le sintesi per l'intera rete TIP-Net, mentre nel capitolo
-#' \@ref(centers) sono riportate le sintesi divise, in ciascuna
-#' sezione, per centro.
+#' TIP-Net per l'anno `r params$year` (`r report_type`). Nel capitolo
+#' \@ref(general) sono riportate le sintesi per l'intera rete TIP-Net,
+#' mentre nel capitolo \@ref(centers) sono riportate le sintesi divise,
+#' in ciascuna sezione, per centro.
 #'
 #' Per ogni sezione (sia generale che per i centri) sono disponibili tre
 #' tab (accessibili facendo _click_ sul loro nome):
 #'
 #'  - **Accettazione**: distribuzioni e caratteristiche per `genere` ed
-#'    `etnia`
+#' `etnia`
 #'  - **Descrittive**: per ciascuna caratteristica di interesse si
-#'    riportano la numerosità (N = dati non mancanti), la distribuzione
-#'    (I, II, e III quartile) con media e deviazione standard per le
-#'    variabili continue, mentre frequenza e numerosità assoluta per le
-#'    variabili discrete. Tutte le metriche sono riportate sia
-#'    stratificate per sesso (_maschio_ o _femmina_), che globali
-#'    (_combined_)
+#' riportano la numerosità (N = dati non mancanti), la distribuzione (I,
+#' II, e III quartile) con media e deviazione standard per le variabili
+#' continue, mentre frequenza e numerosità assoluta per le variabili
+#' discrete. Tutte le metriche sono riportate sia stratificate per sesso
+#' (_maschio_ o _femmina_), che globali (_combined_)
 #'  - **SMR**: _Standardized Mortality Rate_ riportate sia relativamente
-#'    allo score `PIM2` che `PIM3`.
+#' allo score `PIM2` che `PIM3`.
 #'
 
 #'
@@ -154,7 +169,12 @@ label(anagrafica, self = FALSE) <- c(
 
 
 accettazione <- tip_data[[3]][[3]] %>%
-  filter(!is.na(ingresso_dt) & year(ingresso_dt) == params$year) %>%
+  filter(
+    !is.na(ingresso_dt),
+    year(ingresso_dt) == params$year,
+    month(ingresso_dt) >= params$first_month,
+    month(ingresso_dt) <= params$last_month
+  ) %>%
   select(
     codpat, eta_giorni, priorita, ricovero_progr, tipologia,
     motivo_ricovero, redcap_repeat_instance, starts_with("mal_cronica"),

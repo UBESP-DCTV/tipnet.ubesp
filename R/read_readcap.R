@@ -32,8 +32,8 @@ read_redcap <- function(
   token = tipnet_token()
   ) {
 
-  assertive::assert_is_a_string(token)
-  assertive::assert_is_a_string(url)
+  checkmate::qassert(token, "S+")
+  checkmate::qassert(url, "S+")
 
   # list of two: `data` and `meta_data`
   # ~ 9 min/call (1.5-1.8 s/batch)
