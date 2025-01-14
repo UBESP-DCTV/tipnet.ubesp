@@ -2,7 +2,7 @@
 title: "TIP-Net"
 subtitle: "Report dati 2024 (mesi: 1 - 6)"
 author: "Unità di Biostatistica, Epidemiologia, e Sanità Pubblica<br>Dipartimento di Scienze Cardio-Toraco-Vascolari e Sanità Pubblica<br>University of Padova"
-date: "Data di creazione del report: 2024-12-16 (ver. 1.0.0)"
+date: "Data di creazione del report: 2025-01-14 (ver. 1.0.0)"
 output:
   bookdown::html_document2:
     toc: true
@@ -98,7 +98,7 @@ bottom: -1ex;
 </style>
 
 <title>Accettazione Descriptives</title>
-<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   1692  Observations</span></div></font>
+<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   1726  Observations</span></div></font>
 <hr class="thinhr">
 <span style="font-weight:bold">Sesso</span>: <div style='float: right; text-align: right;'><img src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAAoAAAANCAMAAACn6Q83AAAACVBMVEUAAADMzMz////1iUV5AAAAIElEQVQImWNgYIQBBgYmGEBjQrm4mCCtcBMIqMVvAgMAMdUAq70nDhEAAAAASUVORK5CYII=" alt="image" /></div>
@@ -120,13 +120,13 @@ iVBORw0KGgoAAAANSUhEUgAAAAoAAAANCAMAAACn6Q83AAAACVBMVEUAAADMzMz////1iUV5AAAAIElE
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable666202">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>1690</td><td>2</td><td>3</td></tr>
+ <tr><td>1724</td><td>2</td><td>3</td></tr>
  </table>
 
 <pre style="font-size:85%;">
  Value      maschio femmina ambiguo
- Frequency      967     721       2
- Proportion   0.572   0.427   0.001 </pre>
+ Frequency      990     732       2
+ Proportion   0.574   0.425   0.001 </pre>
 
 <hr class="thinhr">
 <span style="font-weight:bold">Etnia</span>: <div style='float: right; text-align: right;'><img src="data:image/png;base64,
@@ -149,7 +149,7 @@ iVBORw0KGgoAAAANSUhEUgAAABkAAAANCAMAAABrcDXcAAAACVBMVEUAAADMzMz////1iUV5AAAAJklE
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable155607">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>1691</td><td>1</td><td>8</td></tr>
+ <tr><td>1725</td><td>1</td><td>8</td></tr>
  </table>
 
 <style>
@@ -183,22 +183,22 @@ iVBORw0KGgoAAAANSUhEUgAAABkAAAANCAMAAABrcDXcAAAACVBMVEUAAADMzMz////1iUV5AAAAJklE
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-&nbsp;                                                                                                                                                                                               N           maschio  (N=967)               femmina  (N=721)                ambiguo  (N=2)               Combined  (N=1690)      
+&nbsp;                                                                                                                                                                                               N           maschio  (N=990)               femmina  (N=732)                ambiguo  (N=2)               Combined  (N=1724)      
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------ ------------------------------ ------------------------------ ------------------------------ ------------------------------
-Età&nbsp;(giorni)                                                                                                                                                                                   1691   144.0000/ 913.0000/3149.0000   154.0000/1234.0000/3667.0000   68.5000/ 137.0000/ 205.5000    146.0000/1037.0000/3410.5000 
-                                                                                                                                                                                                              1901.3609+/-2324.1739          2092.2843+/-2285.6336           137.0000+/- 193.7473          1979.5878+/-2308.3452     
+Età&nbsp;(giorni)                                                                                                                                                                                   1725   147.0000/ 919.5000/3152.5000   154.0000/1234.5000/3668.0000   68.5000/ 137.0000/ 205.5000    147.0000/1042.0000/3412.0000 
+                                                                                                                                                                                                              1902.0717+/-2316.5180          2095.1161+/-2284.4074           137.0000+/- 193.7473          1980.8730+/-2303.5591     
 
-Classe&nbsp;di&nbsp;età                                                                                                                                                                             1692                                                                                                                             
+Classe&nbsp;di&nbsp;età                                                                                                                                                                             1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;neonati                                                                                                                                                                                     10% ( 97)                       8% ( 60)                       50% ( 1)                       9% (158)           
+&nbsp;&nbsp;&nbsp;&nbsp;neonati                                                                                                                                                                                     10% ( 97)                       8% ( 62)                       50% ( 1)                       9% (160)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                    28% (271)                      25% (178)                       50% ( 1)                      27% (450)           
+&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                    28% (276)                      25% (180)                       50% ( 1)                      27% (457)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                  24% (231)                      25% (182)                       0% ( 0)                       24% (413)           
+&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                  24% (240)                      25% (184)                       0% ( 0)                       25% (424)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;scolare                                                                                                                                                                                     20% (194)                      22% (159)                       0% ( 0)                       21% (353)           
+&nbsp;&nbsp;&nbsp;&nbsp;scolare                                                                                                                                                                                     20% (199)                      22% (162)                       0% ( 0)                       21% (361)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;adolescente                                                                                                                                                                                 16% (151)                      17% (125)                       0% ( 0)                       16% (276)           
+&nbsp;&nbsp;&nbsp;&nbsp;adolescente                                                                                                                                                                                 16% (155)                      17% (127)                       0% ( 0)                       16% (282)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;adulto                                                                                                                                                                                       2% ( 23)                       2% ( 17)                       0% ( 0)                        2% ( 40)           
 
@@ -206,37 +206,37 @@ Classe&nbsp;di&nbsp;età                                                        
 
 &nbsp;&nbsp;&nbsp;&nbsp;[dato&nbsp;mancante]                                                                                                                                                                         0% ( 0)                        0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-Priorità                                                                                                                                                                                            1684                                                                                                                             
+Priorità                                                                                                                                                                                            1718                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           51% (488)                      52% (376)                                                     51% (864)           
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           50% (494)                      52% (383)                                                     51% (877)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           42% (400)                      42% (303)                                                     42% (703)           
+&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           42% (415)                      42% (307)                                                     42% (722)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                            6% ( 56)                       4% ( 27)                                                      5% ( 83)           
+&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                            6% ( 58)                       4% ( 27)                                                      5% ( 85)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;4a                                                                                                                                                                                           2% ( 19)                       2% ( 14)                                                      2% ( 33)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;4b                                                                                                                                                                                           0% ( 0)                        0% ( 0)                                                       0% ( 0)            
 
-Ricovero&nbsp;programmato                                                                                                                                                                           1588                                                                                                                             
+Ricovero&nbsp;programmato                                                                                                                                                                           1620                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          41% (372)                      41% (279)                                                     41% (651)           
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          42% (385)                      41% (284)                                                     41% (669)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          59% (527)                      59% (409)                                                     59% (936)           
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          58% (537)                      59% (413)                                                     59% (950)           
 
-Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     1685                                                                                                                             
+Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     1719                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;chirurgico                                                                                                                                                                                  46% (441)                      44% (316)                      100% ( 1)                      45% (758)           
+&nbsp;&nbsp;&nbsp;&nbsp;chirurgico                                                                                                                                                                                  46% (458)                      44% (321)                      100% ( 1)                      45% (780)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                      49% (470)                      52% (377)                       0% ( 0)                       50% (847)           
+&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                      48% (475)                      52% (383)                       0% ( 0)                       50% (858)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                     5% ( 52)                       4% ( 27)                       0% ( 0)                        5% ( 79)           
+&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                     5% ( 53)                       4% ( 27)                       0% ( 0)                        5% ( 80)           
 
-Motivo&nbsp;del&nbsp;ricovero                                                                                                                                                                       847                                                                                                                              
+Motivo&nbsp;del&nbsp;ricovero                                                                                                                                                                       858                                                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;respiratoria                                                                                                                                                             54% (254)                      58% (218)                                                     56% (472)           
+&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;respiratoria                                                                                                                                                             54% (257)                      57% (220)                                                     56% (477)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;alterato&nbsp;sensorio&nbsp;/&nbsp;crisi&nbsp;convulsive                                                                                                                                    13% ( 59)                      11% ( 42)                                                     12% (101)           
+&nbsp;&nbsp;&nbsp;&nbsp;alterato&nbsp;sensorio&nbsp;/&nbsp;crisi&nbsp;convulsive                                                                                                                                    13% ( 61)                      11% ( 43)                                                     12% (104)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;disordini&nbsp;metabolici&nbsp;/&nbsp;disidratazione                                                                                                                                         5% ( 25)                       5% ( 20)                                                      5% ( 45)           
 
@@ -244,11 +244,11 @@ Motivo&nbsp;del&nbsp;ricovero                                                   
 
 &nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;renale&nbsp;acuta                                                                                                                                                         1% ( 6)                        1% ( 3)                                                       1% ( 9)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;diagnosi&nbsp;sepsi&nbsp;correlata&nbsp;(di&nbsp;natura&nbsp;diversa&nbsp;da&nbsp;respiro&nbsp;cuore&nbsp;snc)                                                                               1% ( 6)                        2% ( 6)                                                       1% ( 12)           
+&nbsp;&nbsp;&nbsp;&nbsp;diagnosi&nbsp;sepsi&nbsp;correlata&nbsp;(di&nbsp;natura&nbsp;diversa&nbsp;da&nbsp;respiro&nbsp;cuore&nbsp;snc)                                                                               1% ( 6)                        2% ( 7)                                                       2% ( 13)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;monitoraggio&nbsp;/&nbsp;osservazione                                                                                                                                                       13% ( 60)                      12% ( 47)                                                     13% (107)           
+&nbsp;&nbsp;&nbsp;&nbsp;monitoraggio&nbsp;/&nbsp;osservazione                                                                                                                                                       13% ( 60)                      12% ( 47)                                                     12% (107)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;programmato&nbsp;per&nbsp;procedure&nbsp;invasive                                                                                                                                            3% ( 15)                       3% ( 13)                                                      3% ( 28)           
+&nbsp;&nbsp;&nbsp;&nbsp;programmato&nbsp;per&nbsp;procedure&nbsp;invasive                                                                                                                                            3% ( 15)                       4% ( 14)                                                      3% ( 29)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;asfissia&nbsp;perinatale                                                                                                                                                                     1% ( 3)                        0% ( 0)                                                       0% ( 3)            
 
@@ -256,166 +256,166 @@ Motivo&nbsp;del&nbsp;ricovero                                                   
 
 &nbsp;&nbsp;&nbsp;&nbsp;shock&nbsp;distributivo&nbsp;(settico)                                                                                                                                                       1% ( 3)                        1% ( 3)                                                       1% ( 6)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;arresto&nbsp;cardiocircolatorio                                                                                                                                                              2% ( 9)                        2% ( 7)                                                       2% ( 16)           
+&nbsp;&nbsp;&nbsp;&nbsp;arresto&nbsp;cardiocircolatorio                                                                                                                                                              2% ( 9)                        2% ( 8)                                                       2% ( 17)           
 
-Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   1686                                                                                                                             
+Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   1720                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          52% (505)                      55% (394)                      100% ( 1)                      53% (900)           
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          52% (516)                      55% (404)                      100% ( 1)                      54% (921)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          48% (459)                      45% (326)                       0% ( 0)                       47% (785)           
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          48% (471)                      45% (327)                       0% ( 0)                       46% (798)           
 
-Comorbidità:&nbsp;cardiologica                                                                                                                                                                      1692                                                                                                                             
+Comorbidità:&nbsp;cardiologica                                                                                                                                                                      1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       87% ( 840)                     88% ( 632)                      50% ( 1)                      87% (1473)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       87% ( 861)                     88% ( 641)                      50% ( 1)                      87% (1503)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        13% ( 127)                     12% ( 89)                       50% ( 1)                      13% ( 217)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        13% ( 129)                     12% ( 91)                       50% ( 1)                      13% ( 221)          
 
-Comorbidità:&nbsp;metabolica                                                                                                                                                                        1692                                                                                                                             
+Comorbidità:&nbsp;metabolica                                                                                                                                                                        1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       99% ( 953)                     97% ( 700)                     100% ( 2)                      98% (1655)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       99% ( 976)                     97% ( 711)                     100% ( 2)                      98% (1689)          
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         1% ( 14)                       3% ( 21)                       0% ( 0)                        2% ( 35)           
 
-Comorbidità:&nbsp;neurologica                                                                                                                                                                       1692                                                                                                                             
+Comorbidità:&nbsp;neurologica                                                                                                                                                                       1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       84% ( 809)                     83% ( 601)                     100% ( 2)                      84% (1412)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       84% ( 830)                     84% ( 612)                     100% ( 2)                      84% (1444)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        16% ( 158)                     17% ( 120)                      0% ( 0)                       16% ( 278)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        16% ( 160)                     16% ( 120)                      0% ( 0)                       16% ( 280)          
 
-Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    1692                                                                                                                             
+Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       95% ( 922)                     94% ( 676)                     100% ( 2)                      95% (1600)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       95% ( 945)                     94% ( 687)                     100% ( 2)                      95% (1634)          
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         5% ( 45)                       6% ( 45)                       0% ( 0)                        5% ( 90)           
 
-Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  1692                                                                                                                             
+Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       95% ( 915)                     95% ( 683)                     100% ( 2)                      95% (1600)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       95% ( 936)                     95% ( 692)                     100% ( 2)                      95% (1630)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         5% ( 52)                       5% ( 38)                       0% ( 0)                        5% ( 90)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         5% ( 54)                       5% ( 40)                       0% ( 0)                        5% ( 94)           
 
-Comorbidità:&nbsp;renale                                                                                                                                                                            1692                                                                                                                             
+Comorbidità:&nbsp;renale                                                                                                                                                                            1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       97% ( 938)                     98% ( 708)                     100% ( 2)                      98% (1648)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       97% ( 960)                     98% ( 719)                     100% ( 2)                      98% (1681)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         3% ( 29)                       2% ( 13)                       0% ( 0)                        2% ( 42)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         3% ( 30)                       2% ( 13)                       0% ( 0)                        2% ( 43)           
 
-Comorbidità:&nbsp;respiratoria                                                                                                                                                                      1692                                                                                                                             
+Comorbidità:&nbsp;respiratoria                                                                                                                                                                      1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       91% ( 876)                     92% ( 661)                     100% ( 2)                      91% (1539)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       91% ( 897)                     92% ( 670)                     100% ( 2)                      91% (1569)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         9% ( 91)                       8% ( 60)                       0% ( 0)                       9% ( 151)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         9% ( 93)                       8% ( 62)                       0% ( 0)                       9% ( 155)           
 
-Comorbidità:&nbsp;sindromica                                                                                                                                                                        1692                                                                                                                             
+Comorbidità:&nbsp;sindromica                                                                                                                                                                        1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       90% ( 868)                     90% ( 648)                      50% ( 1)                      90% (1517)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       90% ( 888)                     90% ( 656)                      50% ( 1)                      90% (1545)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        10% ( 99)                      10% ( 73)                       50% ( 1)                      10% ( 173)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        10% ( 102)                     10% ( 76)                       50% ( 1)                      10% ( 179)          
 
-Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       1692                                                                                                                             
+Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       90% ( 875)                     89% ( 645)                     100% ( 2)                      90% (1522)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       91% ( 896)                     89% ( 652)                     100% ( 2)                      90% (1550)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        10% ( 92)                      11% ( 76)                       0% ( 0)                       10% ( 168)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         9% ( 94)                      11% ( 80)                       0% ( 0)                       10% ( 174)          
 
-Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      1692                                                                                                                             
+Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       95% ( 920)                     95% ( 682)                     100% ( 2)                      95% (1604)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       95% ( 941)                     95% ( 693)                     100% ( 2)                      95% (1636)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         5% ( 47)                       5% ( 39)                       0% ( 0)                        5% ( 86)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         5% ( 49)                       5% ( 39)                       0% ( 0)                        5% ( 88)           
 
-Comorbidità:&nbsp;altro                                                                                                                                                                             1692                                                                                                                             
+Comorbidità:&nbsp;altro                                                                                                                                                                             1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       98% ( 951)                     96% ( 690)                     100% ( 2)                      97% (1643)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       98% ( 972)                     96% ( 700)                     100% ( 2)                      97% (1674)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         2% ( 16)                       4% ( 31)                       0% ( 0)                        3% ( 47)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         2% ( 18)                       4% ( 32)                       0% ( 0)                        3% ( 50)           
 
-Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     1692                                                                                                                             
+Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     1726                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                           49% (475)                      48% (344)                       50% ( 1)                      49% (820)           
+&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                           49% (487)                      47% (345)                       50% ( 1)                      48% (833)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           31% (302)                      32% (231)                       0% ( 0)                       32% (533)           
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           31% (310)                      33% (238)                       0% ( 0)                       32% (548)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           13% (125)                      13% ( 91)                       50% ( 1)                      13% (217)           
+&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           13% (126)                      13% ( 93)                       50% ( 1)                      13% (220)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                            5% ( 46)                       4% ( 31)                       0% ( 0)                        5% ( 77)           
+&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                            5% ( 47)                       4% ( 32)                       0% ( 0)                        5% ( 79)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;4                                                                                                                                                                                            2% ( 16)                       3% ( 21)                       0% ( 0)                        2% ( 37)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;5                                                                                                                                                                                            0% ( 2)                        0% ( 3)                        0% ( 0)                        0% ( 5)            
+&nbsp;&nbsp;&nbsp;&nbsp;5                                                                                                                                                                                            0% ( 3)                        0% ( 3)                        0% ( 0)                        0% ( 6)            
 
 &nbsp;&nbsp;&nbsp;&nbsp;6                                                                                                                                                                                            0% ( 1)                        0% ( 0)                        0% ( 0)                        0% ( 1)            
 
-Comorbidità:&nbsp;gastroenterologica                                                                                                                                                                 81                                                                                                                              
+Comorbidità:&nbsp;gastroenterologica                                                                                                                                                                 84                                                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;gastroenterologica                                                                                                                                                                          100% (34)                      100% (47)                                                     100% (81)           
+&nbsp;&nbsp;&nbsp;&nbsp;gastroenterologica                                                                                                                                                                          100% (36)                      100% (48)                                                     100% (84)           
 
 Comorbidità:&nbsp;trapiantologica                                                                                                                                                                    9                                                                                                                               
 
 &nbsp;&nbsp;&nbsp;&nbsp;trapiantologica                                                                                                                                                                             100% ( 7)                      100% ( 2)                                                     100% ( 9)           
 
-PIM&nbsp;2                                                                                                                                                                                          1497   0.520000/ 1.140000/ 3.285000   0.530000/ 1.090000/ 3.230000   1.970000/ 1.970000/ 1.970000   0.520000/ 1.140000/ 3.260000 
-                                                                                                                                                                                                               3.899495+/- 9.449729           4.248806+/-10.143246               1.970000+/-                4.048711+/- 9.749883     
+PIM&nbsp;2                                                                                                                                                                                          1530   0.492500/ 1.130000/ 3.110000   0.520000/ 1.080000/ 3.235000   1.970000/ 1.970000/ 1.970000   0.510000/ 1.110000/ 3.200000 
+                                                                                                                                                                                                               3.839897+/- 9.370057           4.355588+/-10.446605               1.970000+/-                4.059444+/- 9.842568     
 
-PIM&nbsp;3                                                                                                                                                                                          1497    0.420000/0.790000/2.330000     0.420000/0.790000/2.140000     0.700000/0.700000/0.700000     0.420000/0.790000/2.240000  
-                                                                                                                                                                                                               2.836287+/-8.187587            2.963814+/-8.409992                0.700000+/-                2.889806+/-8.279083      
+PIM&nbsp;3                                                                                                                                                                                          1530    0.420000/0.785000/2.180000     0.410000/0.790000/2.145000     0.700000/0.700000/0.700000     0.412500/0.785000/2.175000  
+                                                                                                                                                                                                               2.790206+/-8.098596            3.060504+/-8.730817                0.700000+/-                2.904556+/-8.370995      
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   936                                                                                                                              
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   952                                                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                                                         32% (176)                      34% (129)                                                     33% (305)           
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                                                         32% (179)                      33% (129)                                                     32% (308)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                          53% (295)                      49% (190)                                                     52% (485)           
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                          53% (300)                      50% (195)                                                     52% (495)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                          15% ( 81)                      17% ( 65)                                                     16% (146)           
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                          15% ( 83)                      17% ( 66)                                                     16% (149)           
 
-Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    475                                                                                                                              
+Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    484                                                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                    82% (220)                      87% (179)                                                     84% (399)           
+&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                    82% (225)                      86% (180)                                                     84% (405)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                  18% ( 49)                      13% ( 27)                                                     16% ( 76)           
+&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                  18% ( 50)                      14% ( 29)                                                     16% ( 79)           
 
-Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      1551   1.000000/ 2.000000/ 5.000000   1.000000/ 2.000000/ 5.000000   6.000000/ 6.000000/ 6.000000   1.000000/ 2.000000/ 5.000000 
-                                                                                                                                                                                                               5.438202+/-11.524079           5.326252+/-10.671729               6.000000+/-                5.387492+/-11.159666     
+Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      1585   1.000000/ 2.000000/ 5.000000   1.000000/ 2.000000/ 5.000000   6.000000/ 6.000000/ 6.000000   1.000000/ 2.000000/ 5.000000 
+                                                                                                                                                                                                               5.421687+/-11.429065           5.383582+/-10.701579               6.000000+/-                5.402524+/-11.117349     
 
-Modalità&nbsp;di&nbsp;decesso                                                                                                                                                                        33                                                                                                                              
+Modalità&nbsp;di&nbsp;decesso                                                                                                                                                                        34                                                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;nonostante&nbsp;rianimazione&nbsp;cardiopolmonare                                                                                                                                 19% ( 3)                       29% ( 5)                                                      24% ( 8)           
+&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;nonostante&nbsp;rianimazione&nbsp;cardiopolmonare                                                                                                                                 19% ( 3)                       33% ( 6)                                                      26% ( 9)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;sospensione&nbsp;dei&nbsp;trattamenti&nbsp;di&nbsp;supporto&nbsp;vitale                                                                                                                      69% (11)                       29% ( 5)                                                      48% (16)           
+&nbsp;&nbsp;&nbsp;&nbsp;sospensione&nbsp;dei&nbsp;trattamenti&nbsp;di&nbsp;supporto&nbsp;vitale                                                                                                                      69% (11)                       28% ( 5)                                                      47% (16)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;astensione&nbsp;dall'iniziare&nbsp;trattamenti&nbsp;di&nbsp;supporto&nbsp;vitale                                                                                                             6% ( 1)                        0% ( 0)                                                       3% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;decisione&nbsp;di&nbsp;non&nbsp;rianimare                                                                                                                                                    0% ( 0)                        29% ( 5)                                                      15% ( 5)           
+&nbsp;&nbsp;&nbsp;&nbsp;decisione&nbsp;di&nbsp;non&nbsp;rianimare                                                                                                                                                    0% ( 0)                        28% ( 5)                                                      15% ( 5)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;cerebrale                                                                                                                                                                         6% ( 1)                        12% ( 2)                                                      9% ( 3)            
+&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;cerebrale                                                                                                                                                                         6% ( 1)                        11% ( 2)                                                      9% ( 3)            
 
-Esito&nbsp;TIP                                                                                                                                                                                      1557                                                                                                                             
+Esito&nbsp;TIP                                                                                                                                                                                      1591                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                        98% ( 875)                     97% ( 646)                     100% ( 2)                      98% (1523)          
+&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                        98% ( 898)                     97% ( 656)                     100% ( 2)                      98% (1556)          
 
-&nbsp;&nbsp;&nbsp;&nbsp;morto                                                                                                                                                                                        2% ( 16)                       3% ( 17)                       0% ( 0)                        2% ( 33)           
+&nbsp;&nbsp;&nbsp;&nbsp;morto                                                                                                                                                                                        2% ( 16)                       3% ( 18)                       0% ( 0)                        2% ( 34)           
 
-Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  1557                                                                                                                             
+Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  1591                                                                                                                             
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;acquisito                                                                                                                                                              2% ( 19)                       3% ( 20)                       0% ( 0)                        3% ( 39)           
+&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;acquisito                                                                                                                                                              2% ( 20)                       3% ( 20)                       0% ( 0)                        3% ( 40)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;congenito                                                                                                                                                              8% ( 74)                       8% ( 52)                       0% ( 0)                        8% (126)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;gastrointestinale                                                                                                                                                                            7% ( 62)                       6% ( 41)                       0% ( 0)                        7% (103)           
+&nbsp;&nbsp;&nbsp;&nbsp;gastrointestinale                                                                                                                                                                            7% ( 64)                       6% ( 42)                       0% ( 0)                        7% (106)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                    6% ( 50)                       4% ( 25)                       0% ( 0)                        5% ( 75)           
+&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                    6% ( 51)                       4% ( 25)                       0% ( 0)                        5% ( 76)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;miscellanea                                                                                                                                                                                 26% (233)                      28% (187)                       0% ( 0)                       27% (420)           
+&nbsp;&nbsp;&nbsp;&nbsp;miscellanea                                                                                                                                                                                 26% (242)                      29% (194)                       0% ( 0)                       27% (436)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                 18% (157)                      17% (114)                       0% ( 0)                       17% (271)           
+&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                 18% (162)                      17% (115)                       0% ( 0)                       17% (277)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;renale                                                                                                                                                                                       2% ( 20)                       1% ( 7)                        0% ( 0)                        2% ( 27)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;altro                                                                                                                                                                     8% ( 73)                      12% ( 80)                       0% ( 0)                       10% (153)           
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;altro                                                                                                                                                                     8% ( 74)                      12% ( 81)                       0% ( 0)                       10% (155)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;inferiore                                                                                                                                            18% (157)                      17% (112)                      100% ( 1)                      17% (270)           
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;inferiore                                                                                                                                            17% (159)                      17% (113)                      100% ( 1)                      17% (273)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;superiore                                                                                                                                             5% ( 46)                       4% ( 25)                       0% ( 0)                        5% ( 71)           
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;superiore                                                                                                                                             5% ( 48)                       4% ( 25)                       0% ( 0)                        5% ( 73)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;astinenza                                                                                                                                                              0% ( 0)                        0% ( 0)                        0% ( 0)                        0% ( 0)            
 
@@ -429,9 +429,9 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
 
 
  
-SMR PIM2 (overall):  0.54 
+SMR PIM2 (overall):  0.55 
   
-SMR PIM3 (overall):  0.76 
+SMR PIM3 (overall):  0.77 
 
 
 # Report centri {#centers}
@@ -2505,7 +2505,7 @@ bottom: -1ex;
 </style>
 
 <title>Accettazione Descriptives</title>
-<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   156  Observations</span></div></font>
+<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   157  Observations</span></div></font>
 <hr class="thinhr">
 <span style="font-weight:bold">Sesso</span>: 
 <style>
@@ -2526,13 +2526,13 @@ bottom: -1ex;
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable212999">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>155</td><td>1</td><td>2</td></tr>
+ <tr><td>156</td><td>1</td><td>2</td></tr>
  </table>
 
 <pre style="font-size:85%;">
  Value      maschio femmina
- Frequency       91      64
- Proportion   0.587   0.413 </pre>
+ Frequency       92      64
+ Proportion    0.59    0.41 </pre>
 
 <hr class="thinhr">
 <span style="font-weight:bold">Etnia</span>: <div style='float: right; text-align: right;'><img src="data:image/png;base64,
@@ -2555,13 +2555,13 @@ iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAACVBMVEUAAADMzMz////1iUV5AAAAIUlE
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable340498">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>155</td><td>1</td><td>5</td></tr>
+ <tr><td>156</td><td>1</td><td>5</td></tr>
  </table>
 
 <pre style="font-size:85%;">
  Value      caucasica  ispanica  asiatica  africana     araba
- Frequency        121         1        11        15         7
- Proportion     0.781     0.006     0.071     0.097     0.045 </pre>
+ Frequency        122         1        11        15         7
+ Proportion     0.782     0.006     0.071     0.096     0.045 </pre>
 
 <hr class="thinhr">
 ```
@@ -2570,18 +2570,18 @@ iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAACVBMVEUAAADMzMz////1iUV5AAAAIUlE
 ### Descrittive 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-&nbsp;                                                                                                                                                                                               N          maschio  (N=91)                femmina  (N=64)               Combined  (N=155)       
+&nbsp;                                                                                                                                                                                               N          maschio  (N=92)                femmina  (N=64)               Combined  (N=156)       
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----- ------------------------------ ------------------------------ ------------------------------
-Età&nbsp;(giorni)                                                                                                                                                                                   155    207.500/ 801.000/2289.000      265.500/1243.500/2870.000      251.000/ 943.000/2742.000   
-                                                                                                                                                                                                              1686.813+/-1975.078            1912.703+/-2001.002            1780.084+/-1982.478      
+Età&nbsp;(giorni)                                                                                                                                                                                   156    221.750/ 801.000/2170.500      265.500/1243.500/2870.000      251.500/ 936.500/2741.000   
+                                                                                                                                                                                                              1673.446+/-1968.376            1912.703+/-2001.002            1771.603+/-1978.910      
 
-Classe&nbsp;di&nbsp;età                                                                                                                                                                             156                                                                                              
+Classe&nbsp;di&nbsp;età                                                                                                                                                                             157                                                                                              
 
 &nbsp;&nbsp;&nbsp;&nbsp;neonati                                                                                                                                                                                     5% ( 5)                        6% ( 4)                        6% ( 9)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                    31% (28)                       25% (16)                       28% (44)           
+&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                    30% (28)                       25% (16)                       28% (44)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                  35% (32)                       28% (18)                       32% (50)           
+&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                  36% (33)                       28% (18)                       33% (51)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;scolare                                                                                                                                                                                     12% (11)                       27% (17)                       18% (28)           
 
@@ -2593,9 +2593,9 @@ Classe&nbsp;di&nbsp;età                                                        
 
 &nbsp;&nbsp;&nbsp;&nbsp;[dato&nbsp;mancante]                                                                                                                                                                        0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-Priorità                                                                                                                                                                                            155                                                                                              
+Priorità                                                                                                                                                                                            156                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                          70% ( 64)                      67% ( 43)                      69% (107)           
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                          71% ( 65)                      67% ( 43)                      69% (108)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                          25% ( 23)                      31% ( 20)                      28% ( 43)           
 
@@ -2605,19 +2605,19 @@ Priorità                                                                       
 
 &nbsp;&nbsp;&nbsp;&nbsp;4b                                                                                                                                                                                          0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-Ricovero&nbsp;programmato                                                                                                                                                                           151                                                                                              
+Ricovero&nbsp;programmato                                                                                                                                                                           152                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         30% ( 26)                      24% ( 15)                      27% ( 41)           
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         29% ( 26)                      24% ( 15)                      27% ( 41)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         70% ( 62)                      76% ( 48)                      73% (110)           
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         71% ( 63)                      76% ( 48)                      73% (111)           
 
-Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     155                                                                                              
+Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     156                                                                                              
 
 &nbsp;&nbsp;&nbsp;&nbsp;chirurgico                                                                                                                                                                                  38% (35)                       38% (24)                       38% (59)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                      60% (55)                       56% (36)                       59% (91)           
+&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                      60% (55)                       56% (36)                       58% (91)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                    1% ( 1)                        6% ( 4)                        3% ( 5)            
+&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                    2% ( 2)                        6% ( 4)                        4% ( 6)            
 
 Motivo&nbsp;del&nbsp;ricovero                                                                                                                                                                       91                                                                                               
 
@@ -2645,83 +2645,83 @@ Motivo&nbsp;del&nbsp;ricovero                                                   
 
 &nbsp;&nbsp;&nbsp;&nbsp;arresto&nbsp;cardiocircolatorio                                                                                                                                                             2% ( 1)                        3% ( 1)                        2% ( 2)            
 
-Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   155                                                                                              
+Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   156                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         74% ( 67)                      61% ( 39)                      68% (106)           
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         73% ( 67)                      61% ( 39)                      68% (106)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         26% ( 24)                      39% ( 25)                      32% ( 49)           
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         27% ( 25)                      39% ( 25)                      32% ( 50)           
 
-Comorbidità:&nbsp;cardiologica                                                                                                                                                                      156                                                                                              
+Comorbidità:&nbsp;cardiologica                                                                                                                                                                      157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      64% ( 58)                      80% ( 51)                      70% (109)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      64% ( 59)                      80% ( 51)                      71% (110)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       36% ( 33)                      20% ( 13)                      30% ( 46)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       36% ( 33)                      20% ( 13)                      29% ( 46)           
 
-Comorbidità:&nbsp;metabolica                                                                                                                                                                        156                                                                                              
+Comorbidità:&nbsp;metabolica                                                                                                                                                                        157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      99% ( 90)                      100% ( 64)                     99% (154)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      99% ( 91)                      100% ( 64)                     99% (155)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        1% ( 1)                        0% ( 0)                        1% ( 1)            
 
-Comorbidità:&nbsp;neurologica                                                                                                                                                                       156                                                                                              
+Comorbidità:&nbsp;neurologica                                                                                                                                                                       157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      91% ( 83)                      83% ( 53)                      88% (136)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      91% ( 84)                      83% ( 53)                      88% (137)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        9% ( 8)                       17% ( 11)                      12% ( 19)           
 
-Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    156                                                                                              
+Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      98% ( 89)                      98% ( 63)                      98% (152)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      98% ( 90)                      98% ( 63)                      98% (153)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        2% ( 2)                        2% ( 1)                        2% ( 3)            
 
-Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  156                                                                                              
+Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      87% ( 79)                      91% ( 58)                      88% (137)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      87% ( 80)                      91% ( 58)                      88% (138)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       13% ( 12)                       9% ( 6)                       12% ( 18)           
 
-Comorbidità:&nbsp;renale                                                                                                                                                                            156                                                                                              
+Comorbidità:&nbsp;renale                                                                                                                                                                            157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      81% ( 74)                      95% ( 61)                      87% (135)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      82% ( 75)                      95% ( 61)                      87% (136)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       19% ( 17)                       5% ( 3)                       13% ( 20)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       18% ( 17)                       5% ( 3)                       13% ( 20)           
 
-Comorbidità:&nbsp;respiratoria                                                                                                                                                                      156                                                                                              
+Comorbidità:&nbsp;respiratoria                                                                                                                                                                      157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      95% ( 86)                      97% ( 62)                      95% (148)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      95% ( 87)                      97% ( 62)                      96% (149)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        5% ( 5)                        3% ( 2)                        5% ( 7)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        5% ( 5)                        3% ( 2)                        4% ( 7)            
 
-Comorbidità:&nbsp;sindromica                                                                                                                                                                        156                                                                                              
+Comorbidità:&nbsp;sindromica                                                                                                                                                                        157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      81% ( 74)                      92% ( 59)                      86% (133)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      82% ( 75)                      92% ( 59)                      86% (134)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       19% ( 17)                       8% ( 5)                       14% ( 22)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       18% ( 17)                       8% ( 5)                       14% ( 22)           
 
-Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       156                                                                                              
+Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      96% ( 87)                      92% ( 59)                      94% (146)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      96% ( 88)                      92% ( 59)                      94% (147)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        4% ( 4)                        8% ( 5)                        6% ( 9)            
 
-Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      156                                                                                              
+Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      95% ( 86)                      98% ( 63)                      96% (149)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      95% ( 87)                      98% ( 63)                      96% (150)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        5% ( 5)                        2% ( 1)                        4% ( 6)            
 
-Comorbidità:&nbsp;altro                                                                                                                                                                             156                                                                                              
+Comorbidità:&nbsp;altro                                                                                                                                                                             157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      100% ( 91)                     98% ( 63)                      99% (154)           
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      100% ( 92)                     98% ( 63)                      99% (155)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        0% ( 0)                        2% ( 1)                        1% ( 1)            
 
-Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     156                                                                                              
+Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     157                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                           26% (24)                       41% (26)                       32% (50)           
+&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                           27% (25)                       41% (26)                       33% (51)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           42% (38)                       47% (30)                       44% (68)           
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           41% (38)                       47% (30)                       44% (68)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           23% (21)                       9% ( 6)                        17% (27)           
 
@@ -2735,28 +2735,28 @@ Comorbidità:&nbsp;trapiantologica                                              
 
 &nbsp;&nbsp;&nbsp;&nbsp;trapiantologica                                                                                                                                                                             100% (2)                       100% (1)                       100% (3)           
 
-PIM&nbsp;2                                                                                                                                                                                          146   1.177500/ 2.225000/ 5.020000   0.742500/ 1.925000/ 6.725000   0.997500/ 2.155000/ 5.447500 
-                                                                                                                                                                                                              6.508810+/-12.689148           8.320645+/-18.111678           7.278219+/-15.197846     
+PIM&nbsp;2                                                                                                                                                                                          147   1.210000/ 2.110000/ 4.910000   0.742500/ 1.925000/ 6.725000   1.005000/ 2.110000/ 5.415000 
+                                                                                                                                                                                                              6.448941+/-12.625462           8.320645+/-18.111678           7.238367+/-15.153415     
 
-PIM&nbsp;3                                                                                                                                                                                          146   0.725000/ 1.530000/ 3.077500   0.690000/ 1.300000/ 4.042500   0.712500/ 1.365000/ 3.360000 
-                                                                                                                                                                                                              3.830952+/-11.353227           5.652097+/-16.491202           4.604315+/-13.748028     
+PIM&nbsp;3                                                                                                                                                                                          147   0.730000/ 1.550000/ 3.050000   0.690000/ 1.300000/ 4.042500   0.715000/ 1.380000/ 3.340000 
+                                                                                                                                                                                                              3.808235+/-11.287389           5.652097+/-16.491202           4.585918+/-13.702680     
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   116                                                                                              
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   117                                                                                              
 
 &nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                                                         14% (10)                       15% ( 7)                       15% (17)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                          58% (40)                       66% (31)                       61% (71)           
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                          57% (40)                       66% (31)                       61% (71)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                          28% (19)                       19% ( 9)                       24% (28)           
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                          29% (20)                       19% ( 9)                       25% (29)           
 
-Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    47                                                                                               
+Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    48                                                                                               
 
-&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                    53% (17)                       80% (12)                       62% (29)           
+&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                    52% (17)                       80% (12)                       60% (29)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                  47% (15)                       20% ( 3)                       38% (18)           
+&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                  48% (16)                       20% ( 3)                       40% (19)           
 
-Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      152   1.000000/ 2.000000/ 8.000000   1.000000/ 2.000000/ 5.000000   1.000000/ 2.000000/ 7.250000 
-                                                                                                                                                                                                              8.292135+/-18.043006           6.222222+/-13.388060           7.434211+/-16.259351     
+Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      153   1.000000/ 2.500000/ 8.750000   1.000000/ 2.000000/ 5.000000   1.000000/ 2.000000/ 8.000000 
+                                                                                                                                                                                                              8.400000+/-17.970513           6.222222+/-13.388060           7.503268+/-16.228275     
 
 Modalità&nbsp;di&nbsp;decesso                                                                                                                                                                       10                                                                                               
 
@@ -2770,25 +2770,25 @@ Modalità&nbsp;di&nbsp;decesso                                                  
 
 &nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;cerebrale                                                                                                                                                                         0% (0)                        33% (2)                        20% (2)            
 
-Esito&nbsp;TIP                                                                                                                                                                                      154                                                                                              
+Esito&nbsp;TIP                                                                                                                                                                                      155                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                       96% ( 86)                      91% ( 58)                      94% (144)           
+&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                       96% ( 87)                      91% ( 58)                      94% (145)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;morto                                                                                                                                                                                       4% ( 4)                        9% ( 6)                        6% ( 10)           
 
-Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  154                                                                                              
+Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  155                                                                                              
 
 &nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;acquisito                                                                                                                                                             9% ( 8)                        11% ( 7)                       10% (15)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;congenito                                                                                                                                                             27% (24)                       14% ( 9)                       21% (33)           
+&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;congenito                                                                                                                                                             26% (24)                       14% ( 9)                       21% (33)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;gastrointestinale                                                                                                                                                                           3% ( 3)                        5% ( 3)                        4% ( 6)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                   4% ( 4)                        8% ( 5)                        6% ( 9)            
+&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                   5% ( 5)                        8% ( 5)                        6% (10)            
 
 &nbsp;&nbsp;&nbsp;&nbsp;miscellanea                                                                                                                                                                                 14% (13)                       14% ( 9)                       14% (22)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                 16% (14)                       25% (16)                       19% (30)           
+&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                 15% (14)                       25% (16)                       19% (30)           
 
 &nbsp;&nbsp;&nbsp;&nbsp;renale                                                                                                                                                                                      8% ( 7)                        3% ( 2)                        6% ( 9)            
 
@@ -2812,7 +2812,7 @@ Diagnosi&nbsp;alla&nbsp;dimissione                                              
  
 SMR PIM2:  0.94 
   
-SMR PIM3:  1.49 
+SMR PIM3:  1.48 
 
  
 ##  DAG: 9  {.tabset .tabset-fade .tabset-pills} 
@@ -2851,7 +2851,7 @@ bottom: -1ex;
 </style>
 
 <title>Accettazione Descriptives</title>
-<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   94  Observations</span></div></font>
+<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   100  Observations</span></div></font>
 <hr class="thinhr">
 <span style="font-weight:bold">Sesso</span>: 
 <style>
@@ -2872,13 +2872,13 @@ bottom: -1ex;
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable447502">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>94</td><td>0</td><td>2</td></tr>
+ <tr><td>100</td><td>0</td><td>2</td></tr>
  </table>
 
 <pre style="font-size:85%;">
  Value      maschio femmina
- Frequency       43      51
- Proportion   0.457   0.543 </pre>
+ Frequency       47      53
+ Proportion    0.47    0.53 </pre>
 
 <hr class="thinhr">
 <span style="font-weight:bold">Etnia</span>: <div style='float: right; text-align: right;'><img src="data:image/png;base64,
@@ -2901,239 +2901,239 @@ iVBORw0KGgoAAAANSUhEUgAAABYAAAANCAMAAACae25RAAAACVBMVEUAAADMzMz////1iUV5AAAAG0lE
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable112051">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>94</td><td>0</td><td>7</td></tr>
+ <tr><td>100</td><td>0</td><td>7</td></tr>
  </table>
 
 
-caucasica (83, 0.883), ispanica (1, 0.011), asiatica (2, 0.021), africana (5, 0.053), araba
-(1, 0.011), etnia mista (1, 0.011), non conosciuta/non riportata (1, 0.011)
+caucasica (89, 0.89), ispanica (1, 0.01), asiatica (2, 0.02), africana (5, 0.05), araba (1,
+0.01), etnia mista (1, 0.01), non conosciuta/non riportata (1, 0.01)
 <hr class="thinhr">
 ```
   
  
 ### Descrittive 
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-&nbsp;                                                                                                                                                                                              N           maschio  (N=43)                 femmina  (N=51)                Combined  (N=94)        
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---- ------------------------------- ------------------------------- -------------------------------
-Età&nbsp;(giorni)                                                                                                                                                                                   94     319.000/1936.000/2866.500       367.000/3537.000/5261.000       364.500/2217.000/5036.000   
-                                                                                                                                                                                                              2148.791+/-2073.137             2997.961+/-2586.979             2609.511+/-2391.647      
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&nbsp;                                                                                                                                                                                               N           maschio  (N=47)                 femmina  (N=53)                Combined  (N=100)       
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----- ------------------------------- ------------------------------- -------------------------------
+Età&nbsp;(giorni)                                                                                                                                                                                   100     388.000/2228.000/4636.500       372.000/3619.000/5340.000       376.500/2537.000/5233.250   
+                                                                                                                                                                                                               2435.489+/-2198.901             3111.434+/-2604.046             2793.740+/-2433.798      
 
-Classe&nbsp;di&nbsp;età                                                                                                                                                                             94                                                                                                 
+Classe&nbsp;di&nbsp;età                                                                                                                                                                             100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;neonati                                                                                                                                                                                     5% ( 2)                         2% ( 1)                         3% ( 3)            
+&nbsp;&nbsp;&nbsp;&nbsp;neonati                                                                                                                                                                                      4% ( 2)                         2% ( 1)                         3% ( 3)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                   21% ( 9)                        24% (12)                        22% (21)            
+&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                    19% ( 9)                        23% (12)                        21% (21)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                 21% ( 9)                        22% (11)                        21% (20)            
+&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                  19% ( 9)                        21% (11)                        20% (20)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;scolare                                                                                                                                                                                    33% (14)                        12% ( 6)                        21% (20)            
+&nbsp;&nbsp;&nbsp;&nbsp;scolare                                                                                                                                                                                     30% (14)                        11% ( 6)                        20% (20)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;adolescente                                                                                                                                                                                21% ( 9)                        35% (18)                        29% (27)            
+&nbsp;&nbsp;&nbsp;&nbsp;adolescente                                                                                                                                                                                 28% (13)                        38% (20)                        33% (33)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;adulto                                                                                                                                                                                      0% ( 0)                         6% ( 3)                         3% ( 3)            
+&nbsp;&nbsp;&nbsp;&nbsp;adulto                                                                                                                                                                                       0% ( 0)                         6% ( 3)                         3% ( 3)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;[giorni&nbsp;negativi]                                                                                                                                                                      0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;[giorni&nbsp;negativi]                                                                                                                                                                       0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;[dato&nbsp;mancante]                                                                                                                                                                        0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;[dato&nbsp;mancante]                                                                                                                                                                         0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-Priorità                                                                                                                                                                                            94                                                                                                 
+Priorità                                                                                                                                                                                            100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                          37% (16)                        37% (19)                        37% (35)            
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           34% (16)                        38% (20)                        36% (36)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                          58% (25)                        61% (31)                        60% (56)            
+&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           62% (29)                        60% (32)                        61% (61)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                           5% ( 2)                         0% ( 0)                         2% ( 2)            
+&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                            4% ( 2)                         0% ( 0)                         2% ( 2)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;4a                                                                                                                                                                                          0% ( 0)                         2% ( 1)                         1% ( 1)            
+&nbsp;&nbsp;&nbsp;&nbsp;4a                                                                                                                                                                                           0% ( 0)                         2% ( 1)                         1% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;4b                                                                                                                                                                                          0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;4b                                                                                                                                                                                           0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-Ricovero&nbsp;programmato                                                                                                                                                                           94                                                                                                 
+Ricovero&nbsp;programmato                                                                                                                                                                           100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         40% (17)                        63% (32)                        52% (49)            
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          45% (21)                        62% (33)                        54% (54)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         60% (26)                        37% (19)                        48% (45)            
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          55% (26)                        38% (20)                        46% (46)            
 
-Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     94                                                                                                 
+Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;chirurgico                                                                                                                                                                                 51% (22)                        65% (33)                        59% (55)            
+&nbsp;&nbsp;&nbsp;&nbsp;chirurgico                                                                                                                                                                                  55% (26)                        64% (34)                        60% (60)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                     37% (16)                        33% (17)                        35% (33)            
+&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                      34% (16)                        34% (18)                        34% (34)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                   12% ( 5)                         2% ( 1)                         6% ( 6)            
+&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                    11% ( 5)                         2% ( 1)                         6% ( 6)            
 
-Motivo&nbsp;del&nbsp;ricovero                                                                                                                                                                       33                                                                                                 
+Motivo&nbsp;del&nbsp;ricovero                                                                                                                                                                       34                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;respiratoria                                                                                                                                                            69% (11)                        71% (12)                        70% (23)            
+&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;respiratoria                                                                                                                                                             69% (11)                        67% (12)                        68% (23)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;alterato&nbsp;sensorio&nbsp;/&nbsp;crisi&nbsp;convulsive                                                                                                                                   25% ( 4)                        12% ( 2)                        18% ( 6)            
+&nbsp;&nbsp;&nbsp;&nbsp;alterato&nbsp;sensorio&nbsp;/&nbsp;crisi&nbsp;convulsive                                                                                                                                    25% ( 4)                        11% ( 2)                        18% ( 6)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;disordini&nbsp;metabolici&nbsp;/&nbsp;disidratazione                                                                                                                                        0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;disordini&nbsp;metabolici&nbsp;/&nbsp;disidratazione                                                                                                                                         0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;cardiocircolatoria&nbsp;(no&nbsp;shock&nbsp;settico)                                                                                                                     6% ( 1)                         0% ( 0)                         3% ( 1)            
+&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;cardiocircolatoria&nbsp;(no&nbsp;shock&nbsp;settico)                                                                                                                      6% ( 1)                         0% ( 0)                         3% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;renale&nbsp;acuta                                                                                                                                                        0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;renale&nbsp;acuta                                                                                                                                                         0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;diagnosi&nbsp;sepsi&nbsp;correlata&nbsp;(di&nbsp;natura&nbsp;diversa&nbsp;da&nbsp;respiro&nbsp;cuore&nbsp;snc)                                                                              0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;diagnosi&nbsp;sepsi&nbsp;correlata&nbsp;(di&nbsp;natura&nbsp;diversa&nbsp;da&nbsp;respiro&nbsp;cuore&nbsp;snc)                                                                               0% ( 0)                         6% ( 1)                         3% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;monitoraggio&nbsp;/&nbsp;osservazione                                                                                                                                                       0% ( 0)                        12% ( 2)                         6% ( 2)            
+&nbsp;&nbsp;&nbsp;&nbsp;monitoraggio&nbsp;/&nbsp;osservazione                                                                                                                                                        0% ( 0)                        11% ( 2)                         6% ( 2)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;programmato&nbsp;per&nbsp;procedure&nbsp;invasive                                                                                                                                           0% ( 0)                         6% ( 1)                         3% ( 1)            
+&nbsp;&nbsp;&nbsp;&nbsp;programmato&nbsp;per&nbsp;procedure&nbsp;invasive                                                                                                                                            0% ( 0)                         6% ( 1)                         3% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;asfissia&nbsp;perinatale                                                                                                                                                                    0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;asfissia&nbsp;perinatale                                                                                                                                                                     0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiopatia&nbsp;congenita                                                                                                                                                                  0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;cardiopatia&nbsp;congenita                                                                                                                                                                   0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;shock&nbsp;distributivo&nbsp;(settico)                                                                                                                                                      0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;shock&nbsp;distributivo&nbsp;(settico)                                                                                                                                                       0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;arresto&nbsp;cardiocircolatorio                                                                                                                                                             0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;arresto&nbsp;cardiocircolatorio                                                                                                                                                              0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   94                                                                                                 
+Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         44% (19)                        33% (17)                        38% (36)            
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          47% (22)                        34% (18)                        40% (40)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         56% (24)                        67% (34)                        62% (58)            
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          53% (25)                        66% (35)                        60% (60)            
 
-Comorbidità:&nbsp;cardiologica                                                                                                                                                                      94                                                                                                 
+Comorbidità:&nbsp;cardiologica                                                                                                                                                                      100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      93% (40)                        98% (50)                        96% (90)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       91% (43)                        98% (52)                        95% (95)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        7% ( 3)                         2% ( 1)                         4% ( 4)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         9% ( 4)                         2% ( 1)                         5% ( 5)            
 
-Comorbidità:&nbsp;metabolica                                                                                                                                                                        94                                                                                                 
+Comorbidità:&nbsp;metabolica                                                                                                                                                                        100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      98% (42)                        100% (51)                       99% (93)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       98% (46)                        100% (53)                       99% (99)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        2% ( 1)                         0% ( 0)                         1% ( 1)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         2% ( 1)                         0% ( 0)                         1% ( 1)            
 
-Comorbidità:&nbsp;neurologica                                                                                                                                                                       94                                                                                                 
+Comorbidità:&nbsp;neurologica                                                                                                                                                                       100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      84% (36)                        84% (43)                        84% (79)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       83% (39)                        85% (45)                        84% (84)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       16% ( 7)                        16% ( 8)                        16% (15)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        17% ( 8)                        15% ( 8)                        16% (16)            
 
-Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    94                                                                                                 
+Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      98% (42)                        94% (48)                        96% (90)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       98% (46)                        94% (50)                        96% (96)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        2% ( 1)                         6% ( 3)                         4% ( 4)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         2% ( 1)                         6% ( 3)                         4% ( 4)            
 
-Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  94                                                                                                 
+Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      91% (39)                        98% (50)                        95% (89)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       91% (43)                        98% (52)                        95% (95)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        9% ( 4)                         2% ( 1)                         5% ( 5)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         9% ( 4)                         2% ( 1)                         5% ( 5)            
 
-Comorbidità:&nbsp;renale                                                                                                                                                                            94                                                                                                 
+Comorbidità:&nbsp;renale                                                                                                                                                                            100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      100% (43)                       98% (50)                        99% (93)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       100% (47)                       98% (52)                        99% (99)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        0% ( 0)                         2% ( 1)                         1% ( 1)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         0% ( 0)                         2% ( 1)                         1% ( 1)            
 
-Comorbidità:&nbsp;respiratoria                                                                                                                                                                      94                                                                                                 
+Comorbidità:&nbsp;respiratoria                                                                                                                                                                      100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      95% (41)                        98% (50)                        97% (91)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       96% (45)                        98% (52)                        97% (97)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        5% ( 2)                         2% ( 1)                         3% ( 3)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         4% ( 2)                         2% ( 1)                         3% ( 3)            
 
-Comorbidità:&nbsp;sindromica                                                                                                                                                                        94                                                                                                 
+Comorbidità:&nbsp;sindromica                                                                                                                                                                        100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      77% (33)                        90% (46)                        84% (79)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       77% (36)                        89% (47)                        83% (83)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       23% (10)                        10% ( 5)                        16% (15)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        23% (11)                        11% ( 6)                        17% (17)            
 
-Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       94                                                                                                 
+Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      98% (42)                        94% (48)                        96% (90)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       98% (46)                        94% (50)                        96% (96)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        2% ( 1)                         6% ( 3)                         4% ( 4)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         2% ( 1)                         6% ( 3)                         4% ( 4)            
 
-Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      94                                                                                                 
+Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      86% (37)                        94% (48)                        90% (85)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       85% (40)                        94% (50)                        90% (90)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       14% ( 6)                         6% ( 3)                        10% ( 9)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        15% ( 7)                         6% ( 3)                        10% (10)            
 
-Comorbidità:&nbsp;altro                                                                                                                                                                             94                                                                                                 
+Comorbidità:&nbsp;altro                                                                                                                                                                             100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      100% (43)                       98% (50)                        99% (93)            
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                       100% (47)                       98% (52)                        99% (99)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        0% ( 0)                         2% ( 1)                         1% ( 1)            
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                         0% ( 0)                         2% ( 1)                         1% ( 1)            
 
-Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     94                                                                                                 
+Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     100                                                                                                 
 
-&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                          60% (26)                        75% (38)                        68% (64)            
+&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                           57% (27)                        74% (39)                        66% (66)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                          14% ( 6)                         8% ( 4)                        11% (10)            
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           17% ( 8)                         9% ( 5)                        13% (13)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                          16% ( 7)                        10% ( 5)                        13% (12)            
+&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           17% ( 8)                         9% ( 5)                        13% (13)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                           2% ( 1)                         6% ( 3)                         4% ( 4)            
+&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                            2% ( 1)                         6% ( 3)                         4% ( 4)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;4                                                                                                                                                                                           7% ( 3)                         2% ( 1)                         4% ( 4)            
+&nbsp;&nbsp;&nbsp;&nbsp;4                                                                                                                                                                                            6% ( 3)                         2% ( 1)                         4% ( 4)            
 
-Comorbidità:&nbsp;gastroenterologica                                                                                                                                                                6                                                                                                  
+Comorbidità:&nbsp;gastroenterologica                                                                                                                                                                 6                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;gastroenterologica                                                                                                                                                                         100% (1)                        100% (5)                        100% (6)            
+&nbsp;&nbsp;&nbsp;&nbsp;gastroenterologica                                                                                                                                                                          100% (1)                        100% (5)                        100% (6)            
 
-PIM&nbsp;2                                                                                                                                                                                          78   0.1850000/0.7200000/1.5550000   0.1550000/0.4100000/0.8650000   0.1725000/0.5300000/1.1825000 
-                                                                                                                                                                                                             1.6951282+/-2.2133315           0.7130769+/-0.9239878           1.2041026+/-1.7558980     
+PIM&nbsp;2                                                                                                                                                                                          83    0.1650000/0.7000000/1.3400000   0.1575000/0.3800000/0.8625000   0.1600000/0.4500000/1.1500000 
+                                                                                                                                                                                                              1.5618605+/-2.1486322           0.7000000+/-0.9158071           1.1465060+/-1.7179131     
 
-PIM&nbsp;3                                                                                                                                                                                          78   0.2150000/0.4700000/1.5250000   0.1850000/0.3200000/0.6050000   0.2100000/0.3800000/1.2500000 
-                                                                                                                                                                                                             1.3207692+/-1.7023689           0.6538462+/-0.8693513           0.9873077+/-1.3841352     
+PIM&nbsp;3                                                                                                                                                                                          83    0.2050000/0.4300000/1.4600000   0.1875000/0.3050000/0.5975000   0.1950000/0.3700000/1.2150000 
+                                                                                                                                                                                                              1.2183721+/-1.6522826           0.6432500+/-0.8607462           0.9412048+/-1.3543538     
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   39                                                                                                 
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   41                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                                                        38% ( 8)                        50% ( 9)                        44% (17)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                                                         43% (10)                        50% ( 9)                        46% (19)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                         33% ( 7)                        44% ( 8)                        38% (15)            
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                          30% ( 7)                        44% ( 8)                        37% (15)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                         29% ( 6)                         6% ( 1)                        18% ( 7)            
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                          26% ( 6)                         6% ( 1)                        17% ( 7)            
 
-Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    25                                                                                                 
+Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    25                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                   69% ( 9)                        100% (12)                       84% (21)            
+&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                    69% ( 9)                        100% (12)                       84% (21)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                 31% ( 4)                         0% ( 0)                        16% ( 4)            
+&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                  31% ( 4)                         0% ( 0)                        16% ( 4)            
 
-Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      84    1.000000/2.000000/4.000000      1.000000/2.000000/2.000000      1.000000/2.000000/3.250000   
-                                                                                                                                                                                                              3.236842+/-3.017375             2.065217+/-1.436078             2.595238+/-2.349668      
+Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      89     1.000000/2.000000/4.000000      1.000000/2.000000/2.000000      1.000000/2.000000/3.000000   
+                                                                                                                                                                                                               3.166667+/-2.895890             2.063830+/-1.420414             2.584270+/-2.295297      
 
-Esito&nbsp;TIP                                                                                                                                                                                      85                                                                                                 
+Esito&nbsp;TIP                                                                                                                                                                                      90                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                       100% (38)                       100% (47)                       100% (85)           
+&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                        100% (42)                       100% (48)                       100% (90)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;morto                                                                                                                                                                                       0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;morto                                                                                                                                                                                        0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  85                                                                                                 
+Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  90                                                                                                  
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;acquisito                                                                                                                                                             3% ( 1)                         2% ( 1)                         2% ( 2)            
+&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;acquisito                                                                                                                                                              2% ( 1)                         2% ( 1)                         2% ( 2)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;congenito                                                                                                                                                             0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;congenito                                                                                                                                                              0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;gastrointestinale                                                                                                                                                                          16% ( 6)                         9% ( 4)                        12% (10)            
+&nbsp;&nbsp;&nbsp;&nbsp;gastrointestinale                                                                                                                                                                           14% ( 6)                         8% ( 4)                        11% (10)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                  13% ( 5)                         2% ( 1)                         7% ( 6)            
+&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                   12% ( 5)                         2% ( 1)                         7% ( 6)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;miscellanea                                                                                                                                                                                29% (11)                        60% (28)                        46% (39)            
+&nbsp;&nbsp;&nbsp;&nbsp;miscellanea                                                                                                                                                                                 36% (15)                        60% (29)                        49% (44)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                 8% ( 3)                         9% ( 4)                         8% ( 7)            
+&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                  7% ( 3)                         8% ( 4)                         8% ( 7)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;renale                                                                                                                                                                                      3% ( 1)                         0% ( 0)                         1% ( 1)            
+&nbsp;&nbsp;&nbsp;&nbsp;renale                                                                                                                                                                                       2% ( 1)                         0% ( 0)                         1% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;altro                                                                                                                                                                   11% ( 4)                         6% ( 3)                         8% ( 7)            
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;altro                                                                                                                                                                    10% ( 4)                         6% ( 3)                         8% ( 7)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;inferiore                                                                                                                                           13% ( 5)                        11% ( 5)                        12% (10)            
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;inferiore                                                                                                                                            12% ( 5)                        10% ( 5)                        11% (10)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;superiore                                                                                                                                            5% ( 2)                         2% ( 1)                         4% ( 3)            
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;superiore                                                                                                                                             5% ( 2)                         2% ( 1)                         3% ( 3)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;astinenza                                                                                                                                                             0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;astinenza                                                                                                                                                              0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;delirium                                                                                                                                                              0% ( 0)                         0% ( 0)                         0% ( 0)            
+&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;delirium                                                                                                                                                               0% ( 0)                         0% ( 0)                         0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;altro                                                                                                                                                                                       0% ( 0)                         0% ( 0)                         0% ( 0)            
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&nbsp;&nbsp;&nbsp;&nbsp;altro                                                                                                                                                                                        0% ( 0)                         0% ( 0)                         0% ( 0)            
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  
   
@@ -3181,7 +3181,7 @@ bottom: -1ex;
 </style>
 
 <title>Accettazione Descriptives</title>
-<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   136  Observations</span></div></font>
+<font color="MidnightBlue"><div align=center><span style="font-weight:bold">Accettazione <br><br> 2  Variables   163  Observations</span></div></font>
 <hr class="thinhr">
 <span style="font-weight:bold">Sesso</span>: 
 <style>
@@ -3202,13 +3202,13 @@ bottom: -1ex;
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable444148">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>136</td><td>0</td><td>2</td></tr>
+ <tr><td>163</td><td>0</td><td>2</td></tr>
  </table>
 
 <pre style="font-size:85%;">
  Value      maschio femmina
- Frequency       80      56
- Proportion   0.588   0.412 </pre>
+ Frequency       98      65
+ Proportion   0.601   0.399 </pre>
 
 <hr class="thinhr">
 <span style="font-weight:bold">Etnia</span>: <div style='float: right; text-align: right;'><img src="data:image/png;base64,
@@ -3231,260 +3231,262 @@ iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAACVBMVEUAAADMzMz////1iUV5AAAAHklE
  </style>
  <table data-quarto-disable-processing="true" class="hmisctable882720">
  <tr><th>n</th><th>missing</th><th>distinct</th></tr>
- <tr><td>136</td><td>0</td><td>5</td></tr>
+ <tr><td>163</td><td>0</td><td>5</td></tr>
  </table>
 
 
-caucasica (107, 0.787), asiatica (8, 0.059), africana (8, 0.059), araba (9, 0.066), non
-conosciuta/non riportata (4, 0.029)
+caucasica (130, 0.798), asiatica (9, 0.055), africana (9, 0.055), araba (10, 0.061), non
+conosciuta/non riportata (5, 0.031)
 <hr class="thinhr">
 ```
   
  
 ### Descrittive 
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-&nbsp;                                                                                                                                                                                               N         maschio  (N=80)              femmina  (N=56)             Combined  (N=136)      
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----- ---------------------------- ---------------------------- ----------------------------
-Età&nbsp;(giorni)                                                                                                                                                                                   136   160.000/ 430.500/2022.000     66.500/ 385.500/1575.250     85.750/ 399.000/2017.500  
-                                                                                                                                                                                                             1455.675+/-2162.143          1525.946+/-2525.547          1484.610+/-2309.863     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&nbsp;                                                                                                                                                                                               N          maschio  (N=98)                femmina  (N=65)               Combined  (N=163)       
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----- ------------------------------ ------------------------------ ------------------------------
+Età&nbsp;(giorni)                                                                                                                                                                                   163    166.000/ 542.500/2015.750       67.000/ 396.000/1741.000      108.500/ 531.000/2014.500   
+                                                                                                                                                                                                              1411.857+/-2020.662            1515.862+/-2402.284            1453.331+/-2174.236      
 
-Classe&nbsp;di&nbsp;età                                                                                                                                                                             136                                                                                        
+Classe&nbsp;di&nbsp;età                                                                                                                                                                             163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;neonati                                                                                                                                                                                    11% ( 9)                     14% ( 8)                     12% (17)          
+&nbsp;&nbsp;&nbsp;&nbsp;neonati                                                                                                                                                                                     9% ( 9)                        15% (10)                       12% (19)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                   38% (30)                     34% (19)                     36% (49)          
+&nbsp;&nbsp;&nbsp;&nbsp;lattanti                                                                                                                                                                                    36% (35)                       32% (21)                       34% (56)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                 21% (17)                     29% (16)                     24% (33)          
+&nbsp;&nbsp;&nbsp;&nbsp;prescolare                                                                                                                                                                                  26% (25)                       28% (18)                       26% (43)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;scolare                                                                                                                                                                                    21% (17)                     11% ( 6)                     17% (23)          
+&nbsp;&nbsp;&nbsp;&nbsp;scolare                                                                                                                                                                                     22% (22)                       14% ( 9)                       19% (31)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;adolescente                                                                                                                                                                                5% ( 4)                      7% ( 4)                      6% ( 8)           
+&nbsp;&nbsp;&nbsp;&nbsp;adolescente                                                                                                                                                                                 4% ( 4)                        6% ( 4)                        5% ( 8)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;adulto                                                                                                                                                                                     4% ( 3)                      5% ( 3)                      4% ( 6)           
+&nbsp;&nbsp;&nbsp;&nbsp;adulto                                                                                                                                                                                      3% ( 3)                        5% ( 3)                        4% ( 6)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;[giorni&nbsp;negativi]                                                                                                                                                                     0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;[giorni&nbsp;negativi]                                                                                                                                                                      0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;[dato&nbsp;mancante]                                                                                                                                                                       0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;[dato&nbsp;mancante]                                                                                                                                                                        0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-Priorità                                                                                                                                                                                            136                                                                                        
+Priorità                                                                                                                                                                                            163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                          25% (20)                     43% (24)                     32% (44)          
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           26% (25)                       46% (30)                       34% (55)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                          64% (51)                     45% (25)                     56% (76)          
+&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           63% (62)                       43% (28)                       55% (90)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                          11% ( 9)                     12% ( 7)                     12% (16)          
+&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                           11% (11)                       11% ( 7)                       11% (18)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;4a                                                                                                                                                                                         0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;4a                                                                                                                                                                                          0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;4b                                                                                                                                                                                         0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;4b                                                                                                                                                                                          0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-Ricovero&nbsp;programmato                                                                                                                                                                           126                                                                                        
+Ricovero&nbsp;programmato                                                                                                                                                                           151                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         64% (47)                     60% (32)                     63% (79)          
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          62% (56)                       60% (36)                       61% (92)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         36% (26)                     40% (21)                     37% (47)          
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          38% (35)                       40% (24)                       39% (59)           
 
-Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     136                                                                                        
+Tipologia&nbsp;di&nbsp;ricovero                                                                                                                                                                     163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;chirurgico                                                                                                                                                                                 69% (55)                     66% (37)                     68% (92)          
+&nbsp;&nbsp;&nbsp;&nbsp;chirurgico                                                                                                                                                                                 69% ( 68)                      63% ( 41)                      67% (109)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                     30% (24)                     32% (18)                     31% (42)          
+&nbsp;&nbsp;&nbsp;&nbsp;medico                                                                                                                                                                                     30% ( 29)                      35% ( 23)                      32% ( 52)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                   1% ( 1)                      2% ( 1)                      1% ( 2)           
+&nbsp;&nbsp;&nbsp;&nbsp;trauma,&nbsp;ustione,&nbsp;intossicazione,&nbsp;annegamento,&nbsp;avvelenamento,&nbsp;folgorazione,&nbsp;inalazione&nbsp;di&nbsp;fumo,&nbsp;ipotermia,&nbsp;soffocamento                    1% ( 1)                        2% ( 1)                        1% ( 2)            
 
-Motivo&nbsp;del&nbsp;ricovero                                                                                                                                                                       42                                                                                         
+Motivo&nbsp;del&nbsp;ricovero                                                                                                                                                                       52                                                                                               
 
-&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;respiratoria                                                                                                                                                            58% (14)                     78% (14)                     67% (28)          
+&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;respiratoria                                                                                                                                                             59% (17)                       70% (16)                       63% (33)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;alterato&nbsp;sensorio&nbsp;/&nbsp;crisi&nbsp;convulsive                                                                                                                                   8% ( 2)                      6% ( 1)                      7% ( 3)           
+&nbsp;&nbsp;&nbsp;&nbsp;alterato&nbsp;sensorio&nbsp;/&nbsp;crisi&nbsp;convulsive                                                                                                                                    14% ( 4)                       9% ( 2)                        12% ( 6)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;disordini&nbsp;metabolici&nbsp;/&nbsp;disidratazione                                                                                                                                       4% ( 1)                      0% ( 0)                      2% ( 1)           
+&nbsp;&nbsp;&nbsp;&nbsp;disordini&nbsp;metabolici&nbsp;/&nbsp;disidratazione                                                                                                                                        3% ( 1)                        0% ( 0)                        2% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;cardiocircolatoria&nbsp;(no&nbsp;shock&nbsp;settico)                                                                                                                    0% ( 0)                      11% ( 2)                     5% ( 2)           
+&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;cardiocircolatoria&nbsp;(no&nbsp;shock&nbsp;settico)                                                                                                                     0% ( 0)                        9% ( 2)                        4% ( 2)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;renale&nbsp;acuta                                                                                                                                                       0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;insufficienza&nbsp;renale&nbsp;acuta                                                                                                                                                        0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;diagnosi&nbsp;sepsi&nbsp;correlata&nbsp;(di&nbsp;natura&nbsp;diversa&nbsp;da&nbsp;respiro&nbsp;cuore&nbsp;snc)                                                                             0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;diagnosi&nbsp;sepsi&nbsp;correlata&nbsp;(di&nbsp;natura&nbsp;diversa&nbsp;da&nbsp;respiro&nbsp;cuore&nbsp;snc)                                                                              0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;monitoraggio&nbsp;/&nbsp;osservazione                                                                                                                                                      17% ( 4)                     0% ( 0)                      10% ( 4)          
+&nbsp;&nbsp;&nbsp;&nbsp;monitoraggio&nbsp;/&nbsp;osservazione                                                                                                                                                       14% ( 4)                       0% ( 0)                        8% ( 4)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;programmato&nbsp;per&nbsp;procedure&nbsp;invasive                                                                                                                                          0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;programmato&nbsp;per&nbsp;procedure&nbsp;invasive                                                                                                                                           0% ( 0)                        4% ( 1)                        2% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;asfissia&nbsp;perinatale                                                                                                                                                                   8% ( 2)                      0% ( 0)                      5% ( 2)           
+&nbsp;&nbsp;&nbsp;&nbsp;asfissia&nbsp;perinatale                                                                                                                                                                    7% ( 2)                        0% ( 0)                        4% ( 2)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiopatia&nbsp;congenita                                                                                                                                                                 4% ( 1)                      0% ( 0)                      2% ( 1)           
+&nbsp;&nbsp;&nbsp;&nbsp;cardiopatia&nbsp;congenita                                                                                                                                                                  3% ( 1)                        0% ( 0)                        2% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;shock&nbsp;distributivo&nbsp;(settico)                                                                                                                                                     0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;shock&nbsp;distributivo&nbsp;(settico)                                                                                                                                                      0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;arresto&nbsp;cardiocircolatorio                                                                                                                                                            0% ( 0)                      6% ( 1)                      2% ( 1)           
+&nbsp;&nbsp;&nbsp;&nbsp;arresto&nbsp;cardiocircolatorio                                                                                                                                                             0% ( 0)                        9% ( 2)                        4% ( 2)            
 
-Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   136                                                                                        
+Presenza&nbsp;di&nbsp;comorbidità                                                                                                                                                                   163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                         50% (40)                     66% (37)                     57% (77)          
+&nbsp;&nbsp;&nbsp;&nbsp;si                                                                                                                                                                                          49% (48)                       71% (46)                       58% (94)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                         50% (40)                     34% (19)                     43% (59)          
+&nbsp;&nbsp;&nbsp;&nbsp;no                                                                                                                                                                                          51% (50)                       29% (19)                       42% (69)           
 
-Comorbidità:&nbsp;cardiologica                                                                                                                                                                      136                                                                                        
+Comorbidità:&nbsp;cardiologica                                                                                                                                                                      163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     96% ( 77)                    88% ( 49)                    93% (126)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      96% ( 94)                      86% ( 56)                      92% (150)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       4% ( 3)                      12% ( 7)                     7% ( 10)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        4% ( 4)                        14% ( 9)                       8% ( 13)           
 
-Comorbidità:&nbsp;metabolica                                                                                                                                                                        136                                                                                        
+Comorbidità:&nbsp;metabolica                                                                                                                                                                        163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     100% ( 80)                   96% ( 54)                    99% (134)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      100% ( 98)                     97% ( 63)                      99% (161)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       0% ( 0)                      4% ( 2)                      1% ( 2)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        0% ( 0)                        3% ( 2)                        1% ( 2)            
 
-Comorbidità:&nbsp;neurologica                                                                                                                                                                       136                                                                                        
+Comorbidità:&nbsp;neurologica                                                                                                                                                                       163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     76% ( 61)                    86% ( 48)                    80% (109)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      80% ( 78)                      88% ( 57)                      83% (135)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                      24% ( 19)                     14% ( 8)                    20% ( 27)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       20% ( 20)                       12% ( 8)                      17% ( 28)           
 
-Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    136                                                                                        
+Comorbidità:&nbsp;neuromuscolare                                                                                                                                                                    163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     92% ( 74)                    98% ( 55)                    95% (129)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      94% ( 92)                      98% ( 64)                      96% (156)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       8% ( 6)                      2% ( 1)                      5% ( 7)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        6% ( 6)                        2% ( 1)                        4% ( 7)            
 
-Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  136                                                                                        
+Comorbidità:&nbsp;onco-ematologica                                                                                                                                                                  163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     99% ( 79)                    84% ( 47)                    93% (126)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      97% ( 95)                      83% ( 54)                      91% (149)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       1% ( 1)                      16% ( 9)                     7% ( 10)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        3% ( 3)                       17% ( 11)                       9% ( 14)           
 
-Comorbidità:&nbsp;renale                                                                                                                                                                            136                                                                                        
+Comorbidità:&nbsp;renale                                                                                                                                                                            163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     96% ( 77)                    100% ( 56)                   98% (133)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      96% ( 94)                      100% ( 65)                     98% (159)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       4% ( 3)                      0% ( 0)                      2% ( 3)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        4% ( 4)                        0% ( 0)                        2% ( 4)            
 
-Comorbidità:&nbsp;respiratoria                                                                                                                                                                      136                                                                                        
+Comorbidità:&nbsp;respiratoria                                                                                                                                                                      163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     92% ( 74)                    88% ( 49)                    90% (123)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      92% ( 90)                      86% ( 56)                      90% (146)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       8% ( 6)                      12% ( 7)                    10% ( 13)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        8% ( 8)                        14% ( 9)                      10% ( 17)           
 
-Comorbidità:&nbsp;sindromica                                                                                                                                                                        136                                                                                        
+Comorbidità:&nbsp;sindromica                                                                                                                                                                        163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     95% ( 76)                    88% ( 49)                    92% (125)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      94% ( 92)                      86% ( 56)                      91% (148)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       5% ( 4)                      12% ( 7)                     8% ( 11)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        6% ( 6)                        14% ( 9)                       9% ( 15)           
 
-Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       136                                                                                        
+Comorbidità:&nbsp;malformato/esiti&nbsp;di&nbsp;malformazione                                                                                                                                       163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     78% ( 62)                    79% ( 44)                    78% (106)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      80% ( 78)                      75% ( 49)                      78% (127)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                      22% ( 18)                    21% ( 12)                    22% ( 30)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       20% ( 20)                      25% ( 16)                      22% ( 36)           
 
-Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      136                                                                                        
+Comorbidità:&nbsp;ex-prematuro                                                                                                                                                                      163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     98% ( 78)                    93% ( 52)                    96% (130)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      97% ( 95)                      94% ( 61)                      96% (156)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       2% ( 2)                      7% ( 4)                      4% ( 6)           
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        3% ( 3)                        6% ( 4)                        4% ( 7)            
 
-Comorbidità:&nbsp;altro                                                                                                                                                                             136                                                                                        
+Comorbidità:&nbsp;altro                                                                                                                                                                             163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                     92% ( 74)                    91% ( 51)                    92% (125)          
+&nbsp;&nbsp;&nbsp;&nbsp;FALSE                                                                                                                                                                                      92% ( 90)                      91% ( 59)                      91% (149)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                       8% ( 6)                      9% ( 5)                      8% ( 11)          
+&nbsp;&nbsp;&nbsp;&nbsp;TRUE                                                                                                                                                                                        8% ( 8)                        9% ( 6)                        9% ( 14)           
 
-Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     136                                                                                        
+Numero&nbsp;di&nbsp;comorbidità                                                                                                                                                                     163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                          50% (40)                     34% (19)                     43% (59)          
+&nbsp;&nbsp;&nbsp;&nbsp;0                                                                                                                                                                                           51% (50)                       29% (19)                       42% (69)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                          25% (20)                     39% (22)                     31% (42)          
+&nbsp;&nbsp;&nbsp;&nbsp;1                                                                                                                                                                                           27% (26)                       43% (28)                       33% (54)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                          19% (15)                     14% ( 8)                     17% (23)          
+&nbsp;&nbsp;&nbsp;&nbsp;2                                                                                                                                                                                           15% (15)                       15% (10)                       15% (25)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                          2% ( 2)                      7% ( 4)                      4% ( 6)           
+&nbsp;&nbsp;&nbsp;&nbsp;3                                                                                                                                                                                           3% ( 3)                        8% ( 5)                        5% ( 8)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;4                                                                                                                                                                                          4% ( 3)                      5% ( 3)                      4% ( 6)           
+&nbsp;&nbsp;&nbsp;&nbsp;4                                                                                                                                                                                           3% ( 3)                        5% ( 3)                        4% ( 6)            
 
-Comorbidità:&nbsp;gastroenterologica                                                                                                                                                                 2                                                                                         
+&nbsp;&nbsp;&nbsp;&nbsp;5                                                                                                                                                                                           1% ( 1)                        0% ( 0)                        1% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;gastroenterologica                                                                                                                                                                         100% (1)                     100% (1)                     100% (2)          
+Comorbidità:&nbsp;gastroenterologica                                                                                                                                                                 5                                                                                               
 
-PIM&nbsp;2                                                                                                                                                                                          120   0.225000/0.650000/1.765000   0.540000/0.900000/2.970000   0.247500/0.755000/2.057500 
-                                                                                                                                                                                                             2.750423+/-7.181584          3.904694+/-9.773408          3.221750+/-8.318160     
+&nbsp;&nbsp;&nbsp;&nbsp;gastroenterologica                                                                                                                                                                          100% (3)                       100% (2)                       100% (5)           
 
-PIM&nbsp;3                                                                                                                                                                                          120   0.215000/0.520000/0.995000   0.370000/0.640000/1.860000   0.247500/0.575000/1.407500 
-                                                                                                                                                                                                             2.225634+/-6.359110          2.474694+/-5.544807          2.327333+/-6.016946     
+PIM&nbsp;2                                                                                                                                                                                          147   0.200000/ 0.590000/ 1.600000   0.245000/ 0.880000/ 3.270000   0.205000/ 0.710000/ 1.855000 
+                                                                                                                                                                                                              2.588876+/- 6.941098           5.233966+/-13.004224           3.632517+/- 9.835874     
 
-Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   68                                                                                         
+PIM&nbsp;3                                                                                                                                                                                          147   0.220000/ 0.480000/ 0.950000   0.250000/ 0.635000/ 1.995000   0.220000/ 0.530000/ 1.320000 
+                                                                                                                                                                                                              2.024719+/- 5.885829           3.689655+/-10.051910           2.681633+/- 7.809923     
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                                                        22% ( 8)                     16% ( 5)                     19% (13)          
+Tecnica&nbsp;di&nbsp;ventilazione                                                                                                                                                                   81                                                                                               
 
-&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                         70% (26)                     68% (21)                     69% (47)          
+&nbsp;&nbsp;&nbsp;&nbsp;niv                                                                                                                                                                                         20% ( 9)                       14% ( 5)                       17% (14)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                         8% ( 3)                      16% ( 5)                     12% ( 8)          
+&nbsp;&nbsp;&nbsp;&nbsp;it                                                                                                                                                                                          70% (31)                       70% (26)                       70% (57)           
 
-Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    24                                                                                         
+&nbsp;&nbsp;&nbsp;&nbsp;niv&nbsp;e&nbsp;it                                                                                                                                                                          9% ( 4)                        16% ( 6)                       12% (10)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                   85% (11)                     82% ( 9)                     83% (20)          
+Tipologia&nbsp;di&nbsp;infezione                                                                                                                                                                    32                                                                                               
 
-&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                 15% ( 2)                     18% ( 2)                     17% ( 4)          
+&nbsp;&nbsp;&nbsp;&nbsp;comunità                                                                                                                                                                                    89% (16)                       71% (10)                       81% (26)           
 
-Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      135   1.000000/2.000000/4.250000   1.000000/2.000000/8.000000   1.000000/2.000000/5.000000 
-                                                                                                                                                                                                             4.550000+/-9.176056          5.381818+/-6.010765          4.888889+/-8.022977     
+&nbsp;&nbsp;&nbsp;&nbsp;nosocomiale&nbsp;(dopo&nbsp;48h&nbsp;da&nbsp;inizio&nbsp;ospedalizzazione)                                                                                                                  11% ( 2)                       29% ( 4)                       19% ( 6)           
 
-Modalità&nbsp;di&nbsp;decesso                                                                                                                                                                        1                                                                                         
+Durata&nbsp;della&nbsp;degenza                                                                                                                                                                      163    1.000000/2.000000/4.000000     1.000000/2.000000/9.000000     1.000000/2.000000/5.000000  
+                                                                                                                                                                                                              4.551020+/-8.796816            6.015385+/-7.490603            5.134969+/-8.307750      
 
-&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;nonostante&nbsp;rianimazione&nbsp;cardiopolmonare                                                                                                                               0% ( 0)                                                   0% ( 0)           
+Modalità&nbsp;di&nbsp;decesso                                                                                                                                                                        2                                                                                               
 
-&nbsp;&nbsp;&nbsp;&nbsp;sospensione&nbsp;dei&nbsp;trattamenti&nbsp;di&nbsp;supporto&nbsp;vitale                                                                                                                    0% ( 0)                                                   0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;nonostante&nbsp;rianimazione&nbsp;cardiopolmonare                                                                                                                                 0% (0)                        100% (1)                       50% (1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;astensione&nbsp;dall'iniziare&nbsp;trattamenti&nbsp;di&nbsp;supporto&nbsp;vitale                                                                                                           0% ( 0)                                                   0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;sospensione&nbsp;dei&nbsp;trattamenti&nbsp;di&nbsp;supporto&nbsp;vitale                                                                                                                      0% (0)                         0% (0)                         0% (0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;decisione&nbsp;di&nbsp;non&nbsp;rianimare                                                                                                                                                  0% ( 0)                                                   0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;astensione&nbsp;dall'iniziare&nbsp;trattamenti&nbsp;di&nbsp;supporto&nbsp;vitale                                                                                                             0% (0)                         0% (0)                         0% (0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;cerebrale                                                                                                                                                                      100% ( 1)                                                 100% ( 1)          
+&nbsp;&nbsp;&nbsp;&nbsp;decisione&nbsp;di&nbsp;non&nbsp;rianimare                                                                                                                                                    0% (0)                         0% (0)                         0% (0)            
 
-Esito&nbsp;TIP                                                                                                                                                                                      135                                                                                        
+&nbsp;&nbsp;&nbsp;&nbsp;morte&nbsp;cerebrale                                                                                                                                                                        100% (1)                        0% (0)                        50% (1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                      99% ( 79)                    100% ( 55)                   99% (134)          
+Esito&nbsp;TIP                                                                                                                                                                                      163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;morto                                                                                                                                                                                      1% ( 1)                      0% ( 0)                      1% ( 1)           
+&nbsp;&nbsp;&nbsp;&nbsp;vivo                                                                                                                                                                                       99% ( 97)                      98% ( 64)                      99% (161)           
 
-Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  135                                                                                        
+&nbsp;&nbsp;&nbsp;&nbsp;morto                                                                                                                                                                                       1% ( 1)                        2% ( 1)                        1% ( 2)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;acquisito                                                                                                                                                            0% ( 0)                      4% ( 2)                      1% ( 2)           
+Diagnosi&nbsp;alla&nbsp;dimissione                                                                                                                                                                  163                                                                                              
 
-&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;congenito                                                                                                                                                            0% ( 0)                      2% ( 1)                      1% ( 1)           
+&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;acquisito                                                                                                                                                             1% ( 1)                        3% ( 2)                        2% ( 3)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;gastrointestinale                                                                                                                                                                          6% ( 5)                      9% ( 5)                      7% (10)           
+&nbsp;&nbsp;&nbsp;&nbsp;cardiovascolare,&nbsp;congenito                                                                                                                                                             0% ( 0)                        2% ( 1)                        1% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                  0% ( 0)                      2% ( 1)                      1% ( 1)           
+&nbsp;&nbsp;&nbsp;&nbsp;gastrointestinale                                                                                                                                                                           7% ( 7)                        9% ( 6)                        8% (13)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;miscellanea                                                                                                                                                                                48% (38)                     33% (18)                     41% (56)          
+&nbsp;&nbsp;&nbsp;&nbsp;incidenti                                                                                                                                                                                   0% ( 0)                        2% ( 1)                        1% ( 1)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                14% (11)                     18% (10)                     16% (21)          
+&nbsp;&nbsp;&nbsp;&nbsp;miscellanea                                                                                                                                                                                 44% (43)                       37% (24)                       41% (67)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;renale                                                                                                                                                                                     1% ( 1)                      2% ( 1)                      1% ( 2)           
+&nbsp;&nbsp;&nbsp;&nbsp;neurologico                                                                                                                                                                                 16% (16)                       17% (11)                       17% (27)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;altro                                                                                                                                                                   12% (10)                     11% ( 6)                     12% (16)          
+&nbsp;&nbsp;&nbsp;&nbsp;renale                                                                                                                                                                                      1% ( 1)                        2% ( 1)                        1% ( 2)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;inferiore                                                                                                                                           10% ( 8)                     9% ( 5)                      10% (13)          
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;altro                                                                                                                                                                    11% (11)                       11% ( 7)                       11% (18)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;superiore                                                                                                                                           9% ( 7)                      11% ( 6)                     10% (13)          
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;inferiore                                                                                                                                            10% (10)                       9% ( 6)                        10% (16)           
 
-&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;astinenza                                                                                                                                                            0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;respiratorio,&nbsp;via&nbsp;aerea&nbsp;superiore                                                                                                                                            9% ( 9)                        9% ( 6)                        9% (15)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;delirium                                                                                                                                                             0% ( 0)                      0% ( 0)                      0% ( 0)           
+&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;astinenza                                                                                                                                                             0% ( 0)                        0% ( 0)                        0% ( 0)            
 
-&nbsp;&nbsp;&nbsp;&nbsp;altro                                                                                                                                                                                      0% ( 0)                      0% ( 0)                      0% ( 0)           
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&nbsp;&nbsp;&nbsp;&nbsp;sviluppo&nbsp;di&nbsp;delirium                                                                                                                                                              0% ( 0)                        0% ( 0)                        0% ( 0)            
+
+&nbsp;&nbsp;&nbsp;&nbsp;altro                                                                                                                                                                                       0% ( 0)                        0% ( 0)                        0% ( 0)            
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  
   
  
 ### SMR 
  
-SMR PIM2:  0.26 
+SMR PIM2:  0.37 
   
-SMR PIM3:  0.36 
+SMR PIM3:  0.51 
 
  
 ##  DAG: 11  {.tabset .tabset-fade .tabset-pills} 
